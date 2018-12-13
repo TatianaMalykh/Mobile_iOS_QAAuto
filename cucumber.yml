@@ -1,0 +1,2 @@
+wip: -t @wip --format html --out reports/wip.html --format pretty
+popular: -t @popular --format html --out reports/popular/popular.html --format pretty
