@@ -63,3 +63,9 @@ fastlane/test_output
 iOSInjectionProject/
 
 1xBet\.test\.app/
+
+\.DS_Store
+
+reports/
+
+\.idea/workspace\.xml
