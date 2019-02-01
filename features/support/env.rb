@@ -25,10 +25,10 @@ def caps1
 end
 
 def exist_element?(element)
-    $driver.set_implicit_wait(0.5)
-    begin
-        return true if find_element(element)
-    rescue
-        return false
-    end
+  $driver.set_implicit_wait(0.5)
+  begin
+    return true if find_element(element)
+  rescue
+    return false
+  end
 end
