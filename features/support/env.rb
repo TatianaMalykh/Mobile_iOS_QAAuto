@@ -9,7 +9,7 @@ def caps1
             deviceName: "iPhone 6",
             platformName: "iOS",
             platformVersion: "12.1",
-            app: "/Users/kim_chernov/QAAndroidAuto/1xBet.app",
+            app: "/Users/kim_chernov/QAiOSAuto/1xBet.app",
             # automationName: "XCUITest",
             noReset: true,
             unicodeKeyboard: true,

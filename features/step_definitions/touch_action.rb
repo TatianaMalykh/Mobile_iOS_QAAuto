@@ -32,19 +32,19 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
     if exist_element?(accessibility_id: id)
       find_element(accessibility_id: id).click
     else
-      if id == "Stream" or id == "Subscriptions" or id == "Results"
-        find_element(name: "Events").click
+      if id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell"
+        find_element(id: "menu_menuGroupEvents_button").click
         #swipe(start_x: 20, start_y: 900, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
-      elsif id == "Toto" or id == "Bet Constructor" or id == "Financials" or id == "Betting exchange"
-        find_element(name: "Lotteries and financials").click
+      elsif id == "menu_menuToto_cell" or id == "menu_menuBetContructor_cell" or id == "menu_menuFinanceBets_cell" or id == "menu_menuBettingExchange_cell"
+        find_element(id: "menu_menuGroupTotoAndFinBets_button").click
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
-      elsif id == "Promo Code Store" or id == "Info"
+      elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell"
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
-        find_element(name: "Other").click
+        find_element(id: "menu_menuGroupOther_button").click
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
@@ -68,4 +68,15 @@ When(/^Делаем свайп вправо$/) do
   #работает только если выключить XCUIEST
   swipe(start_x: 5, start_y: 50, end_x: 500, end_y: 50)
   puts ("Пользователь выбрал в  элемент ")
+end
+
+When(/^Пользователь нажимает элемент "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенный в элемент с id "([^"]*)"$/) do |name, class1, index, id|
+  elements = find_element(accessibility_id: id).find_elements(class: class1)
+  elements[index.to_i].click
+  puts "Press to #{name}"
+end
+
+When(/^Делаем свайп вниз$/) do
+  swipe(start_x: 20, start_y: 600, end_x: 20, end_y: 200)
+  sleep (2)
 end
