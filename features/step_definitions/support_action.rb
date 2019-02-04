@@ -20,3 +20,19 @@ When(/^Ждем появления элемента "([^"]*)" с id "([^"]*)", �
   end
   puts "Элемент #{name} появился спустя #{spent_time} секунд."
 end
+
+When(/^Записываем в файл всё значение текста элемента "([^"]*)" с id "([^"]*)"$/) do |name, id|
+  FileUtils.rm("#{$project_path}/reports/#{ENV["device"]}/state.txt") if File.exist? ("#{$project_path}/reports/#{ENV["device"]}/state.txt")
+  elements = find_element(id: id)
+  if elements.value.empty?
+    raise ("Для данного элемента текст не задан!")
+  else
+    File.open("#{$project_path}/reports/#{ENV["device"]}/state.txt", "w") do |file|
+      file.puts elements.value
+      file.close
+      puts ("Запомнили значение #{elements.value} элемента #{name}.")
+    end
+  end
+end
+
+
