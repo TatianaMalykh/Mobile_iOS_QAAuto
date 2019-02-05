@@ -22,12 +22,12 @@ When(/^Ждем появления элемента "([^"]*)" с id "([^"]*)", �
 end
 
 When(/^Записываем в файл всё значение текста элемента "([^"]*)" с id "([^"]*)"$/) do |name, id|
-  FileUtils.rm("#{$project_path}/reports/#{ENV["device"]}/state.txt") if File.exist? ("#{$project_path}/reports/#{ENV["device"]}/state.txt")
+  FileUtils.rm("#{$project_path}/state.txt") if File.exist? ("#{$project_path}/state.txt")
   elements = find_element(id: id)
   if elements.value.empty?
     raise ("Для данного элемента текст не задан!")
   else
-    File.open("#{$project_path}/reports/#{ENV["device"]}/state.txt", "w") do |file|
+    File.open("#{$project_path}/state.txt", "w") do |file|
       file.puts elements.value
       file.close
       puts ("Запомнили значение #{elements.value} элемента #{name}.")
@@ -35,4 +35,7 @@ When(/^Записываем в файл всё значение текста э�
   end
 end
 
-
+When(/^Пользователь нажимает на экранной клавиатуре "([^"]*)" с id "([^"]*)"$/) do |name, id|
+  find_element(accessibility_id: id).click
+  puts("Нажали #{name} на экранной клавиатуре")
+end

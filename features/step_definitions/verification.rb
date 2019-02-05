@@ -55,7 +55,7 @@ When(/^Проверяем, что значение всего текста эл�
   if val_element.empty?
     raise ("Для элемента #{name} текст не задан!")
   else
-    memory_file = File.new("#{$project_path}/reports/#{ENV["device"]}/state.txt")
+    memory_file = File.new("#{$project_path}/state.txt")
     val_memory = memory_file.read.chomp!
     if val_memory == val_element
       puts ("Значение #{val_memory} равно значению #{val_element}.")
@@ -72,12 +72,21 @@ When(/^Проверяем, что значение всего текста эл�
   if val_element.empty?
     raise ("Для элемента #{name} текст не задан!")
   else
-    memory_file = File.new("#{$project_path}/reports/#{ENV["device"]}/state.txt")
+    memory_file = File.new("#{$project_path}/state.txt")
     val_memory = memory_file.read.chomp!
     if val_memory != val_element
       puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
     else
       raise ("Значение #{val_memory}  равно значению #{val_element}!")
     end
+  end
+end
+
+When(/^Проверяем, что в элементе с id "([^"]*)" у элемента класса "([^"]*)" с индексом "([^"]*)" есть текст$/) do |id, class1, index|
+  if exist_element?(accessibility_id: id)
+    elements = find_element(accessibility_id: id).find_elements(class: class1)
+    puts "Для элемента задан текст #{elements[index.to_i].value}"
+  else
+    raise "Текста нет"
   end
 end
