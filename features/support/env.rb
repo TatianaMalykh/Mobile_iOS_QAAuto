@@ -34,6 +34,15 @@ def exist_element?(element)
   end
 end
 
+def exist_element_class?(cls,ind,element)
+  $driver.set_implicit_wait(0.5)
+  element = find_element(element).find_elements(cls)
+  begin
+    return true if element[ind]
+  rescue
+    return false
+  end
+end
 
 def screen_of_element(name, element)
 # скриним весь экран
