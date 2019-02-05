@@ -35,7 +35,7 @@ end
 
 def exist_element_class?(cls,ind,element)
   $driver.set_implicit_wait(0.5)
-  element= find_element(element).find_elements(cls)
+  element = find_element(element).find_elements(cls)
   begin
     return true if element[ind]
   rescue
