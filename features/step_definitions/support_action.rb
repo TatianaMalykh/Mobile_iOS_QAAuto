@@ -39,3 +39,8 @@ When(/^Пользователь нажимает на экранной клав�
   find_element(accessibility_id: id).click
   puts("Нажали #{name} на экранной клавиатуре")
 end
+
+When(/^Делаем скриншот элемента "([^"]*)" с id "([^"]*)"$/) do |name, id|
+  element = find_element(id: id)
+  screen_of_element(name, element)
+end

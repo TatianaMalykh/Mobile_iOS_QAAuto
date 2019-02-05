@@ -1,5 +1,6 @@
 require 'appium_lib'
 require 'cucumber'
+require 'chunky_png'
 
 $project_path = ENV["IOS_PROJECT_PATH"]
 
@@ -32,3 +33,27 @@ def exist_element?(element)
     return false
   end
 end
+
+
+def screen_of_element(name, element)
+# скриним весь экран
+  $driver.screenshot("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+# вырезаем из скрина экрана скрин нужного элемента
+  x = element.rect.x
+  y = element.rect.y
+  width = element.rect.width
+  height = element.rect.height
+  image.crop!(x, y, width, height)
+  image.save("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+end
+
+
+def element_same?(actual_element, standard_element, element)
+  puts point_x = element.rect.x
+  puts point_y = element.rect.y
+  puts width = element.rect.width
+  puts height = element.rect.height
+  screen_same?(actual_element, standard_element, point_x, point_y, width, height)
+end
+
