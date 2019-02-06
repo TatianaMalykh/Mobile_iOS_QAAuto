@@ -109,6 +109,15 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
   end
 end
 
+When(/^Проверяем, что скриншот "([^"]*)" совпадает с новым скриншотом "([^"]*)" элемента с id "([^"]*)"$/) do |standard_element, actual_element, id|
+  element = find_element(id: id)
+  if element_same?(actual_element, standard_element, element)
+    puts "Скриншоты совпали!"
+  else
+    raise "Скриншоты не совпали."
+  end
+end
+
 When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с id "([^"]*)", есть текст$/) do |name, my_class,index, id|
   element = find_element(id: id).find_elements(class:my_class)
   if element[index.to_i].value?
@@ -125,5 +134,18 @@ When(/^Проверяем, что у элемента "([^"]*)" класса "([
     puts "В элементе есть текст #{name}"
   else
     raise "В элементе нет текста"
+  end
+end
+
+
+When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым "([^"]*)" с расположением по x "([^"]*)" y "([^"]*)" обрезанным на x "([^"]*)" и y "([^"]*)"$/) do |standard, actual, x_st, y_st, x_len, y_len|
+  x_stt = (($driver.window_size.width*x_st.to_f)*2).to_i
+  y_stt = (($driver.window_size.height*y_st.to_f)*2).to_i
+  x_lent = (($driver.window_size.width*x_len.to_f)*2).to_i
+  y_lent = (($driver.window_size.height*y_len.to_f)*2).to_i
+  if screen_same?(actual, standard, x_stt, y_stt, x_lent, y_lent)
+    raise "Скриншоты совпали!"
+  else
+    puts "Скриншоты не совпали."
   end
 end
