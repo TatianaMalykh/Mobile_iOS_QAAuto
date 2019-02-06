@@ -36,3 +36,19 @@ When(/^Делаем скриншот элемента "([^"]*)" с id "([^"]*)"$
   screen_of_element(name, element)
 end
 
+
+When(/^Делаем скриншот экрана "([^"]*)" и обрезаем его начиная с x "([^"]*)" y "([^"]*)" на расстояние x "([^"]*)" и y "([^"]*)"$/) do |name, x_st, y_st, x_len, y_len|
+#делаем скриншот экрана
+  $driver.screenshot("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+  x_st = (($driver.window_size.width*x_st.to_f)*2).to_i
+  y_st = (($driver.window_size.height*y_st.to_f)*2).to_i
+  x_len = (($driver.window_size.width*x_len.to_f)*2).to_i
+  y_len = (($driver.window_size.height*y_len.to_f)*2).to_i
+  image.crop!(x_st, y_st, x_len, y_len)
+  image.save("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+end
+
+
+
+

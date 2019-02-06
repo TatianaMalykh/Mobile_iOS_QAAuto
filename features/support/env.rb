@@ -46,14 +46,14 @@ end
 
 def screen_same?(actual, standard, x_st, y_st, x_len, y_len)
 #делаем скриншот экрана
-  $driver.screenshot("#{$project_path}/reports/#{ENV["device"]}/#{actual}.png")
-  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{ENV["device"]}/#{actual}.png")
+  $driver.screenshot("#{$project_path}/reports/#{actual}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{actual}.png")
   image.crop!(x_st, y_st, x_len, y_len)
-  image.save("#{$project_path}/reports/#{ENV["device"]}/#{actual}.png")
+  image.save("#{$project_path}/reports/#{actual}.png")
 
   images = [
-      ChunkyPNG::Image.from_file("#{$project_path}/reports/#{ENV["device"]}/#{standard}.png"),
-      ChunkyPNG::Image.from_file("#{$project_path}/reports/#{ENV["device"]}/#{actual}.png")
+      ChunkyPNG::Image.from_file("#{$project_path}/reports/#{standard}.png"),
+      ChunkyPNG::Image.from_file("#{$project_path}/reports/#{actual}.png")
   ]
   diff = []
   images.first.height.times do |y|
@@ -67,8 +67,8 @@ def screen_same?(actual, standard, x_st, y_st, x_len, y_len)
   length_percent = (diff.length.to_f / images.first.pixels.length) * 100
   puts "pixels changed (%): #{length_percent}%"
 
-  FileUtils.rm_r("reports/#{ENV["device"]}/#{actual}.png")
-  FileUtils.rm_r("reports/#{ENV["device"]}/#{standard}.png")
+  #FileUtils.rm_r("reports//#{actual}.png")
+  #FileUtils.rm_r("reports//#{standard}.png")
 # если есть разница
   if length_percent > 0.3
     return false
@@ -80,23 +80,26 @@ end
 
 def screen_of_element(name, element)
 # скриним весь экран
-  $driver.screenshot("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
-  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+  $driver.screenshot("#{$project_path}/reports/#{name}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{name}.png")
 # вырезаем из скрина экрана скрин нужного элемента
-  x = element.rect.x
-  y = element.rect.y
-  width = element.rect.width
-  height = element.rect.height
+  x = element.rect.x*2
+  y = element.rect.y*2
+  width = element.rect.width*2
+  height = element.rect.height*2
+  puts x
+  puts y
+  puts width
+  puts height
   image.crop!(x, y, width, height)
-  image.save("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+  image.save("#{$project_path}/reports/#{name}.png")
 end
 
 
 def element_same?(actual_element, standard_element, element)
-  puts point_x = element.rect.x
-  puts point_y = element.rect.y
-  puts width = element.rect.width
-  puts height = element.rect.height
+  puts point_x = element.rect.x*2
+  puts point_y = element.rect.y*2
+  puts width = element.rect.width*2
+  puts height = element.rect.height*2
   screen_same?(actual_element, standard_element, point_x, point_y, width, height)
 end
-
