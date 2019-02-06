@@ -13,7 +13,6 @@
 #      проверяем наличие элементов вверху экрана
       Тогда Ждем появления элемента "Назад" с id "buttonLeft", но не более "10" секунд
       И Проверяем наличие элемента "Переключатель типов регистраций" с id "registration_segments_segmented-control"
-#      И Пользователь нажимает элемент "Рега по мылу" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "registration_segments_segmentControl"
 #      проверяем элементы в регистрации по мобильному телефону
       И Проверяем наличие элемента "Поле ввода телефона" с id "registration-mobile_phone_text-field"
       И Проверяем наличие элемента "Выбор валюты" с id "registration-mobile_currency_text-field-ext"
@@ -66,7 +65,7 @@
 #      Попытку восстановить пароль проверим в негативном сценарии
       Тогда Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
       И Проверяем, что в элементе с id "alert-controller_alert_view" у элемента класса "XCUIElementTypeStaticText" с индексом "1" есть текст
-    @wip
+
     Сценарий: Проверка регистрации в один клик
       Дано Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
       И Ждем "2" секунд(ы)
@@ -103,6 +102,40 @@
       Тогда Пользователь видит окно об успешности регистрации с логином и паролем
       И Проверяем соответствие выданного логина автоподставленномму
       И Пользователь нажимает элемент "Войти" с id "authorization_auth_button"
-#      появиться может окно капчи и будет грустно
+#      появиться может окно капчи и будет грустно - автотесты ее обходить не умеют
+    @wip
+    Сценарий: Проверка регистрации по e-mail (полная)
+      Дано Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
+      И Ждем "2" секунд(ы)
+      И Делаем свайп вправо
+      То Ждем появления элемента "Аватара пользователя" с id "menuUser", но не более "10" секунд
+      Когда Выбираем в меню элемент "menu_menuRegistration_cell"
+      Тогда Ждем появления элемента "Назад" с id "buttonLeft", но не более "10" секунд
+      И Пользователь нажимает элемент "Рега по мылу" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "registration_segments_segmented-control"
+#   Проверяем форму полной регистрации и наличие в полях текста
+      И Проверяем наличие элемента "Фамилия" с id "registration-full_surname_text-field"
+      И Проверяем, что в элементе "Фамилия" с id "registration-full_surname_text-field" есть текст
+      И Проверяем наличие элемента "Имя" с id "registration-full_name_text-field"
+      И Проверяем, что в элементе "Имя" с id "registration-full_name_text-field" есть текст
+      И Проверяем наличие элемента "Дата рождения" с id "registration-full_date-of-birthday_text-field-ext"
+      И Проверяем, что в элементе "Дата рождения" с id "registration-full_date-of-birthday_text-field-ext" есть текст
+      И Проверяем наличие элемента "Страна" с id "registration-full_country_text-field-ext"
+      И Проверяем, что в элементе "Страна" с id "registration-full_country_text-field-ext" есть текст
+      И Проверяем наличие элемента "Регион" с id "registration-full_region_text-field-ext"
+      И Проверяем, что в элементе "Регион" с id "registration-full_region_text-field-ext" есть текст
+      И Проверяем наличие элемента "Город" с id "registration-full_city_text-field-ext"
+      И Проверяем, что в элементе "Город" с id "registration-full_city_text-field-ext" есть текст
+      И Проверяем наличие элемента "Телефон" с id "registration-full_phone_text-field"
+      И Проверяем, что в элементе "Телефон" с id "registration-full_phone_text-field" есть текст
+      И Проверяем наличие элемента "Имейл" с id "registration-full_mail_text-field"
+      И Проверяем, что в элементе "Имейл" с id "registration-full_mail_text-field" есть текст
+      И Проверяем наличие элемента "Пароль" с id "registration-full_password_text-field"
+      И Проверяем, что в элементе "Пароль" с id "registration-full_password_text-field" есть текст
+      И Проверяем наличие элемента "Повторите пароль" с id "registration-full_password-сonfirm_text-field"
+      И Проверяем, что в элементе "Повторите пароль" с id "registration-full_password-сonfirm_text-field" есть текст
+      И Проверяем наличие элемента "Валюта" с id "registration-full_currency_text-field-ext"
+      И Проверяем, что в элементе "Валюта" с id "registration-full_currency_text-field-ext" есть текст
+      И Проверяем наличие элемента "Промокод" с id "registration-full_promo-сode_text-field"
+      И Проверяем, что в элементе "Промокод" с id "registration-full_promo-сode_text-field" есть текст
 
 
