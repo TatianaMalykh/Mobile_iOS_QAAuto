@@ -44,3 +44,23 @@ When(/^Делаем скриншот элемента "([^"]*)" с id "([^"]*)"$
   element = find_element(id: id)
   screen_of_element(name, element)
 end
+
+When(/^Пользователь видит окно об успешности регистрации с логином и паролем$/) do
+  outputs = find_element(id: "alert-controller_alert_view").find_elements(class: "XCUIElementTypeStaticText")
+  output = outputs[-1].value
+  File.open("out.txt", "w") {|f| f.write("#{output}")}
+  find_element(accessibility_id: "OK").click
+end
+
+When(/^Проверяем соответствие выданного логина автоподставленномму$/) do
+  str = File.new("out.txt").readlines[0]
+  login = (str[-9..-2])
+  username = find_element(id: "authorization_login_text-field").value
+  password = find_element(id: "authorization_password_text-field")
+  if login == username and password.value.empty? == false
+    puts "Логин совпадает с выданным, а поле пароля заполнено"
+  else
+    fail "Логин не совпадает с выданным и/или поле пароля пустое"
+  end
+  File.delete("out.txt")
+end

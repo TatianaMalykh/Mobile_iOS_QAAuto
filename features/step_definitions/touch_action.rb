@@ -78,3 +78,9 @@ When(/^Делаем свайп вниз$/) do
   swipe(start_x: 20, start_y: 600, end_x: 20, end_y: 200)
   sleep (2)
 end
+
+When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" с индексом "([^"]*)"$/) do |name, id, index|
+  elements = find_elements(id: id)
+  elements[index.to_i].click
+  puts "Нажали элемент #{name}"
+end
