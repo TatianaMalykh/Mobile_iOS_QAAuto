@@ -149,3 +149,12 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
     puts "Скриншоты не совпали."
   end
 end
+
+When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" есть лейбл$/) do |name, id|
+  element = find_element(id: id)
+  if element.label?
+    puts "В элементе есть текст #{name}"
+  else
+    raise "В элементе нет текста"
+  end
+end

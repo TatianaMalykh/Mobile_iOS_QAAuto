@@ -135,7 +135,74 @@
       И Проверяем, что в элементе "Повторите пароль" с id "registration-full_password-сonfirm_text-field" есть текст
       И Проверяем наличие элемента "Валюта" с id "registration-full_currency_text-field-ext"
       И Проверяем, что в элементе "Валюта" с id "registration-full_currency_text-field-ext" есть текст
+      И Делаем свайп вниз
       И Проверяем наличие элемента "Промокод" с id "registration-full_promo-сode_text-field"
       И Проверяем, что в элементе "Промокод" с id "registration-full_promo-сode_text-field" есть текст
+      И Проверяем наличие элемента "Получать на имейл новости о событиях" с id "registration-full_event-news_button"
+      И Проверяем наличие элемента "Получать на имейл результаты ставок" с id "registration-full_result-news_button"
+      И Проверяем наличие элемента "Вход с Touch ID" с id "registration-full_touch-id_button"
+      И Проверяем наличие элемента "Подтверждение совершеннолетия" с id "registration_info_button"
+      И Проверяем наличие элемента "Чекбокс подтверждения" с id "registration_info_checkbox"
+      И Проверяем наличие элемента "Правила компании" с id "registration_rules_button"
+      И Проверяем наличие элемента "Иконка инфо" с id "buttonInfo"
+      И Проверяем наличие элемента "Зарегистрироваться " с id "registration-full_registration_button"
+      И Проверяем, что у элемента "Зарегистрироваться" с id "registration-full_registration_button" есть лейбл
+#      Проверяем собственно регистрацию
+      И Пользователь вводит в поле "Фамилия" с ID "registration-full_surname_text-field" "Кришна"
+      И Пользователь вводит в поле "Имя" с ID "registration-full_name_text-field" "Егор"
+      И Пользователь нажимает элемент "Дата рождения" с id "registration-full_date-of-birthday_text-field-ext"
+      И Вводим допустимую дату рождения
+      И Записываем в файл всё значение текста элемента "Страна" с id "registration-full_country_text-field-ext"
+      И Пользователь нажимает элемент "Страна" с id "registration-full_country_text-field-ext"
+      И Пользователь нажимает элемент "Далее" с id "text-field_next_button"
+      И Проверяем, что значение всего текста элемента "Страна" с id "registration-full_country_text-field-ext" не соответствует ранее записанному
+      И Записываем в файл всё значение текста элемента "Регион" с id "registration-full_region_text-field-ext"
+      И Пользователь нажимает элемент "Регион" с id "registration-full_region_text-field-ext"
+      И Пользователь нажимает элемент "Далее" с id "text-field_next_button"
+      И Проверяем, что значение всего текста элемента "Регион" с id "registration-full_region_text-field-ext" не соответствует ранее записанному
+      И Записываем в файл всё значение текста элемента "Город" с id "registration-full_city_text-field-ext"
+      И Пользователь нажимает элемент "Город" с id "registration-full_city_text-field-ext"
+      И Пользователь нажимает элемент "Далее" с id "text-field_next_button"
+      И Проверяем, что значение всего текста элемента "Город" с id "registration-full_city_text-field-ext" не соответствует ранее записанному
+      И Пользователь вводит рандомный номер телефона
+#       скрываем клавиатуру кнопкой Отмена
+      И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+      И Пользователь вводит в поле "Имейл" с ID "registration-full_mail_text-field" "egorkrisna@mail.ru"
+#       скрываем клавиатуру кнопкой Отмена
+      И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+      И Пользователь вводит в поле "Пароль" с ID "registration-full_password_text-field" "qwe890qwe"
+      #       скрываем клавиатуру кнопкой Отмена
+      И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+      И Пользователь вводит в поле "Повторите пароль" с ID "registration-full_password-сonfirm_text-field" "qwe890qwe"
+      #       скрываем клавиатуру кнопкой Отмена
+      И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+      И Записываем в файл всё значение текста элемента "Валюта" с id "registration-full_currency_text-field-ext"
+      И Пользователь нажимает элемент "Валюта" с id "registration-full_currency_text-field-ext"
+      И Пользователь нажимает элемент "Далее" с id "text-field_next_button"
+      И Проверяем, что значение всего текста элемента "Валюта" с id "registration-full_currency_text-field-ext" не соответствует ранее записанному
+      #       скрываем клавиатуру кнопкой Отмена
+      И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+      И Делаем свайп вниз
+      Когда Пользователь нажимает элемент "Подтвердить совершеннолетие" с id "registration_info_button" с индексом "1"
+      И Пользователь нажимает элемент "Зарегистрироваться" с id "registration-oneclick_registration_button"
+      И Ждем "2" секунд(ы)
+#      ПРОВЕРИТЬ ОКНО АКТИВАЦИИ ТЕЛЕФОНА
+      Тогда Пользователь видит окно об успешности регистрации с логином и паролем
+      И Проверяем соответствие выданного логина автоподставленномму
+      И Пользователь нажимает элемент "Войти" с id "authorization_auth_button"
+
+
+
+
+
+
+
+
+
+
+
+      
+
+
 
 
