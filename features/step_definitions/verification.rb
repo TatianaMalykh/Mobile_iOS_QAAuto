@@ -26,7 +26,7 @@ When(/^Проверяем отсутствие элемента "([^"]*)" с id 
 end
 
 When(/^Проверяем, что в элементе "([^"]*)" с id "([^"]*)" нет текста$/) do |name, id|
-  if find_element(id: id).value.empty?
+  if find_element(accessibility_id: id).value.empty?
     puts("Текста нет!")
   else
     text = find_element(accessibility_id: id).value
@@ -54,7 +54,7 @@ end
 
 
 When(/^Проверяем наличие элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент id "([^"]*)"$/) do |name,my_class,index, id|
-  element = find_element(id: id).find_elements(class:my_class)
+  element = find_element(accessibility_id: id).find_elements(class:my_class)
   if element[index.to_i].enabled?
     puts ("Есть элемент #{name}.")
   else
@@ -81,7 +81,7 @@ end
 
 
 When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым скриншотом "([^"]*)" элемента с id "([^"]*)"$/) do |standard_element, actual_element, id|
-  element = find_element(id: id)
+  element = find_element(accessibility_id: id)
   if element_same?(actual_element, standard_element, element)
     raise "Скриншоты совпали!"
   else
@@ -90,7 +90,7 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
 end
 
 When(/^Проверяем, что скриншот "([^"]*)" совпадает с новым скриншотом "([^"]*)" элемента с id "([^"]*)"$/) do |standard_element, actual_element, id|
-  element = find_element(id: id)
+  element = find_element(accessibility_id: id)
   if element_same?(actual_element, standard_element, element)
     puts "Скриншоты совпали!"
   else
@@ -99,9 +99,9 @@ When(/^Проверяем, что скриншот "([^"]*)" совпадает 
 end
 
 When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с id "([^"]*)", есть текст$/) do |name, my_class,index, id|
-  element = find_element(id: id).find_elements(class:my_class)
+  element = find_element(accessibility_id: id).find_elements(class:my_class)
   if element[index.to_i].value?
-    puts "В элементе есть текст #{name}"
+    puts "В элементе есть текст #{element[index.to_i].value}"
   else
     raise "В элементе нет текста"
   end
@@ -109,9 +109,9 @@ end
 
 
 When(/^Проверяем, что у элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с id "([^"]*)", есть лейбл$/) do |name, my_class,index, id|
-  element = find_element(id: id).find_elements(class:my_class)
+  element = find_element(accessibility_id: id).find_elements(class:my_class)
   if element[index.to_i].label?
-    puts "В элементе есть текст #{name}"
+    puts "В элементе есть текст #{element[index.to_i].value}"
   else
     raise "В элементе нет текста"
   end
@@ -127,5 +127,100 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
     raise "Скриншоты совпали!"
   else
     puts "Скриншоты не совпали."
+  end
+end
+
+When(/^ПРОВЕРКА НА ОБНОВЛНИЕ$/) do
+  # ВРЕМЕННЫЙ ОБХОД ОБНОВЛЕНИЯ!!!!!!!!!!!
+    spent_time = 0
+     until exist_element?(accessibility_id:"alert-controller_alert_view") do
+      spent_time +=0.5
+      if spent_time > 15
+        puts "ALERT  не появился после #{spent_time} секунд ожидания!"
+        break
+      end
+    end
+    puts "Элемент появился спустя #{spent_time} секунд."
+    if exist_element?(accessibility_id:"alert-controller_alert_view")
+      elements = find_element(accessibility_id: "alert-controller_alert_view").find_elements(class: "XCUIElementTypeButton")
+      elements[0].click
+      puts "Нажали элемент"
+    else
+      puts "Слава богу нет дурацкого алерта об обновлении,ура!"
+    end
+end
+
+When(/^Провряем что в Поле Логин соответствуют значениям введенным для аккаунта "([^"]*)"$/) do |udid_phone|
+  udid = udid_phone
+  #udid = ENV["device"]
+  puts login = $accounts_hash[udid].split("_")[0]
+  puts find_element(accessibility_id: "authorization_login_text-field").value.to_s
+   hash_value = find_element(accessibility_id: "authorization_login_text-field").value.to_s
+   find_value = login.to_s
+  equial = hash_value == find_value
+  if equial
+    puts "Значения совпадают"
+  else
+    raise "Значния не совпадают"
+  end
+  if @driver.is_keyboard_shown()
+    @driver.hide_keyboard(nil, :tapOutside)
+  end
+end
+
+When(/^Провряем что в Поле Логин не соответствуют значениям введенным для аккаунта "([^"]*)"$/) do |udid_phone|
+  udid = udid_phone
+  #udid = ENV["device"]
+  puts login = $accounts_hash[udid].split("_")[0]
+  puts find_element(accessibility_id: "authorization_login_text-field").value.to_s
+  puts  m = find_element(accessibility_id: "authorization_login_text-field").value.to_s.equal?(login)
+  if m
+    raise "Значения совпадают"
+  else
+    puts "Значения не совпадают"
+  end
+  if @driver.is_keyboard_shown()
+    @driver.hide_keyboard(nil, :tapOutside)
+  end
+end
+
+When(/^ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ$/) do
+  # РАЗРЕШИТЬ УВЕДОМЛЕНИЯ!!!!!!!!!!!
+  spent_time = 0
+  until exist_element?(accessibility_id:"SBSwitcherWindow") do
+    spent_time +=0.5
+    if spent_time > 5
+      puts "ALERT  не появился после #{spent_time} секунд ожидания!"
+      break
+    end
+  end
+  puts "Элемент появился спустя #{spent_time} секунд."
+  if exist_element?(accessibility_id:"SBSwitcherWindow")
+    elements = find_elements(class: "XCUIElementTypeButton")
+    elements[-1].click
+    puts "Нажали элемент"
+  else
+    puts "Слава богу нет дурацкого алерта об нотификации,ура!"
+  end
+end
+
+
+When(/^ПРОВЕРКА НА ПРОПУСТИТЬ$/) do
+  #  ОБХОД ДЛЯ ВНОВЬ УСТАНОВЛЕННОГО ПРИЛОЖЕНИЯ!!!!!!!!!!!
+  spent_time = 0
+  until exist_element?(accessibility_id:"tutorial_skip_button") do
+    spent_time +=0.5
+    if spent_time > 5
+      puts "ALERT  не появился после #{spent_time} секунд ожидания!"
+      break
+    end
+  end
+  puts "Элемент появился спустя #{spent_time} секунд."
+  if exist_element?(accessibility_id:"tutorial_skip_button")
+    elements = find_element(accessibility_id: "tutorial_skip_button")
+    elements.click
+    puts "Нажали элемент"
+  else
+    puts "Слава богу нет дурацкого алерта об обновлении,ура!"
   end
 end

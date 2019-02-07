@@ -35,7 +35,7 @@ end
 
 def exist_element_class?(cls,ind,element)
   $driver.set_implicit_wait(0.5)
-  element = find_element(element).find_elements(cls)
+  element = find_element(accessibility_id:"#{element}").find_elements(class:"#{cls}")
   begin
     return true if element[ind]
   rescue
@@ -102,4 +102,8 @@ def element_same?(actual_element, standard_element, element)
   puts width = element.rect.width*2
   puts height = element.rect.height*2
   screen_same?(actual_element, standard_element, point_x, point_y, width, height)
+end
+
+def touch_id_1
+  puts @driver.touch_id(false)
 end
