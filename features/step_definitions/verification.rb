@@ -135,7 +135,7 @@ When(/^ПРОВЕРКА НА ОБНОВЛНИЕ$/) do
     spent_time = 0
      until exist_element?(accessibility_id:"alert-controller_alert_view") do
       spent_time +=0.5
-      if spent_time > 15
+      if spent_time > 7
         puts "ALERT  не появился после #{spent_time} секунд ожидания!"
         break
       end
@@ -189,7 +189,7 @@ When(/^ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВО�
   spent_time = 0
   until exist_element?(accessibility_id:"SBSwitcherWindow") do
     spent_time +=0.5
-    if spent_time > 5
+    if spent_time > 3
       puts "ALERT  не появился после #{spent_time} секунд ожидания!"
       break
     end
@@ -210,7 +210,7 @@ When(/^ПРОВЕРКА НА ПРОПУСТИТЬ$/) do
   spent_time = 0
   until exist_element?(accessibility_id:"tutorial_skip_button") do
     spent_time +=0.5
-    if spent_time > 5
+    if spent_time > 3
       puts "ALERT  не появился после #{spent_time} секунд ожидания!"
       break
     end
@@ -222,5 +222,15 @@ When(/^ПРОВЕРКА НА ПРОПУСТИТЬ$/) do
     puts "Нажали элемент"
   else
     puts "Слава богу нет дурацкого алерта об обновлении,ура!"
+  end
+end
+
+
+When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)"$/) do |name, my_class,index,|
+  element = find_elements(class:my_class)
+  if element[index.to_i]
+    puts "В элементе есть текст #{element[index.to_i].label}"
+  else
+    puts "В элементе нет текста"
   end
 end
