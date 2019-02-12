@@ -84,3 +84,9 @@ When(/^Пользователь нажимает элемент "([^"]*)" с id 
   elements[index.to_i].click
   puts "Нажали элемент #{name}"
 end
+
+When(/^Пользователь нажимает элемент "([^"]*)" класса "([^"]*)" с индексом "([^"]*)"$/) do |name, class1, index|
+  elements = find_elements(class: class1)
+  elements[index.to_i].click
+  puts "Нажали элемент #{name}"
+end
