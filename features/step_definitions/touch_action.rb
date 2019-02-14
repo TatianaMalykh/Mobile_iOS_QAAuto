@@ -3,7 +3,6 @@ When(/^Пользователь нажимает элемент "([^"]*)" с id 
   puts("Нажали #{name}")
 end
 
-
 When(/^Пользователь нажимает элемент "([^"]*)" с name "([^"]*)"$/) do |name_el, id|
   find_element(name: id).click
   puts("Нажали #{name_el}")
@@ -72,7 +71,18 @@ end
 
 When(/^Пользователь нажимает элемент "([^"]*)" класса "([^"]*)" с индексом "([^"]*)"$/) do |name, class1, index|
   elements = find_elements(class: class1)
-  puts elements[index.to_i].name
   elements[index.to_i].click
-  puts "Нажали элмент #{name}"
+  puts "Нажали элемент"
+end
+
+When(/^Делаем свайп по параметрам x: "([^"]*)" y: "([^"]*)" x_end: "([^"]*)" y_end: "([^"]*)"$/) do |x, y, x_end,y_end|
+  #работает только если выключить XCUIEST
+  swipe(start_x: x.to_i, start_y: y.to_i, end_x: x_end.to_i, end_y: y_end.to_i)
+  puts ("Пользователь выбрал в  элемент ")
+end
+
+When(/^Пользователь нажимает элемент "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенный в элемент с классом "([^"]*)"$/) do |name, class1, index, class2|
+  elements = find_element(class: class2).find_elements(class: class1)
+  elements[index.to_i].click
+  puts "Нажали элмент"
 end

@@ -1,3 +1,4 @@
 wip: -t @wip --format html --out reports/wip.html --format pretty
 popular: -t @popular --format html --out reports/popular/popular.html --format pretty
-Auhorization_negative: -t @Aut --format html --out reports/Auhorization_negative/Auhorization_negative.html --format pretty
+Authorization_negative: -t @Authorization_negative --format html --out reports/Authorization_negative/Authorization_negative.html --format pretty
+Authorization_positive: -t @Authorization_positive --format html --out reports/Authorization_positive/Authorization_positive.html --format pretty

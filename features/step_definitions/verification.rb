@@ -234,3 +234,32 @@ When(/^Проверяем, что в элементе "([^"]*)" класса "([
     puts "В элементе нет текста"
   end
 end
+
+
+When(/^Проверяем, что у элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с классом "([^"]*)", есть лейбл$/) do |name, my_class,index, my_class_2|
+  element = find_element(class: my_class_2).find_elements(class:my_class)
+  if element[index.to_i].label?
+    puts "В элементе есть текст #{element[index.to_i].value}"
+  else
+    raise "В элементе нет текста"
+  end
+end
+
+When(/^Проверяем наличие элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с классом "([^"]*)"$/) do |name,my_class,index, my_class_2|
+  element = find_element(class: my_class_2).find_elements(class:my_class)
+  if element[index.to_i].enabled?
+    puts ("Есть элемент #{name}.")
+  else
+    raise "Нет элемента #{name}!"
+  end
+end
+
+
+When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с классом "([^"]*)", есть текст$/) do |name, my_class,index, class_2|
+  element = find_element(class: class_2).find_elements(class:my_class)
+  if element[index.to_i].value?
+    puts "В элементе есть текст #{element[index.to_i].value}"
+  else
+    raise "В элементе нет текста"
+  end
+end
