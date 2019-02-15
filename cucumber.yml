@@ -1,2 +1,3 @@
 wip: -t @wip --format html --out reports/wip.html --format pretty
 popular: -t @popular --format html --out reports/popular/popular.html --format pretty
+Auhorization_negative: -t @Aut --format html --out reports/Auhorization_negative/Auhorization_negative.html --format pretty
