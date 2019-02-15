@@ -108,3 +108,12 @@ end
 def touch_id_1
   puts @driver.touch_id(false)
 end
+
+def exist_element_class?(element)
+  $driver.set_implicit_wait(0.5)
+  begin
+    return true if find_element(element)
+  rescue
+    return false
+  end
+end
