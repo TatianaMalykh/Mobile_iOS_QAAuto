@@ -9,7 +9,6 @@ When(/^Проверяем наличие элемента "([^"]*)" с id "([^"]
     raise "Нет элемента #{name}!"
   end
 end
-
 When(/^Проверяем наличие элементов "([^"]*)" с name "([^"]*)" и выводим их количество в лог$/) do |name, name1|
   if exist_element?(name: name1)
     elements = find_elements(name: name1)
@@ -55,7 +54,7 @@ When(/^Проверяем, что значение всего текста эл�
   if val_element.empty?
     raise ("Для элемента #{name} текст не задан!")
   else
-    memory_file = File.new("#{$project_path}/state.txt")
+    memory_file = File.new("#{$project_path}/reports/state.txt")
     val_memory = memory_file.read.chomp!
     if val_memory == val_element
       puts ("Значение #{val_memory} равно значению #{val_element}.")
@@ -82,7 +81,7 @@ When(/^Проверяем, что значение всего текста эл�
   if val_element.empty?
     raise ("Для элемента #{name} текст не задан!")
   else
-    memory_file = File.new("#{$project_path}/state.txt")
+    memory_file = File.new("#{$project_path}/reports/state.txt")
     val_memory = memory_file.read.chomp!
     if val_memory != val_element
       puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
@@ -92,14 +91,7 @@ When(/^Проверяем, что значение всего текста эл�
   end
 end
 
-When(/^Проверяем, что в элементе с id "([^"]*)" у элемента класса "([^"]*)" с индексом "([^"]*)" есть текст$/) do |id, class1, index|
-  if exist_element?(accessibility_id: id)
-    elements = find_element(accessibility_id: id).find_elements(class: class1)
-    puts "Для элемента задан текст #{elements[index.to_i].value}"
-  else
-    raise "Текста нет"
-  end
-end
+
 When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым скриншотом "([^"]*)" элемента с id "([^"]*)"$/) do |standard_element, actual_element, id|
   element = find_element(accessibility_id: id)
   if element_same?(actual_element, standard_element, element)
@@ -150,21 +142,12 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
   end
 end
 
-When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" есть лейбл$/) do |name, id|
-  element = find_element(id: id)
-  if element.label?
-    puts "В элементе есть текст #{name}"
-  else
-    raise "В элементе нет текста"
-  end
-end
-
 When(/^ПРОВЕРКА НА ОБНОВЛНИЕ$/) do
   # ВРЕМЕННЫЙ ОБХОД ОБНОВЛЕНИЯ!!!!!!!!!!!
     spent_time = 0
      until exist_element?(accessibility_id:"alert-controller_alert_view") do
       spent_time +=0.5
-      if spent_time > 15
+      if spent_time > 7
         puts "ALERT  не появился после #{spent_time} секунд ожидания!"
         break
       end
@@ -218,7 +201,7 @@ When(/^ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВО�
   spent_time = 0
   until exist_element?(accessibility_id:"SBSwitcherWindow") do
     spent_time +=0.5
-    if spent_time > 5
+    if spent_time > 3
       puts "ALERT  не появился после #{spent_time} секунд ожидания!"
       break
     end
@@ -239,7 +222,7 @@ When(/^ПРОВЕРКА НА ПРОПУСТИТЬ$/) do
   spent_time = 0
   until exist_element?(accessibility_id:"tutorial_skip_button") do
     spent_time +=0.5
-    if spent_time > 5
+    if spent_time > 3
       puts "ALERT  не появился после #{spent_time} секунд ожидания!"
       break
     end
@@ -251,5 +234,60 @@ When(/^ПРОВЕРКА НА ПРОПУСТИТЬ$/) do
     puts "Нажали элемент"
   else
     puts "Слава богу нет дурацкого алерта об обновлении,ура!"
+  end
+end
+
+
+When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)"$/) do |name, my_class,index,|
+  element = find_elements(class:my_class)
+  if element[index.to_i]
+    puts "В элементе есть текст #{element[index.to_i].label}"
+  else
+    puts "В элементе нет текста"
+  end
+end
+
+
+When(/^Проверяем, что у элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с классом "([^"]*)", есть лейбл$/) do |name, my_class,index, my_class_2|
+  element = find_element(class: my_class_2).find_elements(class:my_class)
+  if element[index.to_i].label?
+    puts "В элементе есть текст #{element[index.to_i].value}"
+  else
+    raise "В элементе нет текста"
+  end
+end
+
+When(/^Проверяем наличие элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с классом "([^"]*)"$/) do |name,my_class,index, my_class_2|
+  element = find_element(class: my_class_2).find_elements(class:my_class)
+  if element[index.to_i].enabled?
+    puts ("Есть элемент #{name}.")
+  else
+    raise "Нет элемента #{name}!"
+  end
+end
+
+
+When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с классом "([^"]*)", есть текст$/) do |name, my_class,index, class_2|
+  element = find_element(class: class_2).find_elements(class:my_class)
+  if element[index.to_i].value?
+    puts "В элементе есть текст #{element[index.to_i].value}"
+  else
+    raise "В элементе нет текста"
+  end
+end
+When(/^Проверяем, что в элементе с id "([^"]*)" у элемента класса "([^"]*)" с индексом "([^"]*)" есть текст$/) do |id, class1, index|
+  if exist_element?(accessibility_id: id)
+    elements = find_element(accessibility_id: id).find_elements(class: class1)
+  else
+    puts "Для элемента задан текст #{elements[index.to_i].value}"
+    raise "Текста нет"
+  end
+end
+When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" есть лейбл$/) do |name, id|
+  element = find_element(id: id)
+  if element.label?
+    puts "В элементе есть текст #{name}"
+  else
+    raise "В элементе нет текста"
   end
 end

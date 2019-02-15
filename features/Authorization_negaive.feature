@@ -1,6 +1,6 @@
 #language: ru
-@Aut
-Функциональность: Auhorization_negative
+@Authorization_negative
+Функциональность: Authorization_negative
 
   Сценарий: Проверка общих полей формы
     Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ

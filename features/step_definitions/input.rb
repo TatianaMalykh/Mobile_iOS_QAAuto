@@ -32,3 +32,21 @@ When(/^Пользователь вводит в поле "([^"]*)" класса 
   find_element(class: class1).send_keys(value)
   puts ("Вводим в поле #{field} #{value}")
 end
+When(/^Пользователь вводит в поле "([^"]*)" с классом "([^"]*)" и индексом "([^"]*)" значение "([^"]*)"$/) do |field, myclass,index, value|
+  find_element(class: myclass).clear
+  elements = find_elements(class: myclass)
+    elements[index.to_i].send_keys(value)
+  puts ("Вводим в поле #{field} #{value}")
+  # if @driver.is_keyboard_shown
+  #   puts @driver.is_keyboard_shown
+  #   @driver.hide_keyboard('Перейти')
+  #   @driver.hide_keyboard('Готово')
+  #   puts @driver.hide_keyboard('Перейти')
+  # end
+end
+When(/^Пользователь вводит в поле "([^"]*)" с классом "([^"]*)" и индексом "([^"]*)" значение "([^"]*)" без скрытия клавиатуры$/) do |field, myclass,index, value|
+  find_element(class: myclass).clear
+  elements = find_elements(class: myclass)
+  elements[index.to_i].send_keys(value)
+  puts ("Вводим в поле #{field} #{value}")
+end
