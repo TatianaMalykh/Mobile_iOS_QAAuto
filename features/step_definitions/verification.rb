@@ -54,7 +54,7 @@ When(/^Проверяем, что значение всего текста эл�
   if val_element.empty?
     raise ("Для элемента #{name} текст не задан!")
   else
-    memory_file = File.new("#{$project_path}/reports/state.txt")
+    memory_file = File.new("#{$project_path}/state.txt")
     val_memory = memory_file.read.chomp!
     if val_memory == val_element
       puts ("Значение #{val_memory} равно значению #{val_element}.")
@@ -81,7 +81,7 @@ When(/^Проверяем, что значение всего текста эл�
   if val_element.empty?
     raise ("Для элемента #{name} текст не задан!")
   else
-    memory_file = File.new("#{$project_path}/reports/state.txt")
+    memory_file = File.new("#{$project_path}/state.txt")
     val_memory = memory_file.read.chomp!
     if val_memory != val_element
       puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
