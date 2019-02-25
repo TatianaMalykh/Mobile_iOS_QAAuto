@@ -293,11 +293,11 @@ When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" 
 end
 
 When(/^Проверяем, что дата рождения выставляется по умолчанию правильно$/) do
-  field_value = find_element(accessibility_id: id).value
+  field_value = find_element(accessibility_id: "registration-full_date-of-birthday_text-field-ext").value
   reg = /(\d\d\d\d)/
   birth_date = field_value.scan(reg)[0]
   now_date = Time.now.strftime("%Y")
-  age = now_date.to_i -birth_date.to_i
+  age = now_date.to_i - birth_date[0].to_i
   if age == 18
     puts "По умолчанию выставляется дата рождения, соответствующая восемнадцатилетнему возрасту"
   else

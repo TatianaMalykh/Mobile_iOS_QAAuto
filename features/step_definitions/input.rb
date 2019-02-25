@@ -50,3 +50,8 @@ When(/^Пользователь вводит в поле "([^"]*)" с класс
   elements[index.to_i].send_keys(value)
   puts ("Вводим в поле #{field} #{value}")
 end
+
+When(/^Очищаем поле с id "([^"]*)"$/) do |id|
+  find_element(id: id).clear
+  puts "Очистили поле"
+end
