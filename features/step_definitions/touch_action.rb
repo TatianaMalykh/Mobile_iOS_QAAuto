@@ -100,3 +100,8 @@ When(/^Пользователь нажимает элемент "([^"]*)" кла
   elements[index.to_i].click
   puts "Нажали элмент"
 end
+
+When(/^Делаем свайп вверх$/) do
+  swipe(start_x: 20, start_y: 200, end_x: 20, end_y: 600)
+  sleep (2)
+end
