@@ -278,8 +278,8 @@ end
 When(/^Проверяем, что в элементе с id "([^"]*)" у элемента класса "([^"]*)" с индексом "([^"]*)" есть текст$/) do |id, class1, index|
   if exist_element?(accessibility_id: id)
     elements = find_element(accessibility_id: id).find_elements(class: class1)
-  else
     puts "Для элемента задан текст #{elements[index.to_i].value}"
+  else
     raise "Текста нет"
   end
 end
@@ -302,5 +302,21 @@ When(/^Проверяем, что дата рождения выставляет
     puts "По умолчанию выставляется дата рождения, соответствующая восемнадцатилетнему возрасту"
   else
     fail "По умолчанию пользователю не 18!"
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с ранее записанным$/) do |name, class1, index, id|
+  elements = find_element(accessibility_id: id).find_elements(class: class1)
+  val_element = elements[index.to_i].value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/memory.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory != val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory}  равно значению #{val_element}!")
+    end
   end
 end

@@ -148,3 +148,18 @@ When(/^Ждем появления элемента "([^"]*)" с классом 
   end
   puts "Элемент #{name} появился спустя #{spent_time} секунд."
 end
+
+
+When(/^Записываем в файл значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", находящегося в элементе с id "([^"]*)"$/) do |name, class1, index, id|
+  FileUtils.rm("#{$project_path}/memory.txt") if File.exist? ("#{$project_path}/memory.txt")
+  elements = find_element(id: id).find_elements(class: class1)
+  if elements[index.to_i].value.empty?
+    raise ("Для данного элемента текст не задан!")
+  else
+    File.open("#{$project_path}/memory.txt", "w") do |file|
+      file.puts elements[index.to_i].value
+      file.close
+      puts ("Запомнили значение #{elements[index.to_i].value} элемента #{name}.")
+    end
+  end
+end
