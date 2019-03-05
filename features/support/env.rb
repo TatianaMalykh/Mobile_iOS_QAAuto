@@ -47,14 +47,14 @@ end
 
 def screen_same?(actual, standard, x_st, y_st, x_len, y_len)
 #делаем скриншот экрана
-  $driver.screenshot("#{$project_path}/reports/#{actual}.png")
-  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{actual}.png")
+  $driver.screenshot("#{$project_path}/#{actual}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/#{actual}.png")
   image.crop!(x_st, y_st, x_len, y_len)
-  image.save("#{$project_path}/reports/#{actual}.png")
+  image.save("#{$project_path}/#{actual}.png")
 
   images = [
-      ChunkyPNG::Image.from_file("#{$project_path}/reports/#{standard}.png"),
-      ChunkyPNG::Image.from_file("#{$project_path}/reports/#{actual}.png")
+      ChunkyPNG::Image.from_file("#{$project_path}/#{standard}.png"),
+      ChunkyPNG::Image.from_file("#{$project_path}/#{actual}.png")
   ]
   diff = []
   images.first.height.times do |y|
