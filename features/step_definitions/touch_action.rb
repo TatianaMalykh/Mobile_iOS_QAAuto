@@ -33,7 +33,7 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
     if exist_element?(accessibility_id: id)
       find_element(accessibility_id: id).click
     else
-      if id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell"
+      if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell"
         find_element(id: "menu_menuGroupEvents_button").click
         #swipe(start_x: 20, start_y: 900, end_x: 20, end_y: 200)
         sleep (2)
@@ -98,10 +98,22 @@ end
 When(/^Пользователь нажимает элемент "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенный в элемент с классом "([^"]*)"$/) do |name, class1, index, class2|
   elements = find_element(class: class2).find_elements(class: class1)
   elements[index.to_i].click
-  puts "Нажали элмент"
+  puts "Нажали элемент"
 end
 
 When(/^Делаем свайп вверх$/) do
   swipe(start_x: 20, start_y: 200, end_x: 20, end_y: 600)
   sleep (2)
+end
+
+When(/^Пользователь нажимает элемент на экране с координатами x "([^"]*)" и y "([^"]*)"$/) do |point_x, point_y|
+  sleep(2)
+  Appium::TouchAction.new.press(x: point_x, y: point_y).release.perform
+  puts "что-то нажали - #{point_x}, #{point_y}"
+end
+
+When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" с индексом "([^"]*)", вложенный в элемент с id "([^"]*)"$/) do |name, id2, index, id|
+  elements = find_element(id: id).find_elements(id: id2)
+  elements[index.to_i].click
+  puts "Нажали элемент #{name}"
 end

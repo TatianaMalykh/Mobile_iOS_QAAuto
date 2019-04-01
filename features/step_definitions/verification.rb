@@ -249,12 +249,27 @@ end
 
 
 When(/^Проверяем, что у элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с классом "([^"]*)", есть лейбл$/) do |name, my_class,index, my_class_2|
-  element = find_element(class: my_class_2).find_elements(class:my_class)
+  element = find_element(class: my_class_2).find_elements(class: my_class)
   if element[index.to_i].label?
-    puts "В элементе есть текст #{element[index.to_i].value}"
+    puts "В элементе есть текст #{element[index.to_i].label}"
   else
     raise "В элементе нет текста"
   end
+end
+
+When(/^Проверяем, что у элементов "([^"]*)" класса "([^"]*)", вложенных в элемент с классом "([^"]*)", есть лейбл$/) do |name, my_class, my_class_2|
+  elements = find_element(class: my_class_2).find_elements(class:my_class)
+  elements.each do |x|
+    if x.label == nil
+      puts "Этот элемент отсутствует"
+    elsif
+    x.label.empty?
+      raise "Нет текста в поле!"
+    else
+      puts "#{x.label}"
+    end
+  end
+  puts "- текст в элементах #{name}"
 end
 
 When(/^Проверяем наличие элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с классом "([^"]*)"$/) do |name,my_class,index, my_class_2|
@@ -337,8 +352,8 @@ end
 When(/^Проверяем, что у элементов "([^"]*)" класса "([^"]*)", вложенных в элемент с id "([^"]*)", есть текст$/) do |name, class1, id|
   elements = find_element(accessibility_id: id).find_elements(class:class1)
   elements.each do |x|
-    if x == nil
-      raise "Нет текстового поля!"
+    if x.value == nil
+      puts "Этот элемент немногословен"
     elsif
       x.value.empty?
       raise "Нет текста в поле!"
@@ -347,4 +362,47 @@ When(/^Проверяем, что у элементов "([^"]*)" класса "
     end
   end
   puts "- текст в элементах #{name}"
+end
+
+When(/^Проверяем, что количество элементов класса "([^"]*)", вложенных в элемент класса "([^"]*)" соответствует ожидаемому "([^"]*)"$/) do |class_2, class1, kol|
+  available_elements = find_element(class: class1).find_elements(class: class_2)
+  quantity_of_elements = available_elements.size
+  if quantity_of_elements.to_i == kol.to_i
+    puts "Количество найденных элементов (#{kol.to_i}) совпадает с ожидаемым"
+  else
+    puts "Количество найденных элементов не совпадает с ожидаемым. Нашлось #{available_elements.size}"
+  end
+end
+
+# для элемента, которого может не существовать на экране, например кнопка видео к матчу, маркеты еще не появились и т.д.
+When(/^Проверяем наличие элемента "([^"]*)" с id "([^"]*)", которого может не существовать$/) do |name, id|
+  if exist_element?(id: id)
+    puts "Элемент #{name} существует"
+  else
+    puts "Нет элемента #{name}"
+  end
+end
+
+When(/^Проверяем, что у элементов "([^"]*)" класса "([^"]*)", вложенных в элемент с id "([^"]*)", есть лейбл$/) do |name, class_1, id|
+  elements = find_element(id: id).find_elements(class: class_1)
+  elements.each do |x|
+    if x.label == nil
+      puts "Этот элемент отсутствует"
+    elsif
+    x.label.empty?
+      raise "Нет текста в поле!"
+    else
+      puts "#{x.label}"
+    end
+  end
+  puts "- текст в элементах #{name}"
+end
+
+When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым скриншотом "([^"]*)" элемента с id "([^"]*)" и индексом "([^"]*)", вложенным в элемент с id "([^"]*)"$/) do |standard_element, actual_element, id2, index, id|
+  element = find_element(accessibility_id: id).find_elements(id: id2)
+  if element_same?(actual_element, standard_element, element[index.to_i])
+    raise "Скриншоты совпали!"
+  else
+    puts "Скриншоты не совпали."
+  end
 end

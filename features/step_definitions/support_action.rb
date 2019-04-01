@@ -163,3 +163,9 @@ When(/^Записываем в файл значение текста элеме
     end
   end
 end
+
+When(/^Делаем скриншот элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)", вложенный в элемент с id "([^"]*)"$/) do |name, id2, index, id|
+  elements = find_element(id: id).find_elements(id: id2)
+  element = elements[index.to_i]
+  screen_of_element(name, element)
+end
