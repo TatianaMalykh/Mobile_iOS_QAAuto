@@ -66,14 +66,14 @@ When(/^Проверяем соответствие выданного логин
 end
 When(/^Делаем скриншот экрана "([^"]*)" и обрезаем его начиная с x "([^"]*)" y "([^"]*)" на расстояние x "([^"]*)" и y "([^"]*)"$/) do |name, x_st, y_st, x_len, y_len|
 #делаем скриншот экрана
-  $driver.screenshot("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
-  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+  $driver.screenshot("#{$project_path}/#{name}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/#{name}.png")
   x_st = (($driver.window_size.width*x_st.to_f)*2).to_i
   y_st = (($driver.window_size.height*y_st.to_f)*2).to_i
   x_len = (($driver.window_size.width*x_len.to_f)*2).to_i
   y_len = (($driver.window_size.height*y_len.to_f)*2).to_i
   image.crop!(x_st, y_st, x_len, y_len)
-  image.save("#{$project_path}/reports/#{ENV["device"]}/#{name}.png")
+  image.save("#{$project_path}/#{name}.png")
 end
 
 
@@ -162,4 +162,10 @@ When(/^Записываем в файл значение текста элеме
       puts ("Запомнили значение #{elements[index.to_i].value} элемента #{name}.")
     end
   end
+end
+
+When(/^Делаем скриншот элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)", вложенный в элемент с id "([^"]*)"$/) do |name, id2, index, id|
+  elements = find_element(id: id).find_elements(id: id2)
+  element = elements[index.to_i]
+  screen_of_element(name, element)
 end
