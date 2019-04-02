@@ -107,9 +107,8 @@ When(/^Делаем свайп вверх$/) do
 end
 
 When(/^Пользователь нажимает элемент на экране с координатами x "([^"]*)" и y "([^"]*)"$/) do |point_x, point_y|
-  sleep(2)
   Appium::TouchAction.new.press(x: point_x, y: point_y).release.perform
-  puts "что-то нажали - #{point_x}, #{point_y}"
+  puts "Нажали на элемент с координатами #{point_x}, #{point_y}"
 end
 
 When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" с индексом "([^"]*)", вложенный в элемент с id "([^"]*)"$/) do |name, id2, index, id|

@@ -259,14 +259,11 @@ end
 
 When(/^Проверяем, что у элементов "([^"]*)" класса "([^"]*)", вложенных в элемент с классом "([^"]*)", есть лейбл$/) do |name, my_class, my_class_2|
   elements = find_element(class: my_class_2).find_elements(class:my_class)
-  elements.each do |x|
-    if x.label == nil
-      puts "Этот элемент отсутствует"
-    elsif
-    x.label.empty?
+  elements.each do |element|
+    if element.label.empty?
       raise "Нет текста в поле!"
     else
-      puts "#{x.label}"
+      puts "#{element.label}"
     end
   end
   puts "- текст в элементах #{name}"
@@ -349,21 +346,6 @@ When(/^Проверяем, что у элементов "([^"]*)" с имене�
   end
 end
 
-When(/^Проверяем, что у элементов "([^"]*)" класса "([^"]*)", вложенных в элемент с id "([^"]*)", есть текст$/) do |name, class1, id|
-  elements = find_element(accessibility_id: id).find_elements(class:class1)
-  elements.each do |x|
-    if x.value == nil
-      puts "Этот элемент немногословен"
-    elsif
-      x.value.empty?
-      raise "Нет текста в поле!"
-    else
-      puts "#{x.value}"
-    end
-  end
-  puts "- текст в элементах #{name}"
-end
-
 When(/^Проверяем, что количество элементов класса "([^"]*)", вложенных в элемент класса "([^"]*)" соответствует ожидаемому "([^"]*)"$/) do |class_2, class1, kol|
   available_elements = find_element(class: class1).find_elements(class: class_2)
   quantity_of_elements = available_elements.size
@@ -386,10 +368,7 @@ end
 When(/^Проверяем, что у элементов "([^"]*)" класса "([^"]*)", вложенных в элемент с id "([^"]*)", есть лейбл$/) do |name, class_1, id|
   elements = find_element(id: id).find_elements(class: class_1)
   elements.each do |x|
-    if x.label == nil
-      puts "Этот элемент отсутствует"
-    elsif
-    x.label.empty?
+    if x.label.empty?
       raise "Нет текста в поле!"
     else
       puts "#{x.label}"
