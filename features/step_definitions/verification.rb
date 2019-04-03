@@ -299,9 +299,9 @@ end
 When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" есть лейбл$/) do |name, id|
   element = find_element(id: id)
   if element.label?
-    puts "В элементе есть текст #{name}"
+    puts "В элементе #{name} есть текст #{element.label}"
   else
-    raise "В элементе нет текста"
+    raise "В элементе #{name} нет текста"
   end
 end
 
@@ -383,5 +383,24 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
     raise "Скриншоты совпали!"
   else
     puts "Скриншоты не совпали."
+  end
+end
+
+When(/^Проверяем, что элемент "([^"]*)" с id "([^"]*)" доступен и выводим значение атрибута "([^"]*)"$/) do |name, id, atr|
+  element = find_element(id: id)
+  val_element = element.attribute(atr)
+  if val_element.empty?
+    raise "Нет значения указанного атрибута"
+  else
+    puts "Значение атрибута #{atr} элемента #{name} равно #{val_element.to_s}"
+  end
+end
+
+When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)" есть лейбл$/) do |name, id, index|
+  elements = find_elements(id: id)
+  if elements[index.to_i].label?
+    puts "В элементе #{name} есть текст #{elements[index.to_i].label}"
+  else
+    raise "В элементе #{name} нет текста"
   end
 end
