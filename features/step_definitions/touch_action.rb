@@ -116,3 +116,16 @@ When(/^Пользователь нажимает элемент "([^"]*)" с id 
   elements[index.to_i].click
   puts "Нажали элемент #{name}"
 end
+
+When(/^Нажимаем на элемент "([^"]*)" с id "([^"]*)", пока на экране не останется "([^"]*)" элемента\(ов\) с id "([^"]*)"$/) do |name, click_id, count, check_id|
+  element_check_count = find_elements(id: check_id).size
+  while element_check_count != count.to_i
+    find_element(id: click_id).click
+    # Cоглашаемся с алертом, чтобы удалить событие из купона
+    elements = find_element(accessibility_id: "alert-controller_alert_view").find_elements(class: "XCUIElementTypeButton")
+    elements[1].click
+    element_check_count = find_elements(id: check_id).size
+    puts "#{element_check_count}"
+  end
+  puts "Нажали #{name} несколько раз"
+end
