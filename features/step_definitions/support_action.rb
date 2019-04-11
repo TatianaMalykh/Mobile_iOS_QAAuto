@@ -169,3 +169,41 @@ When(/^Делаем скриншот элемента "([^"]*)" с id "([^"]*)" 
   element = elements[index.to_i]
   screen_of_element(name, element)
 end
+
+When(/^Делаем скриншот элемента "([^"]*)" с классом "([^"]*)" и индексом "([^"]*)", вложенный в элемент с id "([^"]*)"$/) do |name, myclass, index, id|
+  elements = find_element(id: id).find_elements(class: myclass)
+  element = elements[index.to_i]
+  screen_of_element(name, element)
+end
+
+When(/^Записываем в файл с названием "([^"]*)" значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", находящегося в элементе с id "([^"]*)"$/) do |filename, name, class1, index, id|
+  FileUtils.rm("#{$project_path}/#{filename}.txt") if File.exist? ("#{$project_path}/#{filename}.txt")
+  elements = find_element(id: id).find_elements(class: class1)
+  if elements[index.to_i].value.empty?
+    raise ("Для данного элемента текст не задан!")
+  else
+    File.open("#{$project_path}/#{filename}.txt", "w") do |file|
+      file.puts elements[index.to_i].value
+      file.close
+      puts ("Запомнили значение #{elements[index.to_i].value} элемента #{name}.")
+    end
+  end
+end
+
+
+
+When(/^Записываем в файл с названием "([^"]*)" значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)" и позицией в массиве "([^"]*)", находящегося в элементе с id "([^"]*)"$/) do |filename, name, class1, index, poz, id|
+  # Шаг для записи в файл слова в сообщении алерте например номер купона или чего-то такого
+  FileUtils.rm("#{$project_path}/#{filename}.txt") if File.exist? ("#{$project_path}/#{filename}.txt")
+  elements = find_element(id: id).find_elements(class: class1)
+  if elements[index.to_i].value.empty?
+    raise ("Для данного элемента текст не задан!")
+  else
+    File.open("#{$project_path}/#{filename}.txt", "w") do |file|
+      text = elements[index.to_i].value.split(" ")
+      file.puts text[poz.to_i]
+      file.close
+      puts ("Запомнили значение #{text[poz.to_i]} элемента #{name}.")
+    end
+  end
+end
