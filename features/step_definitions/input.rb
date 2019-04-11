@@ -55,3 +55,12 @@ When(/^Очищаем поле с id "([^"]*)"$/) do |id|
   find_element(id: id).clear
   puts "Очистили поле"
 end
+
+When(/^Вставляем в поле "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", ранее записанное в файл "([^"]*)" значение$/) do |name, class1, index, id, filename|
+  paste_data_file = File.new("#{$project_path}/#{filename}.txt")
+  value = paste_data_file.read.chomp
+  puts "Вставляем в поле #{name} #{value}"
+  element = find_element(id: id).find_elements(class: class1)[index.to_i]
+  element.send_keys("#{value}")
+  sleep(2)
+end

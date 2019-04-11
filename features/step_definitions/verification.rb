@@ -404,3 +404,45 @@ When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" 
     raise "В элементе #{name} нет текста"
   end
 end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
+  elements = find_element(accessibility_id: id).find_elements(class: class1)
+  val_element = elements[index.to_i].value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory != val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory} равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
+  elements = find_element(accessibility_id: id).find_elements(class: class1)
+  val_element = elements[index.to_i].value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory == val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory} равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что количество элементов класса "([^"]*)", вложенных в элемент с id "([^"]*)" соответствует ожидаемому "([^"]*)"$/) do |class_1, id, kol|
+  available_elements = find_element(id: id).find_elements(class: class_1)
+  quantity_of_elements = available_elements.size
+  if quantity_of_elements.to_i == kol.to_i
+    puts "Количество найденных элементов (#{kol.to_i}) совпадает с ожидаемым"
+  else
+    puts "Количество найденных элементов не совпадает с ожидаемым. Нашлось #{available_elements.size}"
+  end
+end

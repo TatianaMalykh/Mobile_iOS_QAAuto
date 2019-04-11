@@ -169,3 +169,31 @@ When(/^Делаем скриншот элемента "([^"]*)" с id "([^"]*)" 
   element = elements[index.to_i]
   screen_of_element(name, element)
 end
+
+When(/^Записываем в файл с названием "([^"]*)" значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", находящегося в элементе с id "([^"]*)"$/) do |filename, name, class1, index, id|
+  FileUtils.rm("#{$project_path}/#{filename}.txt") if File.exist? ("#{$project_path}/#{filename}.txt")
+  elements = find_element(id: id).find_elements(class: class1)
+  if elements[index.to_i].value.empty?
+    raise ("Для данного элемента текст не задан!")
+  else
+    File.open("#{$project_path}/#{filename}.txt", "w") do |file|
+      file.puts elements[index.to_i].value
+      file.close
+      puts ("Запомнили значение #{elements[index.to_i].value} элемента #{name}.")
+    end
+  end
+end
+
+When(/^Записываем в файл с названием "([^"]*)" символы в диапазоне от "([^"]*)" до "([^"]*)" текста из поля "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)"$/) do |filename, start_num, end_num, name, class1, index, id|
+  element = find_element(id: id).find_elements(class: class1)[index.to_i]
+  if element[index.to_i].value.empty?
+    raise "В элементе #{name} текста нет"
+  else
+    File.open("#{$project_path}/#{filename}.txt", "w") do |file|
+      text_num = element.value[start_num.to_i..end_num.to_i]
+      file.puts text_num
+      file.close
+      puts "Запомнили значение #{text_num} элемента #{name}"
+    end
+  end
+end
