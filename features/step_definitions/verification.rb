@@ -414,6 +414,38 @@ When(/^Проверяем наличие элемента "([^"]*)" с id "([^"]
   end
 end
 
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name,id,namefile|
+  elements = find_element(accessibility_id: id)
+  val_element = elements.value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory != val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory}  равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name,id,namefile|
+  elements = find_element(accessibility_id: id)
+  val_element = elements.value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory == val_element
+      puts ("Значение #{val_memory}  равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory} НЕ равно значению #{val_element}!")
+    end
+  end
+end
+
 When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
   elements = find_element(accessibility_id: id).find_elements(class: class1)
   val_element = elements[index.to_i].value
@@ -465,7 +497,6 @@ When(/^Проверяем, что значение текста элемента
     end
   end
 end
-
 
 When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)" а также позицией в тексте "([^"]*)", соответствует записанному в файле с названием "([^"]*)"$/) do |name, id, index,poz,namefile|
   # Для номера купона или любого слова или значения в тексте элемента (нумерация параметра poz с нуля)

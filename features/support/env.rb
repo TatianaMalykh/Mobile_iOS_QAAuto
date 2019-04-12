@@ -126,3 +126,13 @@ def exist_element_class?(element)
     return false
   end
 end
+
+def tap_percentage(x_percentage, y_percentage) # тап по процентам
+  size = driver.window_size
+  puts size
+  x_point = size.width * x_percentage
+  puts x_point
+  y_point = size.height * y_percentage
+  puts y_point
+  Appium::TouchAction.new.press(x: x_point.to_i, y: y_point.to_i).release.perform
+end
