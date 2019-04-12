@@ -129,3 +129,14 @@ When(/^Нажимаем на элемент "([^"]*)" с id "([^"]*)", пока 
   end
   puts "Нажали #{name} несколько раз"
 end
+
+When(/^Пользователь выбирает все элементы класса "([^"]*)", вложенные в элемент класса "([^"]*)" с индексом "([^"]*)"$/) do |class1, class2, index|
+  list = find_elements(class: class2)[index.to_i]
+  elements = list.find_elements(class: class1)
+  count = 0
+  elements.each do |x|
+    x.click
+    count += 1
+    puts "Нажали элемент, #{count}"
+  end
+end

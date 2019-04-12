@@ -318,8 +318,181 @@
     И Пользователь нажимает элемент "Подтверждать" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
 #    генерация купона по таблице комбинаторных проверок (без анализа рисков) на основе граничных значений
     И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
-              ###########################  НА ДАННЫЙ МОМЕНТ ОТСУТСТВУЮТ АЙДИШНИКИ ############################
+#    Проверим наличие полей для генерации
+    И Проверяем наличие элемента "Сумма ставки" с id "coupon-generator_summ_label"
+    И Проверяем, что у элемента "Сумма ставки" с id "coupon-generator_summ_label" есть лейбл
+    И Проверяем наличие элемента "Поле ввода суммы ставки" с id "coupon-generator_summ_text-field"
+    И Проверяем, что в элементе "Поле ввода суммы ставки" с id "coupon-generator_summ_text-field" есть текст
+    И Проверяем наличие элемента "Желаемый выигрыш" с id "coupon-generator_win-summ_label"
+    И Проверяем, что у элемента "Желаемый выигрыш" с id "coupon-generator_win-summ_label" есть лейбл
+    И Проверяем наличие элемента "Поле ввода желаемого выигрыша" с id "coupon-generator_win-summ_text-field"
+    И Проверяем, что в элементе "Поле ввода желаемого выигрыша" с id "coupon-generator_win-summ_text-field" есть текст
+    И Проверяем наличие элемента "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Проверяем, что у элемента "Время до начала" с id "coupon-generator_max-time-before-game_label" есть лейбл
+    И Проверяем наличие элемента "Поле выбора времени" с id "coupon-generator_start-time_text-field"
+    И Проверяем, что в элементе "Поле выбора времени" с id "coupon-generator_start-time_text-field" есть текст
 
+#    1 для поля Начало
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "1"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "5,5"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Ставка в купоне" с id "coupon_cell-0-0", но не более "10" секунд
+#    24 для поля Начало
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "11,1"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "78"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Делаем свайп по параметрам x: "180" y: "600" x_end: "180" y_end: "50"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Ставка в купоне" с id "coupon_cell-0-0", но не более "10" секунд
+#    Все для Вида спорта
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "0,1"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "0,8"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь выбирает все элементы класса "XCUIElementTypeCell", вложенные в элемент класса "XCUIElementTypeTable" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Ставка в купоне" с id "coupon_cell-0-0", но не более "10" секунд
+#    Все для вида исхода
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "0,01"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "0,21"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь выбирает все элементы класса "XCUIElementTypeCell", вложенные в элемент класса "XCUIElementTypeTable" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Ставка в купоне" с id "coupon_cell-0-0", но не более "10" секунд
+#    3-х для типа купона
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "555"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "666"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент на экране с координатами x "180" и y "550"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Ставка в купоне" с id "coupon_cell-0-0", но не более "10" секунд
+#    5-х для типа купона
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "10"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "99"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Делаем свайп по параметрам x: "180" y: "600" x_end: "180" y_end: "50"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Ставка в купоне" с id "coupon_cell-0-0", но не более "10" секунд
+#    Дефолтные значения для ставки и выигрыша
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Ставка в купоне" с id "coupon_cell-0-0", но не более "10" секунд
+#    0 для желаемого выигрыша
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "10"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "0"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Пользователь нажимает элемент "Назад" с id "buttonLeft"
+#    Пустая строка для желаемого выигрыша
+    
   Сценарий: Загрузить, сохранить купон
     Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
     И ПРОВЕРКА НА ОБНОВЛНИЕ
