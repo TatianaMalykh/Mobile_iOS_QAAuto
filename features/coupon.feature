@@ -15,22 +15,22 @@
     Тогда Ждем появления элемента "Назад" с id "buttonLeft", но не более "10" секунд
     И Делаем свайп вниз
 #      Выбираем страну Абхазия
-    К тому же Записываем в файл с названием "Страна" всё значение текста элемента "Страна" с id "registration-oneclick_country_text-field-ext"
+    К тому же Записываем в файл всё значение текста элемента "Страна" с id "registration-oneclick_country_text-field-ext"
     Когда Пользователь нажимает элемент "Страна" с id "registration-oneclick_country_text-field-ext"
     То Ждем появления элемента "Тулбар" с id "Toolbar", но не более "10" секунд
     К тому же Проверяем наличие элемента "Отмена" с id "text-field_cancel_button"
     И Проверяем наличие элемента "Далее" с id "text-field_next_button"
     Тогда Пользователь нажимает элемент "Далее" с id "text-field_next_button"
-    И Проверяем, что значение всего текста элемента "Страна" с id "registration-oneclick_country_text-field-ext" не совпадает с записанным в файле "Страна"
+    И Проверяем, что значение всего текста элемента "Страна" с id "registration-oneclick_country_text-field-ext" не соответствует ранее записанному
 #      Выбираем валюту Российский рубль
-    К тому же Записываем в файл с названием "Валюта" всё значение текста элемента "Валюта" с id "registration-oneclick_currency_text-field-ext"
+    К тому же Записываем в файл всё значение текста элемента "Валюта" с id "registration-oneclick_currency_text-field-ext"
     Когда Пользователь нажимает элемент "Валюта" с id "registration-oneclick_currency_text-field-ext"
     То Ждем появления элемента "Тулбар" с id "Toolbar", но не более "10" секунд
     К тому же Проверяем наличие элемента "Отмена" с id "text-field_cancel_button"
     И Проверяем наличие элемента "Назад" с id "text-field_previos_button"
     И Проверяем наличие элемента "Далее" с id "text-field_next_button"
     Тогда Пользователь нажимает элемент "Далее" с id "text-field_next_button"
-    И Проверяем, что значение всего текста элемента "Валюта" с id "registration-oneclick_currency_text-field-ext" не совпадает с записанным в файле "Валюта"
+    И Проверяем, что значение всего текста элемента "Валюта" с id "registration-oneclick_currency_text-field-ext" не соответствует ранее записанному
 #      Проверяем, что пустой промокод имеет текст "Промо-код"
     И Проверяем, что в элементе "Промокод" с id "registration-oneclick_promo-code_text-field" есть текст
 #      скрываем клавиатуру кнопкой Отмена
@@ -492,7 +492,135 @@
     И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
     И Пользователь нажимает элемент "Назад" с id "buttonLeft"
 #    Пустая строка для желаемого выигрыша
-    
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Очищаем поле с id "coupon-generator_win-summ_text-field"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Проверяем, что у элемента "Ошибка" класса "XCUIElementTypeStaticText" с индексом "1", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Пользователь нажимает элемент "Назад" с id "buttonLeft"
+#    Ставка больше Желаемого выигрыша
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "100"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "1"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Проверяем, что у элемента "Ошибка" класса "XCUIElementTypeStaticText" с индексом "1", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Пользователь нажимает элемент "Назад" с id "buttonLeft"
+#    Не выбран Вид спорта (негативный)
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Проверяем, что у элемента "Ошибка" класса "XCUIElementTypeStaticText" с индексом "1", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Пользователь нажимает элемент "Назад" с id "buttonLeft"
+#    Не выбран вид исхода (негативный)
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "10"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "0"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Проверяем, что у элемента "Ошибка" класса "XCUIElementTypeStaticText" с индексом "1", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Пользователь нажимает элемент "Назад" с id "buttonLeft"
+#    0 для суммы ставки (негативный)
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Пользователь вводит в поле "Поле ввода суммы ставки" с ID "coupon-generator_summ_text-field" "0"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "10"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Проверяем, что у элемента "Ошибка" класса "XCUIElementTypeStaticText" с индексом "1", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Пользователь нажимает элемент "Назад" с id "buttonLeft"
+#    Пустая строка для суммы ставки
+    И Пользователь нажимает элемент "Генерировать купон" с id "coupon-menu_generator_label"
+    И Очищаем поле с id "coupon-generator_summ_text-field"
+    И Пользователь вводит в поле "Поле ввода желаемого выигрыша" с ID "coupon-generator_win-summ_text-field" "10"
+    И Записываем в файл всё значение текста элемента "Время до начала" с id "coupon-generator_start-time_text-field"
+    И Пользователь нажимает элемент "Время до начала" с id "coupon-generator_max-time-before-game_label"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Время до начала" с id "coupon-generator_start-time_text-field" не соответствует ранее записанному
+    И Проверяем наличие элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Записываем в файл всё значение текста элемента "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Тип купона" с id "coupon-generator_type_text-field"
+    И Пользователь нажимает элемент "Ок" с id "text-field_ok_button"
+    И Проверяем, что значение всего текста элемента "Тип купона" с id "coupon-generator_type_text-field" не соответствует ранее записанному
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-0_cell" с индексом "0"
+    И Пользователь нажимает элемент "Вид спорта" с id "	coupon-generator_element-0-1_cell" с индексом "0"
+    И Делаем свайп вниз
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-0_cell" с индексом "1"
+    И Пользователь нажимает элемент "Вид исхода" с id "	coupon-generator_element-0-1_cell" с индексом "1"
+    И Пользователь нажимает элемент "Генерировать" с id "coupon-generator_generate_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Проверяем, что у элемента "Ошибка" класса "XCUIElementTypeStaticText" с индексом "1", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ok" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+
   Сценарий: Загрузить, сохранить купон
     Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
     И ПРОВЕРКА НА ОБНОВЛНИЕ
@@ -561,6 +689,40 @@
     И Вставляем в поле "Код купона" класса "XCUIElementTypeStaticText" с индексом "1", вложенного в элемент с id "alert-controller_alert_view", ранее записанное в файл "Код" значение
     И Пользователь нажимает элемент "Ок" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
     И Ждем появления элемента "Загруженное событие" с id "coupon_cell-0-0", но не более "10" секунд
+
+  Сценарий: Удаление Событий и всего купона
+    Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
+    И ПРОВЕРКА НА ОБНОВЛНИЕ
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    Также Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
+    И Ждем "2" секунд(ы)
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    И Делаем свайп вправо
+    И Выбираем в меню элемент "menu_menuDayExpress_cell"
+    И Пользователь нажимает элемент "Линия-экспресс" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "day-express_segment"
+    И Проверяем наличие элемента "Первый экспресс" с id "day-express_cell-0-0_cell"
+    И Пользователь нажимает элемент "Ставим на первое попавшееся" с id "day-express_event-0_view"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Пользователь нажимает элемент "Добавить в купон" класса "XCUIElementTypeButton" с индексом "2", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Пользователь нажимает элемент "Открить" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
+#    Проверяем, что появился одинар и указатель на него
+    И Ждем появления элемента "Указатель" с id "coupon-menu_menu-indicator_image", но не более "5" секунд
+    И Проверяем наличие элемента "Полоса ставок" с id "coupon-menu_tabs-menu"
+    И Проверяем, что у элемента "Экспресс" класса "XCUIElementTypeStaticText" с индексом "0", вложнного в элемент с id "tabs-menu_element-0-0_cell", есть лейбл
+#    Удаляем одно собитие
+    И Делаем свайп вниз
+    И Делаем скриншот элемента "Экспресс" с id "coupon_cell-0-0"
+    И Пользователь нажимает элемент "Удалить" с id "coupon-event-cell_delete_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Пользователь нажимает элемент "Удалить" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
+    И Проверяем, что скриншот "Экспресс" не совпадает с новым скриншотом "Урезанный_экспресс" элемента с id "coupon_cell-0-0"
+#    Удаляем все события
+    И Пользователь нажимает элемент "Корзиночка" с id "deleteButton"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Пользователь нажимает элемент "Продолжить" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Лого в пустом купоне" с id "iconLogoApp", но не более "5" секунд
+
 
 
 

@@ -21,7 +21,6 @@ end
 
 
 When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
-  #ПЕРЕДЕЛАТЬ КАТЕГОРИИ когда будут айдишники
   $driver.set_implicit_wait(1)
   swipe(start_x: 50, start_y: 200, end_x: 50, end_y: 700)
   sleep (2)
@@ -33,7 +32,7 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
     if exist_element?(accessibility_id: id)
       find_element(accessibility_id: id).click
     else
-      if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell"
+      if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuDayExpress_cell" or id == "menu_menuActions_cell"
         find_element(id: "menu_menuGroupEvents_button").click
         #swipe(start_x: 20, start_y: 900, end_x: 20, end_y: 200)
         sleep (2)
@@ -43,7 +42,7 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
-      elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell"
+      elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell" or id == "menu_menuCouponReader_cell" or id == "menu_menuSupport_cell"
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
         find_element(id: "menu_menuGroupOther_button").click
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
@@ -139,4 +138,23 @@ When(/^Пользователь выбирает все элементы кла�
     count += 1
     puts "Нажали элемент, #{count}"
   end
+end
+
+When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" по координатам этого элемента$/) do |name, id|
+  element = find_element(accessibility_id: id)
+  x = element.rect.x
+  y = element.rect.y
+  puts x,y
+  Appium::TouchAction.new.press(x: x, y: y).release.perform
+  puts("Нажали #{name}")
+end
+
+When(/^Пользователь выбирает в списке "([^"]*)" "([^"]*)" "([^"]*)" с id "([^"]*)" и нажимает на него по координатам$/) do |list, index, name, id|
+  elements = find_elements(accessibility_id: id)
+  elem = elements[index.to_i]
+  x = elem.rect.x
+  y = elem.rect.y
+  puts x,y
+  Appium::TouchAction.new.press(x: x, y: y).release.perform
+  puts ("Пользователь выбрал в #{list} элемент #{name}")
 end
