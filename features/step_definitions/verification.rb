@@ -430,6 +430,22 @@ When(/^Проверяем, что значение текста элемента
   end
 end
 
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name,id,index,id2,namefile|
+  elements = find_element(accessibility_id: id2).find_elements(accessibility_id: id)[index.to_i]
+  val_element = elements.value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory != val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory}  равно значению #{val_element}!")
+    end
+  end
+end
+
 When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name,id,namefile|
   elements = find_element(accessibility_id: id)
   val_element = elements.value

@@ -8,7 +8,6 @@ When(/^Пользователь вводит в поле "([^"]*)" с ID "([^"]*
   puts ("Вводим в поле #{field} #{value}")
 end
 
-
 When(/^Вводим допустимую дату рождения$/) do
   if exist_element?(id: "Toolbar")
     3.times {swipe(start_x: 300, start_y: 500, end_x: 300, end_y: 600)}
@@ -32,6 +31,7 @@ When(/^Пользователь вводит в поле "([^"]*)" класса 
   find_element(class: class1).send_keys(value)
   puts ("Вводим в поле #{field} #{value}")
 end
+
 When(/^Пользователь вводит в поле "([^"]*)" с классом "([^"]*)" и индексом "([^"]*)" значение "([^"]*)"$/) do |field, myclass,index, value|
   find_element(class: myclass).clear
   elements = find_elements(class: myclass)
@@ -44,6 +44,7 @@ When(/^Пользователь вводит в поле "([^"]*)" с класс
   #   puts @driver.hide_keyboard('Перейти')
   # end
 end
+
 When(/^Пользователь вводит в поле "([^"]*)" с классом "([^"]*)" и индексом "([^"]*)" значение "([^"]*)" без скрытия клавиатуры$/) do |field, myclass,index, value|
   find_element(class: myclass).clear
   elements = find_elements(class: myclass)
@@ -54,4 +55,11 @@ end
 When(/^Очищаем поле с id "([^"]*)"$/) do |id|
   find_element(id: id).clear
   puts "Очистили поле"
+end
+
+When(/^Пользователь вводит в поле "([^"]*)" с классом "([^"]*)" находящийся в элементе с id "([^"]*)" значение "([^"]*)"$/) do |field, myclass,id, value|
+  find_element(accessibility_id: id).find_element(class: myclass).clear
+  elements = find_element(accessibility_id: id).find_element(class: myclass)
+  elements.send_keys(value)
+  puts ("Вводим в поле #{field} #{value}")
 end
