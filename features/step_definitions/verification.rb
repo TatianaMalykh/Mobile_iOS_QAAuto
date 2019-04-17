@@ -9,6 +9,7 @@ When(/^Проверяем наличие элемента "([^"]*)" с id "([^"]
     raise "Нет элемента #{name}!"
   end
 end
+
 When(/^Проверяем наличие элементов "([^"]*)" с name "([^"]*)" и выводим их количество в лог$/) do |name, name1|
   if exist_element?(name: name1)
     elements = find_elements(name: name1)
@@ -46,7 +47,6 @@ When(/^Проверяем, что в элементе "([^"]*)" с id "([^"]*)" 
   end
 end
 
-
 When(/^Проверяем, что значение всего текста элемента "([^"]*)" с id "([^"]*)" соответствует ранее записанному$/) do |name, id|
   element = find_element(accessibility_id: id)
   val_element = element.value
@@ -63,7 +63,6 @@ When(/^Проверяем, что значение всего текста эл�
     end
   end
 end
-
 
 When(/^Проверяем наличие элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент id "([^"]*)"$/) do |name,my_class,index, id|
   element = find_element(accessibility_id: id).find_elements(class:my_class)
@@ -90,7 +89,6 @@ When(/^Проверяем, что значение всего текста эл�
     end
   end
 end
-
 
 When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым скриншотом "([^"]*)" элемента с id "([^"]*)"$/) do |standard_element, actual_element, id|
   element = find_element(accessibility_id: id)
@@ -119,7 +117,6 @@ When(/^Проверяем, что в элементе "([^"]*)" класса "([
   end
 end
 
-
 When(/^Проверяем, что у элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с id "([^"]*)", есть лейбл$/) do |name, my_class,index, id|
   element = find_element(accessibility_id: id).find_elements(class:my_class)
   if element[index.to_i].label?
@@ -128,7 +125,6 @@ When(/^Проверяем, что у элемента "([^"]*)" класса "([
     raise "В элементе нет текста"
   end
 end
-
 
 When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым "([^"]*)" с расположением по x "([^"]*)" y "([^"]*)" обрезанным на x "([^"]*)" и y "([^"]*)"$/) do |standard, actual, x_st, y_st, x_len, y_len|
   x_stt = (($driver.window_size.width*x_st.to_f)*2).to_i
@@ -216,7 +212,6 @@ When(/^ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВО�
   end
 end
 
-
 When(/^ПРОВЕРКА НА ПРОПУСТИТЬ$/) do
   #  ОБХОД ДЛЯ ВНОВЬ УСТАНОВЛЕННОГО ПРИЛОЖЕНИЯ!!!!!!!!!!!
   spent_time = 0
@@ -237,7 +232,6 @@ When(/^ПРОВЕРКА НА ПРОПУСТИТЬ$/) do
   end
 end
 
-
 When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)"$/) do |name, my_class,index,|
   element = find_elements(class:my_class)
   if element[index.to_i]
@@ -246,7 +240,6 @@ When(/^Проверяем, что в элементе "([^"]*)" класса "([
     puts "В элементе нет текста"
   end
 end
-
 
 When(/^Проверяем, что у элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с классом "([^"]*)", есть лейбл$/) do |name, my_class,index, my_class_2|
   element = find_element(class: my_class_2).find_elements(class: my_class)
@@ -278,7 +271,6 @@ When(/^Проверяем наличие элемента "([^"]*)" класса
   end
 end
 
-
 When(/^Проверяем, что в элементе "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с классом "([^"]*)", есть текст$/) do |name, my_class,index, class_2|
   element = find_element(class: class_2).find_elements(class:my_class)
   if element[index.to_i].value?
@@ -287,6 +279,7 @@ When(/^Проверяем, что в элементе "([^"]*)" класса "([
     raise "В элементе нет текста"
   end
 end
+
 When(/^Проверяем, что в элементе с id "([^"]*)" у элемента класса "([^"]*)" с индексом "([^"]*)" есть текст$/) do |id, class1, index|
   if exist_element?(accessibility_id: id)
     elements = find_element(accessibility_id: id).find_elements(class: class1)
@@ -299,7 +292,16 @@ end
 When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" есть лейбл$/) do |name, id|
   element = find_element(id: id)
   if element.label?
-    puts "В элементе есть текст #{name}"
+    puts "В элементе есть текст #{name} #{element.label}"
+  else
+    raise "В элементе нет текста"
+  end
+end
+
+When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)" есть лейбл$/) do |name, id, index|
+  elements = find_elements(id: id)
+  if elements[index.to_i].label?
+    puts "В элементе есть текст #{name} #{elements[index.to_i].label}"
   else
     raise "В элементе нет текста"
   end
@@ -383,5 +385,151 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
     raise "Скриншоты совпали!"
   else
     puts "Скриншоты не совпали."
+  end
+end
+
+When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым скриншотом "([^"]*)" элемента с классом "([^"]*)" и индексом "([^"]*)", вложенным в элемент с id "([^"]*)"$/) do |standard_element, actual_element, myclass, index, id|
+  element = find_element(accessibility_id: id).find_elements(class: myclass)
+  if element_same?(actual_element, standard_element, element[index.to_i])
+    raise "Скриншоты совпали!"
+  else
+    puts "Скриншоты не совпали."
+  end
+end
+
+When(/^Проверяем, что скриншот "([^"]*)" совпадает с новым скриншотом "([^"]*)" элемента с классом "([^"]*)" и индексом "([^"]*)", вложенным в элемент с id "([^"]*)"$/) do |standard_element, actual_element, myclass, index, id|
+  element = find_element(accessibility_id: id).find_elements(class: myclass)
+  if element_same?(actual_element, standard_element, element[index.to_i])
+    puts "Скриншоты совпали."
+  else
+    raise "Скриншоты не совпали!"
+  end
+end
+
+When(/^Проверяем наличие элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)"$/) do |name, id_name, index|
+  if exist_elements?("#{id_name}","#{index}")
+    puts ("Есть элемент #{name}.")
+  else
+    raise "Нет элемента #{name}!"
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name,id,namefile|
+  elements = find_element(accessibility_id: id)
+  val_element = elements.value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory != val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory}  равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name,id,index,id2,namefile|
+  elements = find_element(accessibility_id: id2).find_elements(accessibility_id: id)[index.to_i]
+  val_element = elements.value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory != val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory}  равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name,id,namefile|
+  elements = find_element(accessibility_id: id)
+  val_element = elements.value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory == val_element
+      puts ("Значение #{val_memory}  равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory} НЕ равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
+  elements = find_element(accessibility_id: id).find_elements(class: class1)
+  val_element = elements[index.to_i].value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory != val_element
+      puts ("Значение #{val_memory} НЕ равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory}  равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
+  elements = find_element(accessibility_id: id).find_elements(class: class1)
+  val_element = elements[index.to_i].value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    if val_memory == val_element
+      puts ("Значение #{val_memory}  равно значению #{val_element}.")
+    else
+      raise ("Значение #{val_memory} НЕ  равно значению #{val_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)" а также позицией в тексте "([^"]*)", не соответствует записанному в файле с названием "([^"]*)"$/) do |name, id, index,poz,namefile|
+  # Для номера купона или любого слова или значения в тексте элемента (нумерация параметра poz с нуля)
+  element = find_elements(accessibility_id: id)
+  val_element = element[index.to_i].value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+   text = val_element.split(" ")
+    puts text
+    text_element = text[poz.to_i]
+    if val_memory != text_element
+      puts ("Значение #{val_memory} НЕ равно значению #{text_element}.")
+    else
+      raise ("Значение #{val_memory}  равно значению #{text_element}!")
+    end
+  end
+end
+
+When(/^Проверяем, что значение текста элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)" а также позицией в тексте "([^"]*)", соответствует записанному в файле с названием "([^"]*)"$/) do |name, id, index,poz,namefile|
+  # Для номера купона или любого слова или значения в тексте элемента (нумерация параметра poz с нуля)
+  element = find_elements(accessibility_id: id)
+  val_element = element[index.to_i].value
+  if val_element.empty?
+    raise ("Для элемента #{name} текст не задан!")
+  else
+    memory_file = File.new("#{$project_path}/#{namefile}.txt")
+    val_memory = memory_file.read.chomp!
+    text = val_element.split(" ")
+    puts text
+    text_element = text[poz.to_i]
+    if val_memory == text_element
+      puts ("Значение #{val_memory}  равно значению #{text_element}.")
+    else
+      raise ("Значение #{val_memory} НЕ равно значению #{text_element}!")
+    end
   end
 end

@@ -7,7 +7,6 @@ When(/^Пользователь нажимает элемент "([^"]*)" с id 
   puts("Нажали #{name}")
 end
 
-
 When(/^Пользователь нажимает элемент "([^"]*)" с name "([^"]*)"$/) do |name_el, id|
   find_element(name: id).click
   puts("Нажали #{name_el}")
@@ -18,7 +17,6 @@ When(/^Пользователь выбирает в списке "([^"]*)" "([^"
   elements[index.to_i].click
   puts ("Пользователь выбрал в #{list} элемент #{name}")
 end
-
 
 When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
   #ПЕРЕДЕЛАТЬ КАТЕГОРИИ когда будут айдишники
@@ -90,11 +88,13 @@ When(/^Пользователь нажимает элемент "([^"]*)" кла
   elements[index.to_i].click
   puts "Нажали элемент #{name}"
 end
+
 When(/^Делаем свайп по параметрам x: "([^"]*)" y: "([^"]*)" x_end: "([^"]*)" y_end: "([^"]*)"$/) do |x, y, x_end,y_end|
   #работает только если выключить XCUIEST
   swipe(start_x: x.to_i, start_y: y.to_i, end_x: x_end.to_i, end_y: y_end.to_i)
   puts ("Пользователь выбрал в  элемент ")
 end
+
 When(/^Пользователь нажимает элемент "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенный в элемент с классом "([^"]*)"$/) do |name, class1, index, class2|
   elements = find_element(class: class2).find_elements(class: class1)
   elements[index.to_i].click
@@ -115,4 +115,42 @@ When(/^Пользователь нажимает элемент "([^"]*)" с id 
   elements = find_element(id: id).find_elements(id: id2)
   elements[index.to_i].click
   puts "Нажали элемент #{name}"
+end
+
+When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" по координатам этого элемента$/) do |name, id|
+  element = find_element(accessibility_id: id)
+  x = element.rect.x
+  y  = element.rect.y
+  puts x,y
+  Appium::TouchAction.new.press(x: x, y: y).release.perform
+  puts("Нажали #{name}")
+end
+
+When(/^Пользователь выбирает в списке "([^"]*)" "([^"]*)" "([^"]*)" с id "([^"]*)" и нажимает на него по координатам$/) do |list, index, name, id|
+  elements = find_elements(accessibility_id: id)
+  elem = elements[index.to_i]
+  x = elem.rect.x
+  y = elem.rect.y
+  puts x,y
+  Appium::TouchAction.new.press(x: x, y: y).release.perform
+  puts ("Пользователь выбрал в #{list} элемент #{name}")
+end
+
+When(/^Пользователь делает свайп элемента "([^"]*)" с id "([^"]*)" по оси "([^"]*)" на расстояние "([^"]*)"$/) do  |name, id,axis,dist|
+  # работает только если в капсах прописать XCUIEST = true
+  # Принимает параметр axis только значения х у
+  elements = find_element(accessibility_id: id)
+  x_start = elements.rect.x
+  y_start = elements.rect.y
+  puts x_start,y_start
+  if axis == "x"
+    puts "Двигаемся по оси X на #{dist}"
+      swipe(start_x: x_start, start_y: y_start, end_x: x_start+dist.to_f, end_y: y_start)
+  elsif axis == "y"
+    puts "Двигаемся по оси y на #{dist}"
+    swipe(start_x: x_start, start_y: y_start, end_x: x_start, end_y: y_start+dist.to_f)
+  else
+    raise "Неизвестный параметр"
+  end
+  puts ("Передвинули элемент #{name} на #{dist} по оси #{axis}")
 end
