@@ -185,12 +185,12 @@ When(/^Записываем в файл с названием "([^"]*)" знач
 end
 
 When(/^Записываем в файл с названием "([^"]*)" символы в диапазоне от "([^"]*)" до "([^"]*)" текста из поля "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)"$/) do |filename, start_num, end_num, name, class1, index, id|
-  element = find_element(id: id).find_elements(class: class1)[index.to_i]
+  element = find_element(id: id).find_elements(class: class1)
   if element[index.to_i].value.empty?
     raise "В элементе #{name} текста нет"
   else
     File.open("#{$project_path}/#{filename}.txt", "w") do |file|
-      text_num = element.value[start_num.to_i..end_num.to_i]
+      text_num = element[index.to_i].value[start_num.to_i..end_num.to_i]
       file.puts text_num
       file.close
       puts "Запомнили значение #{text_num} элемента #{name}"
