@@ -405,7 +405,7 @@ When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" 
   end
 end
 
-When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", не совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id, namefile|
   elements = find_element(accessibility_id: id).find_elements(class: class1)
   val_element = elements[index.to_i].value
   if val_element.empty?
@@ -421,7 +421,7 @@ When(/^Проверяем, что значение текста элемента
   end
 end
 
-When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id, namefile|
   elements = find_element(accessibility_id: id).find_elements(class: class1)
   val_element = elements[index.to_i].value
   if val_element.empty?
