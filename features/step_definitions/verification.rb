@@ -398,15 +398,6 @@ When(/^Проверяем, что элемент "([^"]*)" с id "([^"]*)" до�
   end
 end
 
-When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)" есть лейбл$/) do |name, id, index|
-  elements = find_elements(id: id)
-  if elements[index.to_i].label?
-    puts "В элементе #{name} есть текст #{elements[index.to_i].label}"
-  else
-    raise "В элементе #{name} нет текста"
-  end
-end
-
 When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым скриншотом "([^"]*)" элемента с классом "([^"]*)" и индексом "([^"]*)", вложенным в элемент с id "([^"]*)"$/) do |standard_element, actual_element, myclass, index, id|
   element = find_element(accessibility_id: id).find_elements(class: myclass)
   if element_same?(actual_element, standard_element, element[index.to_i])
@@ -512,7 +503,6 @@ When(/^Проверяем, что значение текста элемента
     end
   end
 end
-
 
 When(/^Проверяем, что количество элементов класса "([^"]*)", вложенных в элемент с id "([^"]*)" соответствует ожидаемому "([^"]*)"$/) do |class_1, id, kol|
   available_elements = find_element(id: id).find_elements(class: class_1)
