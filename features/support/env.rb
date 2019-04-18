@@ -7,10 +7,10 @@ $project_path = ENV["IOS_PROJECT_PATH"]
 def caps1
     {
         caps: {
-            deviceName: "iPhone 6",
+            deviceName: "iPhone XR",
             platformName: "iOS",
             platformVersion: "12.1",
-            app: "/Users/kim_chernov/QAiOSAuto/1xBet.app",
+            app: "/Users/sergeyignatov/QAIOSAuto/1xBet.app",
             # automationName: "XCUITest",
             noReset: true,
             unicodeKeyboard: true,
@@ -34,11 +34,20 @@ def exist_element?(element)
   end
 end
 
+def exist_elements?(element,index)
+  $driver.set_implicit_wait(0.5)
+  begin
+    return true if find_elements(accessibility_id:"#{element}")[index.to_i]
+  rescue
+    return false
+  end
+end
+
 def exist_element_class?(cls,ind,element)
   $driver.set_implicit_wait(0.5)
-  element = find_element(accessibility_id:"#{element}").find_elements(class:"#{cls}")
+  elements = find_element(accessibility_id:"#{element}").find_elements(class:"#{cls}")
   begin
-    return true if element[ind]
+    return true if elements[ind]
   rescue
     return false
   end
@@ -116,4 +125,14 @@ def exist_element_class?(element)
   rescue
     return false
   end
+end
+
+def tap_percentage(x_percentage, y_percentage) # тап по процентам
+  size = driver.window_size
+  puts size
+  x_point = size.width * x_percentage
+  puts x_point
+  y_point = size.height * y_percentage
+  puts y_point
+  Appium::TouchAction.new.press(x: x_point.to_i, y: y_point.to_i).release.perform
 end
