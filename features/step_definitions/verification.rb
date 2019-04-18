@@ -292,7 +292,7 @@ end
 When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" есть лейбл$/) do |name, id|
   element = find_element(id: id)
   if element.label?
-    puts "В элементе есть текст #{name} #{element.label}"
+    puts "В элементе #{name} есть текст #{element.label}"
   else
     raise "В элементе нет текста"
   end
@@ -303,7 +303,7 @@ When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" 
   if elements[index.to_i].label?
     puts "В элементе есть текст #{name} #{elements[index.to_i].label}"
   else
-    raise "В элементе нет текста"
+    raise "В элементе #{name} нет текста"
   end
 end
 
@@ -385,6 +385,25 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
     raise "Скриншоты совпали!"
   else
     puts "Скриншоты не совпали."
+  end
+end
+
+When(/^Проверяем, что элемент "([^"]*)" с id "([^"]*)" доступен и выводим значение атрибута "([^"]*)"$/) do |name, id, atr|
+  element = find_element(id: id)
+  val_element = element.attribute(atr)
+  if val_element.empty?
+    raise "Нет значения указанного атрибута"
+  else
+    puts "Значение атрибута #{atr} элемента #{name} равно #{val_element.to_s}"
+  end
+end
+
+When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" и индексом "([^"]*)" есть лейбл$/) do |name, id, index|
+  elements = find_elements(id: id)
+  if elements[index.to_i].label?
+    puts "В элементе #{name} есть текст #{elements[index.to_i].label}"
+  else
+    raise "В элементе #{name} нет текста"
   end
 end
 
@@ -478,7 +497,7 @@ When(/^Проверяем, что значение текста элемента
   end
 end
 
-When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id,namefile|
+When(/^Проверяем, что значение текста элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)", совпадает с записанным в файле "([^"]*)"$/) do |name, class1, index, id, namefile|
   elements = find_element(accessibility_id: id).find_elements(class: class1)
   val_element = elements[index.to_i].value
   if val_element.empty?
@@ -491,6 +510,17 @@ When(/^Проверяем, что значение текста элемента
     else
       raise ("Значение #{val_memory} НЕ  равно значению #{val_element}!")
     end
+  end
+end
+
+
+When(/^Проверяем, что количество элементов класса "([^"]*)", вложенных в элемент с id "([^"]*)" соответствует ожидаемому "([^"]*)"$/) do |class_1, id, kol|
+  available_elements = find_element(id: id).find_elements(class: class_1)
+  quantity_of_elements = available_elements.size
+  if quantity_of_elements.to_i == kol.to_i
+    puts "Количество найденных элементов (#{kol.to_i}) совпадает с ожидаемым"
+  else
+    puts "Количество найденных элементов не совпадает с ожидаемым. Нашлось #{available_elements.size}"
   end
 end
 

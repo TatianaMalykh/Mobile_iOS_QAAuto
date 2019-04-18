@@ -19,7 +19,6 @@ When(/^Пользователь выбирает в списке "([^"]*)" "([^"
 end
 
 When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
-  #ПЕРЕДЕЛАТЬ КАТЕГОРИИ когда будут айдишники
   $driver.set_implicit_wait(1)
   swipe(start_x: 50, start_y: 200, end_x: 50, end_y: 700)
   sleep (2)
@@ -31,7 +30,7 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
     if exist_element?(accessibility_id: id)
       find_element(accessibility_id: id).click
     else
-      if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell"
+      if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuDayExpress_cell" or id == "menu_menuActions_cell"
         find_element(id: "menu_menuGroupEvents_button").click
         #swipe(start_x: 20, start_y: 900, end_x: 20, end_y: 200)
         sleep (2)
@@ -41,7 +40,7 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
-      elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell"
+      elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell" or id == "menu_menuCouponReader_cell" or id == "menu_menuSupport_cell"
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
         find_element(id: "menu_menuGroupOther_button").click
         swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
@@ -116,6 +115,35 @@ When(/^Пользователь нажимает элемент "([^"]*)" с id 
   elements[index.to_i].click
   puts "Нажали элемент #{name}"
 end
+
+When(/^Нажимаем на элемент "([^"]*)" с id "([^"]*)", пока на экране не останется "([^"]*)" элемента\(ов\) с id "([^"]*)"$/) do |name, click_id, count, check_id|
+  element_check_count = find_elements(id: check_id).size
+  while element_check_count != count.to_i
+    find_element(id: click_id).click
+    # Cоглашаемся с алертом, чтобы удалить событие из купона
+    elements = find_element(accessibility_id: "alert-controller_alert_view").find_elements(class: "XCUIElementTypeButton")
+    elements[1].click
+    element_check_count = find_elements(id: check_id).size
+    puts "#{element_check_count}"
+  end
+  puts "Нажали #{name} несколько раз"
+end
+
+When(/^Пользователь выбирает все элементы класса "([^"]*)", вложенные в элемент класса "([^"]*)" с индексом "([^"]*)"$/) do |class1, class2, index|
+  list = find_elements(class: class2)[index.to_i]
+  elements = list.find_elements(class: class1)
+  count = 0
+  elements.each do |x|
+    x.click
+    count += 1
+    puts "Нажали элемент, #{count}"
+  end
+end
+
+When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" по координатам этого элемента$/) do |name, id|
+  element = find_element(accessibility_id: id)
+  x = element.rect.x
+  y = element.rect.y
 
 When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" по координатам этого элемента$/) do |name, id|
   element = find_element(accessibility_id: id)
