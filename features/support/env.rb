@@ -7,20 +7,15 @@ $project_path = ENV["IOS_PROJECT_PATH"]
 def caps1
     {
         caps: {
-            deviceName: "iPhone XR",
-            platformName: "iOS",
-            platformVersion: "12.1",
-            app: "/Users/sergeyignatov/QAIOSAuto/1xBet.app",
-            # automationName: "XCUITest",
-            noReset: true,
-            unicodeKeyboard: true,
-            useNewWDA: true,
-            # app: "#{$project_path}/1xBet.test.app",
-            #xcodeOrgId: "6UWA23N6D3",
-            #xcodeSigningId: "iPhone Developer",
-            bundleId: "1xBet.1xBet"
-            #newCommandTimeout: "1000",
-            #automationName: "UIAutomation",
+            "deviceName": "iPhone XR",
+            "platformName": "iOS",
+            "platformVersion": "12.1",
+            "app": "/Users/sergeyignatov/QAIOSAuto/1xBet.test-5.app",
+            #"automationName": "XCUITest",
+            "noReset": "true",
+            "unicodeKeyboard": "true",
+            "useNewWDA": "true"
+
         }
     }
 end
@@ -52,7 +47,6 @@ def exist_element_class?(cls,ind,element)
     return false
   end
 end
-
 
 def screen_same?(actual, standard, x_st, y_st, x_len, y_len)
 #делаем скриншот экрана
@@ -87,7 +81,6 @@ def screen_same?(actual, standard, x_st, y_st, x_len, y_len)
   end
 end
 
-
 def screen_of_element(name, element)
 # скриним весь экран
   $driver.screenshot("#{$project_path}/reports/#{name}.png")
@@ -104,7 +97,6 @@ def screen_of_element(name, element)
   image.crop!(x, y, width, height)
   image.save("#{$project_path}/reports/#{name}.png")
 end
-
 
 def element_same?(actual_element, standard_element, element)
   puts point_x = element.rect.x*2

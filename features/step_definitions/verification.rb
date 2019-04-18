@@ -138,6 +138,18 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
   end
 end
 
+When(/^Проверяем, что скриншот "([^"]*)" совпадает с новым "([^"]*)" с расположением по x "([^"]*)" y "([^"]*)" обрезанным на x "([^"]*)" и y "([^"]*)"$/) do |standard, actual, x_st, y_st, x_len, y_len|
+  x_stt = (($driver.window_size.width*x_st.to_f)*2).to_i
+  y_stt = (($driver.window_size.height*y_st.to_f)*2).to_i
+  x_lent = (($driver.window_size.width*x_len.to_f)*2).to_i
+  y_lent = (($driver.window_size.height*y_len.to_f)*2).to_i
+  if screen_same?(actual, standard, x_stt, y_stt, x_lent, y_lent)
+    puts "Скриншоты не совпали."
+  else
+    raise "Скриншоты совпали!"
+  end
+end
+
 When(/^ПРОВЕРКА НА ОБНОВЛНИЕ$/) do
   # ВРЕМЕННЫЙ ОБХОД ОБНОВЛЕНИЯ!!!!!!!!!!!
     spent_time = 0
@@ -531,5 +543,14 @@ When(/^Проверяем, что значение текста элемента
     else
       raise ("Значение #{val_memory} НЕ равно значению #{text_element}!")
     end
+  end
+end
+
+When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" вложенного в элемент с id "([^"]*)" есть лейбл$/) do |name, id,id2|
+  element = find_element(id: id2).find_element(id:id)
+  if element.label?
+    puts "В элементе есть текст #{name} #{element.label}"
+  else
+    raise "В элементе нет текста"
   end
 end
