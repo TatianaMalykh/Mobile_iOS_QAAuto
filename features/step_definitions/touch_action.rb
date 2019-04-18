@@ -143,11 +143,6 @@ end
 When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" по координатам этого элемента$/) do |name, id|
   element = find_element(accessibility_id: id)
   x = element.rect.x
-  y = element.rect.y
-
-When(/^Пользователь нажимает элемент "([^"]*)" с id "([^"]*)" по координатам этого элемента$/) do |name, id|
-  element = find_element(accessibility_id: id)
-  x = element.rect.x
   y  = element.rect.y
   puts x,y
   Appium::TouchAction.new.press(x: x, y: y).release.perform

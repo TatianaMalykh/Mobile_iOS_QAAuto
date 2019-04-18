@@ -64,9 +64,11 @@ When(/^Вставляем в поле "([^"]*)" класса "([^"]*)" с инд
   element = find_element(id: id).find_elements(class: class1)[index.to_i]
   element.send_keys("#{value}")
   sleep(2)
+end
 
 When(/^Пользователь вводит в поле "([^"]*)" с классом "([^"]*)" находящийся в элементе с id "([^"]*)" значение "([^"]*)"$/) do |field, myclass,id, value|
   find_element(accessibility_id: id).find_element(class: myclass).clear
   elements = find_element(accessibility_id: id).find_element(class: myclass)
   elements.send_keys(value)
   puts ("Вводим в поле #{field} #{value}")
+end
