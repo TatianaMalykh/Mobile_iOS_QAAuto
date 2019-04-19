@@ -7,20 +7,28 @@ $project_path = ENV["IOS_PROJECT_PATH"]
 def caps1
     {
         caps: {
-            deviceName: "iPhone XR",
-            platformName: "iOS",
-            platformVersion: "12.1",
-            app: "/Users/sergeyignatov/QAIOSAuto/1xBet.app",
-            # automationName: "XCUITest",
-            noReset: true,
-            unicodeKeyboard: true,
-            useNewWDA: true,
+            # deviceName: "iPhone 6",
+            # platformName: "iOS",
+            # platformVersion: "12.1",
+            # # app: "/Users/ios_tester/RubymineProjects/Mobile_iOS_QAAuto/1xBet.app",
+            # app: "/Users/ios_tester/RubymineProjects/Mobile_iOS_QAAuto/1xBet.test-7.app",
+            # # automationName: "XCUITest",
+            # noReset: true,
+            # unicodeKeyboard: true,
+            # useNewWDA: true,
             # app: "#{$project_path}/1xBet.test.app",
             #xcodeOrgId: "6UWA23N6D3",
             #xcodeSigningId: "iPhone Developer",
-            bundleId: "1xBet.1xBet"
+            # bundleId: "1xBet.1xBet"
             #newCommandTimeout: "1000",
             #automationName: "UIAutomation",
+            "deviceName": "iPhone 6",
+            "platformName": "iOS",
+            "platformVersion": "12.2",
+            "app": "/Users/ios_tester/RubymineProjects/Mobile_iOS_QAAuto/1xBet.test.app",
+            "noReset": "true",
+            "unicodeKeyboard": "true",
+            "useNewWDA": "true"
         }
     }
 end

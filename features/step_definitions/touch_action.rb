@@ -20,12 +20,12 @@ end
 
 When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
   $driver.set_implicit_wait(1)
-  swipe(start_x: 50, start_y: 200, end_x: 50, end_y: 700)
+  swipe(start_x: 50, start_y: 200, end_x: 50, end_y: 500)
   sleep (2)
   if exist_element?(accessibility_id: id)
     find_element(accessibility_id: id).click
   else
-    swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+    swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
     sleep (2)
     if exist_element?(accessibility_id: id)
       find_element(accessibility_id: id).click
@@ -37,13 +37,13 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
         find_element(accessibility_id: id).click
       elsif id == "menu_menuToto_cell" or id == "menu_menuBetContructor_cell" or id == "menu_menuFinanceBets_cell" or id == "menu_menuBettingExchange_cell"
         find_element(id: "menu_menuGroupTotoAndFinBets_button").click
-        swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
       elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell" or id == "menu_menuCouponReader_cell" or id == "menu_menuSupport_cell"
-        swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         find_element(id: "menu_menuGroupOther_button").click
-        swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
       else

@@ -97,12 +97,16 @@ When(/^Пользователь авторизуется с аккаунтом �
    udid = udid_phone
   login = $accounts_hash[udid].split("_")[0]
   password = $accounts_hash[udid].split("_")[1]
+  find_element(accessibility_id: "authorization_login_text-field").clear
+  sleep(0.5)
   find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
+  sleep(0.5)
+  find_element(accessibility_id: "authorization_password_text-field").clear
+  sleep(0.5)
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
-  if @driver.is_keyboard_shown()
-    @driver.hide_keyboard(nil, :tapOutside)
-  end
+  sleep(0.5)
   find_element(accessibility_id: "authorization_auth_button").click
+  sleep(2)
   puts ("Авторизовались с логином #{login} и паролем #{password}")
 end
 
@@ -126,12 +130,16 @@ When(/^Пользователь авторизуется с аккаунтом �
   #udid = ENV["device"]
   login = $accounts_money_hash[udid].split("_")[0]
   password = $accounts_money_hash[udid].split("_")[1]
+  find_element(accessibility_id: "authorization_login_text-field").clear
+  sleep(0.5)
   find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
+  sleep(0.5)
+  find_element(accessibility_id: "authorization_password_text-field").clear
+  sleep(0.5)
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
-  if @driver.is_keyboard_shown()
-    @driver.hide_keyboard(nil, :tapOutside)
-  end
+  sleep(0.5)
   find_element(accessibility_id: "authorization_auth_button").click
+  sleep(2)
   puts ("Авторизовались с логином #{login} и паролем #{password}")
 end
 
