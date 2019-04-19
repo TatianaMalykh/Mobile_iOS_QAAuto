@@ -7,7 +7,8 @@ $project_path = ENV["IOS_PROJECT_PATH"]
 def caps1
     {
         caps: {
-            "deviceName": "iPhone XR",
+            #"deviceName": "iPhone XR",
+            "deviceName": "iPhone 5s",
             "platformName": "iOS",
             "platformVersion": "12.1",
             "app": "/Users/sergeyignatov/QAIOSAuto/1xBet.test-5.app",
@@ -24,6 +25,16 @@ def exist_element?(element)
   $driver.set_implicit_wait(0.5)
   begin
     return true if find_element(element)
+  rescue
+    return false
+  end
+end
+
+
+def visible_element?(element)
+  $driver.set_implicit_wait(0.5)
+  begin
+    return true if find_element(element).attribute("visible": true)
   rescue
     return false
   end
