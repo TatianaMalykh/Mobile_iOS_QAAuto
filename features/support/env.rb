@@ -30,11 +30,10 @@ def exist_element?(element)
   end
 end
 
-
 def visible_element?(element)
   $driver.set_implicit_wait(0.5)
   begin
-    return true if find_element(element).attribute("visible": true)
+    return true if find_element(element).attribute("visible")
   rescue
     return false
   end

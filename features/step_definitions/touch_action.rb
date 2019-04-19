@@ -201,9 +201,12 @@ end
 
 When(/^Пользователь делает свайп вниз до элемента с id "([^"]*)"$/) do |id|
   count = 0
-  while visible_element?(id: id) == false do
-    swipe(start_x: 50, start_y: 250, end_x: 50, end_y: 200).perform
-    count +=1
-    break if count > 30
-  end
+    puts (find_element(id:id).attribute("visible"))
+      until find_element(id:id).attribute("visible") == "true"  do
+        puts "Ким точно клецка!"
+        puts ("сделали свайп")
+        swipe(start_x: 10, start_y: 250, end_x: 10, end_y: 200)
+        count +=1
+        break if count > 30
+      end
 end
