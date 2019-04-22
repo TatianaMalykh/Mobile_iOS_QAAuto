@@ -25,7 +25,7 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
   if exist_element?(accessibility_id: id)
     find_element(accessibility_id: id).click
   else
-    swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+    swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
     sleep (2)
     if exist_element?(accessibility_id: id)
       find_element(accessibility_id: id).click
@@ -72,7 +72,7 @@ When(/^Пользователь нажимает элемент "([^"]*)" кла
 end
 
 When(/^Делаем свайп вниз$/) do
-  swipe(start_x: 20, start_y: 600, end_x: 20, end_y: 200)
+  swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
   sleep (2)
 end
 
@@ -176,4 +176,60 @@ When(/^Пользователь делает свайп элемента "([^"]*
     raise "Неизвестный параметр"
   end
   puts ("Передвинули элемент #{name} на #{dist} по оси #{axis}")
+end
+
+When(/^Двигаемся по направлению "([^"]*)" "([^"]*)" раз в списке с классом "([^"]*)" и индексом "([^"]*)" который находится в элементе с классом "([^"]*)" и индексом "([^"]*)"$/) do |direction,numbers, class1, index1, class2, index2|
+  # direction принимает  ВВЕРХ ВНИЗ UP DOWN
+  element_sour = find_elements(class: class2)[index2.to_i]
+  elements = element_sour.find_elements(class:class1)[index1.to_i]
+  x = elements.rect.x
+  y = elements.rect.y
+  # находим  высоту элемента и делим ее на 2
+  height_elem  = elements.size.height
+  i = 0
+  while i < numbers.to_i
+    case direction
+    when "UP", "Вверх", "ВВЕРХ", "up", "вверх"
+      Appium::TouchAction.new.press(x: x+5, y: y+(height_elem/2)+(height_elem/4)).release.perform
+    when "DOWN", "Вниз", "ВНИЗ", "down", "вверх"
+      Appium::TouchAction.new.press(x: x+5, y: y+(height_elem/2)-5).release.perform
+    else
+      raise("Указано неверное направление")
+    end
+    i+=1
+  end
+end
+
+When(/^Пользователь делает свайп вниз до элемента с id "([^"]*)"$/) do |id|
+  count = 0
+  puts (find_element(id:id).attribute("visible"))
+  until find_element(id:id).attribute("visible") == "true"  do
+    puts "Ким точно клецка!"
+    puts ("сделали свайп")
+    swipe(start_x: 10, start_y: 250, end_x: 10, end_y: 200)
+    count +=1
+    break if count > 30
+  end
+end
+
+When(/^Двигаем год по направлению "([^"]*)" "([^"]*)" раз в списке с классом "([^"]*)" и индексом "([^"]*)" который находится в элементе с классом "([^"]*)" и индексом "([^"]*)"$/) do |direction,numbers, class1, index1, class2, index2|
+# direction принимает ВВЕРХ ВНИЗ UP DOWN
+  element_sour = find_elements(class: class2)[index2.to_i]
+  elements = element_sour.find_elements(class:class1)[index1.to_i]
+  x = elements.rect.x
+  y = elements.rect.y
+  width_elem = elements.size.width
+  height_elem = elements.size.height
+  i = 0
+  while i < numbers.to_i
+    case direction
+    when "UP", "Вверх", "ВВЕРХ", "up", "вверх"
+      Appium::TouchAction.new.press(x: x+width_elem-5, y: y+(height_elem/2)+(height_elem/4)).release.perform
+    when "DOWN", "Вниз", "ВНИЗ", "down", "вверх"
+      Appium::TouchAction.new.press(x: x+width_elem-5, y: y+(height_elem/2)-5).release.perform
+    else
+      raise("Указано неверное направление")
+    end
+    i+=1
+  end
 end

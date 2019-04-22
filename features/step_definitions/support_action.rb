@@ -67,8 +67,8 @@ end
 
 When(/^Делаем скриншот экрана "([^"]*)" и обрезаем его начиная с x "([^"]*)" y "([^"]*)" на расстояние x "([^"]*)" и y "([^"]*)"$/) do |name, x_st, y_st, x_len, y_len|
 #делаем скриншот экрана
-  $driver.screenshot("#{$project_path}/#{name}.png")
-  image = ChunkyPNG::Image.from_file("#{$project_path}/#{name}.png")
+  $driver.screenshot("#{$project_path}/reports/#{name}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{name}.png")
   x_st = (($driver.window_size.width*x_st.to_f)*2).to_i
   y_st = (($driver.window_size.height*y_st.to_f)*2).to_i
   x_len = (($driver.window_size.width*x_len.to_f)*2).to_i
