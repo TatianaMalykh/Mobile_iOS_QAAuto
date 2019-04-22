@@ -251,3 +251,17 @@ When(/^Пользователь нажимает элемент "([^"]*)", ра�
   tap_percentage(x.to_f, y.to_f)
   puts("Попытались нажать #{name}")
 end
+
+When(/^Находим все элементы класса "([^"]*)" узла класса "([^"]*)" и выводим их текст в лог$/) do |class2, class1|
+  child = find_element(class: class1).find_elements(class: class2)
+  koll = child.size.to_i
+  puts "Количество вложенных элементов = #{koll}"
+  if koll.nil?
+    raise "Элемент бездетен"
+  else
+    for i in 0..(koll-1)
+      sleep(1)
+      puts (child[i].value)
+    end
+  end
+end
