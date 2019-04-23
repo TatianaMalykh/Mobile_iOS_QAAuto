@@ -553,3 +553,12 @@ When(/^Проверяем, что значение текста элемента
     end
   end
 end
+
+When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" вложенного в элемент с id "([^"]*)" есть лейбл$/) do |name, id,id2|
+  element = find_element(id: id2).find_element(id:id)
+  if element.label?
+    puts "В элементе есть текст #{name} #{element.label}"
+  else
+    raise "В элементе нет текста"
+  end
+end
