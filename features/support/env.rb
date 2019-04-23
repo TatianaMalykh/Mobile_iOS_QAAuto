@@ -15,7 +15,8 @@ def caps1
             #"automationName": "XCUITest",
             "noReset": "true",
             "unicodeKeyboard": "true",
-            "useNewWDA": "true"
+            "useNewWDA": "true",
+            "allowTouchIdEnroll":"true"
 
         }
     }
@@ -114,19 +115,6 @@ def element_same?(actual_element, standard_element, element)
   puts width = element.rect.width*2
   puts height = element.rect.height*2
   screen_same?(actual_element, standard_element, point_x, point_y, width, height)
-end
-
-def touch_id_1
-  puts @driver.touch_id(false)
-end
-
-def exist_element_class?(element)
-  $driver.set_implicit_wait(0.5)
-  begin
-    return true if find_element(element)
-  rescue
-    return false
-  end
 end
 
 def tap_percentage(x_percentage, y_percentage) # тап по процентам

@@ -210,3 +210,13 @@ When(/^Пользователь делает свайп вниз до элеме
         break if count > 30
       end
 end
+
+When(/^Симулируем положительное нажатие Touchid$/) do
+  @driver.touch_id(true)
+  puts("Проверка Touchid прошла")
+end
+
+When(/^Симулируем отрицательное нажатие Touchid$/) do
+  @driver.touch_id(false)
+  puts("Проверка Touchid не прошла")
+end
