@@ -21,30 +21,44 @@ end
 When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
   #ПЕРЕДЕЛАТЬ КАТЕГОРИИ когда будут айдишники
   $driver.set_implicit_wait(1)
-  swipe(start_x: 50, start_y: 200, end_x: 50, end_y: 700)
+  swipe(start_x: 50, start_y: 200, end_x: 50, end_y: 500)
   sleep (2)
-  if exist_element?(accessibility_id: id)
+
+  if id == "menu_menuGames_cell" or id == "menu_menuCasino_cell"
+    sleep(1)
+    swipe(start_x: 50, start_y: 500, end_x: 50, end_y: 200)
     find_element(accessibility_id: id).click
+  elsif  exist_element?(accessibility_id: id)
+      find_element(accessibility_id: id).click
   else
-    swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+    swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
     sleep (2)
     if exist_element?(accessibility_id: id)
       find_element(accessibility_id: id).click
     else
-      if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell"
-        find_element(id: "menu_menuGroupEvents_button").click
-        #swipe(start_x: 20, start_y: 900, end_x: 20, end_y: 200)
-        sleep (2)
+      if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell" or id == "menu_menuBetYours_cell"
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+        sleep (5)
+        puts "свайпнули норм"
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[4].click
+        #find_element(accessibility_id: "menu_menuGroupEvents_button").click
+        sleep (5)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         find_element(accessibility_id: id).click
       elsif id == "menu_menuToto_cell" or id == "menu_menuBetContructor_cell" or id == "menu_menuFinanceBets_cell" or id == "menu_menuBettingExchange_cell"
-        find_element(id: "menu_menuGroupTotoAndFinBets_button").click
-        swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+        sleep (2)
+        find_element(accessibility_id: "menu_menuGroupTotoAndFinBets_button").click
+        sleep (2)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
       elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell"
-        swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
-        find_element(id: "menu_menuGroupOther_button").click
-        swipe(start_x: 20, start_y: 700, end_x: 20, end_y: 200)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+        sleep (2)
+        find_element(accessibility_id: "menu_menuGroupOther_button").click
+        sleep (2)
+        swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
         find_element(accessibility_id: id).click
       else
