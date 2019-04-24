@@ -11,7 +11,7 @@ def caps1
             "deviceName": "iPhone 5s",
             "platformName": "iOS",
             "platformVersion": "12.1",
-            "app": "/Users/sergeyignatov/QAIOSAuto/1xBet.test-5.app",
+            "app": "/Users/sergeyignatov/QAIOSAuto/1xBet.test-8.app",
             #"automationName": "XCUITest",
             "noReset": "true",
             "unicodeKeyboard": "true",

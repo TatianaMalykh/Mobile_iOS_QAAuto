@@ -23,7 +23,6 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
   $driver.set_implicit_wait(1)
   swipe(start_x: 50, start_y: 200, end_x: 50, end_y: 500)
   sleep (2)
-
   if id == "menu_menuGames_cell" or id == "menu_menuCasino_cell"
     sleep(1)
     swipe(start_x: 50, start_y: 500, end_x: 50, end_y: 200)
@@ -38,17 +37,17 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
     else
       if id == "menu_menuBetYours_cell" or id == "menu_menuStream_cell" or id == "menu_menuGameNotification_cell" or id == "menu_menuResults_cell" or id == "menu_menuBetYours_cell"
         swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
-        sleep (5)
-        puts "свайпнули норм"
+        sleep (2)
         find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[4].click
         #find_element(accessibility_id: "menu_menuGroupEvents_button").click
-        sleep (5)
+        sleep (2)
         swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         find_element(accessibility_id: id).click
       elsif id == "menu_menuToto_cell" or id == "menu_menuBetContructor_cell" or id == "menu_menuFinanceBets_cell" or id == "menu_menuBettingExchange_cell"
         swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
-        find_element(accessibility_id: "menu_menuGroupTotoAndFinBets_button").click
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[6].click
+        #find_element(accessibility_id: "menu_menuGroupTotoAndFinBets_button").click
         sleep (2)
         swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
@@ -56,7 +55,8 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
       elsif id == "menu_menuPromoMarket_cell" or id == "menu_menuInfo_cell"
         swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
-        find_element(accessibility_id: "menu_menuGroupOther_button").click
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+        #find_element(accessibility_id: "menu_menuGroupOther_button").click
         sleep (2)
         swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
         sleep (2)
@@ -65,6 +65,138 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
         raise("Нет такого элемента")
       end
     end
+  end
+end
+
+When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
+  # Для меню
+  hash_menu = {0 => "menu_menuLogIn_cell",
+               1 =>"menu_menuRegistration_cell",
+               2 =>"menu_menuMessagesFeed_cell",
+               3 =>"menu_menuLive_cell",
+               4 =>"menu_menuLine_cell",
+               5 =>"menu_menuResults_cell",
+               6 =>"menu_menuFavorite_cell",
+               7 =>"menu_menuGameSearch_cell",
+               8 =>"menu_menuCoupon_cell",
+               9 =>"menu_menuGames_cell",
+               10 =>"menu_menuCasino_cell",
+               11 =>"menu_menuActions_cell",
+               12 =>"menu_menuDayExpress_cell",
+               13 =>"menu_menuBetYours_cell",
+               14 =>"menu_menuStream_cell",
+               15 =>"menu_menuGameNotification_cell",
+               16 =>"menu_menuToto_cell",
+               17 =>"menu_menuBetContructor_cell",
+               18 =>"menu_menuFinanceBets_cell",
+               19 =>"menu_menuBettingExchange_cell",
+               20 =>"menu_menuPromoMarket_cell",
+               21 =>"menu_menuInfo_cell"}
+  puts id
+  case id
+   # ПЕРВЫЕ 8 ЭЛЕМЕНТОВ
+  when  hash_menu[0], hash_menu[1] , hash_menu[2] , hash_menu[3] , hash_menu[4] , hash_menu[5] , hash_menu[6] , hash_menu[7] , hash_menu[8] , hash_menu[9]
+    find_element(accessibility_id: id).click
+   # КАЗИНО
+  when hash_menu[10]
+    swipe(start_x: 20, start_y: 250, end_x: 20, end_y: 200)
+    find_element(accessibility_id: id).click
+    # СОБЫТИЯ
+  when hash_menu[11] , hash_menu[12] , hash_menu[13] , hash_menu[14] , hash_menu[15]
+    swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+    sleep (5)
+    if exist_element?(accessibility_id: id)
+      # закрываем другие пункты меню
+        if exist_element?(accessibility_id:"menu_menuInfo_cell")
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+        else
+        puts "Пункт Разное закрыт"
+        end
+      #закрываем пункт меню лотереи и финставки
+        if exist_element?(accessibility_id:"menu_menuBettingExchange_cell")
+          find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[6].click
+        else
+          puts "Пункт Лотереи и финставки"
+        end
+      find_element(accessibility_id: id).click
+    else
+      # закрываем другие пункты меню
+      if exist_element?(accessibility_id:"menu_menuInfo_cell")
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+      else
+        puts "Пункт Разное закрыт"
+      end
+      #закрываем пункт меню лотереи и финставки
+      if exist_element?(accessibility_id:"menu_menuBettingExchange_cell")
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[6].click
+      else
+        puts "Пункт Лотереи и финставки"
+      end
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[4].click
+      sleep (1)
+      swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+      find_element(accessibility_id: id).click
+    end
+    # ЛОТЕРЕИ И СТАВКИ
+  when hash_menu[16] , hash_menu[17] , hash_menu[18] , hash_menu[19]
+    swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+    sleep (1)
+    if exist_element?(accessibility_id: id)
+      # закрываем другие пункты меню
+      if exist_element?(accessibility_id:"menu_menuInfo_cell")
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+      else
+        puts "Пункт Разное закрыт"
+      end
+      sleep (1)
+      find_element(accessibility_id: id).click
+    else
+      # закрываем другие пункты меню
+      if exist_element?(accessibility_id:"menu_menuInfo_cell")
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+      else
+        puts "Пункт Разное закрыт"
+      end
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[6].click
+      sleep (1)
+      swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+      sleep (1)
+      find_element(accessibility_id: id).click
+    end
+    # РАЗНОЕ
+  when hash_menu[20] , hash_menu[21]
+    swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+    sleep (1)
+    if exist_element?(accessibility_id: id)
+      swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+      sleep (1)
+      find_element(accessibility_id: id).click
+    else
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+      sleep (1)
+      swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+      sleep (1)
+      find_element(accessibility_id: id).click
+    end
+    # Короче блок пунктов меню для пользователя, который авторизован
+  when "menu_menuUserBets_cell"
+    find_element(accessibility_id: id).click
+  when "menu_menuCouponReader_cell", "menu_menuSupport_cell"
+    swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+    sleep (1)
+    if exist_element?(accessibility_id: id)
+      swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+      sleep (1)
+      find_element(accessibility_id: id).click
+    else
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+      sleep (1)
+      swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
+      sleep (1)
+      find_element(accessibility_id: id).click
+    end
+  else
+    raise("Нет такого элемента")
   end
 end
 

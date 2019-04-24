@@ -400,6 +400,15 @@ When(/^Проверяем, что скриншот "([^"]*)" не совпада
   end
 end
 
+When(/^Проверяем, что скриншот "([^"]*)" совпадает с новым скриншотом "([^"]*)" элемента с id "([^"]*)" и индексом "([^"]*)", вложенным в элемент с id "([^"]*)"$/) do |standard_element, actual_element, id2, index, id|
+  element = find_element(accessibility_id: id).find_elements(id: id2)
+  if element_same?(actual_element, standard_element, element[index.to_i])
+    puts "Скриншоты совпали!"
+  else
+    raise "Скриншоты не совпали."
+  end
+end
+
 When(/^Проверяем, что скриншот "([^"]*)" не совпадает с новым скриншотом "([^"]*)" элемента с классом "([^"]*)" и индексом "([^"]*)", вложенным в элемент с id "([^"]*)"$/) do |standard_element, actual_element, myclass, index, id|
   element = find_element(accessibility_id: id).find_elements(class: myclass)
   if element_same?(actual_element, standard_element, element[index.to_i])
