@@ -184,7 +184,7 @@
     И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
     И Пользователь нажимает элемент "Продолжить" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
     И Ждем появления элемента "Пусто" с id "view-empty_message_label", но не более "10" секунд
-  @wip
+
   Сценарий: Игра
     Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
     И ПРОВЕРКА НА ОБНОВЛНИЕ
@@ -242,7 +242,54 @@
     И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
     И Пользователь нажимает элемент "Продолжить" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
     И Ждем появления элемента "Пусто" с id "view-empty_message_label", но не более "10" секунд
+  @wip
+  Сценарий: Статистика
+    Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
+    И ПРОВЕРКА НА ОБНОВЛНИЕ
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    Также Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
+    И Ждем "2" секунд(ы)
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    И Делаем свайп вправо
+    То Ждем появления элемента "Эмблема пользователь" с id "menuUser", но не более "10" секунд
+    И Выбираем в меню элемент "menu_menuLive_cell"
+    И Ждем появления элемента "Событие" с id "sports-champs_element-0-0_cell", но не более "5" секунд
+    И Пользователь нажимает элемент "Футбол" с id "sports-champs_element-0-0_cell"
+    И Ждем "2" секунд(ы)
+    И Пользователь нажимает элемент "Чемп_1" с id "sports-champs_element-0-0_checkbox"
+    И Пользователь нажимает элемент "Перейти в фильтр" с id "buttonRight"
+    И Ждем появления элемента "Игра1" с id "games-collection_element-0-0_cell", но не более "5" секунд
+    И Проверяем наличие элемента "Список ставок" с id "gamesListBets"
+    И Пользователь нажимает элемент "Игра" с id "games-collection_element-0-0_cell"
+    И Ждем появления элемента "Уголочек" с id "gameHideShowMenu", но не более "10" секунд
+    И Ждем "2" секунд(ы)
+    И Делаем свайп по параметрам x: "235" y: "175" x_end: "45" y_end: "175"
+    И Ждем появления элемента "Название 1 команды" с id "game-info-period-stat_first-team-name_label", но не более "5" секунд
+    И Проверяем наличие элемента "Прошло времени" с id "game-info-stat-container_time_label"
+    И Проверяем, что в элементе "Прошло времени" с id "game-info-stat-container_time_label" есть текст
+    И Проверяем наличие элемента "Иконка нотификации" с id "game-info-stat-container_notification_button"
+    И Проверяем наличие элемента "Картинка для невыбранной нотификации" с id "gameNotificationIconOff"
+    И Проверяем наличие элемента "Иконка избранного" с id "game-info-stat-container_favorite_button"
+    И Проверяем наличие элемента "Картинка для не добавленного в избранное матча" с id "favoriteOff"
+    И Проверяем наличие элемента "Инфо о периодах" с id "game-info-period-stat_times_label"
+    И Проверяем, что у элемента "Инфо о периодах" с id "game-info-period-stat_times_label" есть лейбл
+    И Проверяем наличие элемента "Итог" с id "game-info-period-stat_result_label"
+    И Проверяем, что у элемента "Итог" с id "game-info-period-stat_result_label" есть лейбл
+    И Проверяем наличие элементов "Цифры таблицы" с name "game-info-period-stat-cell_goal_label" и выводим их количество в лог
+    И Проверяем наличие элемента "Команда1" с id "game-info-period-stat_first-team-name_label"
+    И Проверяем, что у элемента "Команда1" с id "game-info-period-stat_first-team-name_label" есть лейбл
+    И Проверяем наличие элемента "Команда2" с id "game-info-period-stat_second-team-name-label"
+    И Проверяем, что у элемента "Команда2" с id "game-info-period-stat_second-team-name-label" есть лейбл
+    И Проверяем наличие элемента "Очков у команды1" с id "game-info-period-stat_first-team-goal_label"
+    И Проверяем, что у элемента "Очков у команды1" с id "game-info-period-stat_first-team-goal_label" есть лейбл
+    И Проверяем наличие элемента "Очков у команды2" с id "game-info-period-stat_result_label"
+    И Проверяем, что у элемента "Очков у команды2" с id "game-info-period-stat_result_label" есть лейбл
+    И Проверяем наличие элемента "Статус игры" с id "game-info-stat-container_game-status_label"
+    И Проверяем, что у элемента "Статус игры" с id "game-info-stat-container_game-status_label" есть лейбл
+    
 
+
+     
 
 
 
