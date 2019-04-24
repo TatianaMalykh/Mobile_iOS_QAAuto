@@ -38,6 +38,15 @@ When(/^Проверяем отсутствие элемента "([^"]*)" с id 
   end
 end
 
+When(/^Проверяем отсутствие элемента "([^"]*)" с классом "([^"]*)"$/) do |name, myclass|
+  $driver.set_implicit_wait(1)
+  if exist_element?(class: myclass)
+    raise "Есть элемент #{name}!"
+  else
+    puts ("Нет элемента #{name}.")
+  end
+end
+
 When(/^Проверяем, что в элементе "([^"]*)" с id "([^"]*)" нет текста$/) do |name, id|
   if find_element(accessibility_id: id).value.empty?
     puts("Текста нет!")
