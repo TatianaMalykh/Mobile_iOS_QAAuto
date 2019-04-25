@@ -265,3 +265,9 @@ When(/^Находим все элементы класса "([^"]*)" узла к
     end
   end
 end
+
+When(/^Ищем игру с существующим элементом "([^"]*)" c id "([^"]*)"$/) do |name, id|
+  condition = -> {exist_element?(id:id)}
+  game_search(condition)
+  puts "Нашли #{name}"
+end

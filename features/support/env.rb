@@ -152,3 +152,64 @@ def tap_percentage(x_percentage, y_percentage) # тап по процентам
   puts y_point
   Appium::TouchAction.new.press(x: x_point.to_i, y: y_point.to_i).release.perform
 end
+
+def game_search(condition)
+  i = 0
+  c4et = false
+  while !c4et
+    elements_sports = find_element(id: "sports-champs_element-0-#{i}_cell")
+    element_enabled = false
+    puts "Зашли в спорты"
+    if elements_sports.attribute("visible") == "true"
+      while !element_enabled
+        elements_sports.click
+        j = 0
+        while !element_enabled
+          elements_champs = find_element(id: "sports-champs_element-0-#{j}_cell")
+          elements_champs.click
+          spent_time = 0
+          puts "Зашли в игры"
+          while exist_element?(id: "games-collection_element-0-0_cell") == false
+            sleep (0.5)
+            spent_time +=0.5
+            break if spent_time > 10
+          end
+          find_element(id: "games-collection_element-0-0_cell").click
+          puts "Зашли внутрь игры"
+          sleep(2)
+          if condition.call
+            puts ("Подходящий элемент найден.")
+            c4et = true
+            element_enabled = true
+          end
+          if !element_enabled
+            puts ("Смотрим следующий Чемпионат.")
+            element = find_element(accessibility_id: "buttonLeft")
+            x = element.rect.x
+            y = element.rect.y
+            Appium::TouchAction.new.press(x: x, y: y).release.perform
+            sleep(2)
+            element = find_element(accessibility_id: "buttonLeft")
+            x = element.rect.x
+            y = element.rect.y
+            Appium::TouchAction.new.press(x: x, y: y).release.perform
+            sleep(2)
+          end
+          j+=1
+        end
+        if !element_enabled
+          puts ("Смотрим следующущее Событие.")
+          element = find_element(accessibility_id: "buttonLeft")
+          x = element.rect.x
+          y = element.rect.y
+          Appium::TouchAction.new.press(x: x, y: y).release.perform
+        end
+      end
+    else
+      swipe(start_x: 50, start_y: 400, end_x: 50, end_y: 200)
+      puts "Свайпнули вниз, так как элементы кончились"
+      i = 0
+    end
+    i+=1
+  end
+end

@@ -562,3 +562,15 @@ When(/^Проверяем, что у элемента "([^"]*)" с id "([^"]*)" 
     raise "В элементе нет текста"
   end
 end
+
+When(/^Проверяем, что скриншот "([^"]*)" совпадает с новым "([^"]*)" с расположением по x "([^"]*)" y "([^"]*)" обрезанным на x "([^"]*)" и y "([^"]*)"$/) do |standard, actual, x_st, y_st, x_len, y_len|
+  x_stt = (($driver.window_size.width*x_st.to_f)*2).to_i
+  y_stt = (($driver.window_size.height*y_st.to_f)*2).to_i
+  x_lent = (($driver.window_size.width*x_len.to_f)*2).to_i
+  y_lent = (($driver.window_size.height*y_len.to_f)*2).to_i
+  if screen_same?(actual, standard, x_stt, y_stt, x_lent, y_lent)
+    puts "Скриншоты совпали!"
+  else
+    raise "Скриншоты не совпали."
+  end
+end
