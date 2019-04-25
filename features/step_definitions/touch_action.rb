@@ -108,13 +108,13 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
     if exist_element?(accessibility_id: id)
       # закрываем другие пункты меню
         if exist_element?(accessibility_id:"menu_menuInfo_cell")
-        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[7].click
         else
         puts "Пункт Разное закрыт"
         end
       #закрываем пункт меню лотереи и финставки
         if exist_element?(accessibility_id:"menu_menuBettingExchange_cell")
-          find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[6].click
+          find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[5].click
         else
           puts "Пункт Лотереи и финставки"
         end
@@ -122,17 +122,20 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
     else
       # закрываем другие пункты меню
       if exist_element?(accessibility_id:"menu_menuInfo_cell")
-        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[7].click
       else
         puts "Пункт Разное закрыт"
       end
       #закрываем пункт меню лотереи и финставки
       if exist_element?(accessibility_id:"menu_menuBettingExchange_cell")
-        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[6].click
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[5].click
       else
-        puts "Пункт Лотереи и финставки"
+        puts "Пункт Лотереи и финставки закрыт"
       end
-      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[4].click
+      sleep (2)
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[3].click
+      puts
+      puts "Нажали элемент события"
       sleep (1)
       swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
       find_element(accessibility_id: id).click
@@ -144,7 +147,7 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
     if exist_element?(accessibility_id: id)
       # закрываем другие пункты меню
       if exist_element?(accessibility_id:"menu_menuInfo_cell")
-        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[7].click
       else
         puts "Пункт Разное закрыт"
       end
@@ -153,11 +156,11 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
     else
       # закрываем другие пункты меню
       if exist_element?(accessibility_id:"menu_menuInfo_cell")
-        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[7].click
       else
         puts "Пункт Разное закрыт"
       end
-      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[6].click
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[5].click
       sleep (1)
       swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
       sleep (1)
@@ -172,7 +175,7 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
       sleep (1)
       find_element(accessibility_id: id).click
     else
-      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[7].click
       sleep (1)
       swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
       sleep (1)
@@ -189,7 +192,7 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
       sleep (1)
       find_element(accessibility_id: id).click
     else
-      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[8].click
+      find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[7].click
       sleep (1)
       swipe(start_x: 20, start_y: 500, end_x: 20, end_y: 200)
       sleep (1)

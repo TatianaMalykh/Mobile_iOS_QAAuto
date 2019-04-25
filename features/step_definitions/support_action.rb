@@ -235,3 +235,15 @@ When(/^Пользователь нажимает элемент "([^"]*)", ра�
   tap_percentage(x.to_f, y.to_f)
   puts("Попытались нажать #{name}")
 end
+
+When(/^Ищем игру с видимым элементом "([^"]*)" с id "([^"]*)"$/) do |name, id|
+  condition = -> {find_element(id: id).visible?}
+  game_search(condition)
+  puts "Нашли элемент #{name}"
+end
+
+When(/^Ищем игру с видимым элементом "([^"]*)" с id "([^"]*)" сокрщенный$/) do |name, id|
+  condition = -> {find_element(id: id).visible?}
+  game_search_tiny(condition)
+  puts "Нашли элемент #{name}"
+end
