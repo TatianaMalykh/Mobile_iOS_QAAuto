@@ -1,8 +1,10 @@
 wip: -t @wip --format html --out reports/wip.html --format pretty
-popular: -t @popular --format html --out reports/popular/popular.html --format pretty
+popular: -t @popular --format html --out reports/popular/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_popular.html --format pretty
 Authorization_negative: -t @Authorization_negative --format html --out reports/Authorization_negative/Authorization_negative.html --format pretty
 Authorization_positive: -t @Authorization_positive --format html --out reports/Authorization_positive/Authorization_positive.html --format pretty
 successful_registration: -t @successful_registration --format html --out reports/Successful_registration/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_Successful_registration.html --format pretty
 unsuccessful_registration: -t @unsuccessful_registration --format html --out reports/Unuccessful_registration/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_Unuccessful_registration.html --format pretty
-coupon: -t @coupon --format html --out reports/coupon/coupon.html --format pretty
+coupon: -t @coupon --format html --out reports/coupon/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_coupon.html --format pretty
 history_bet: -t @history_bet --format html --out reports/history_bet/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_history_bet.html --format pretty
+live: -t @live --format html --out reports/live/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_live.html --format pretty
+line: -t @line --format html --out reports/line/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_line.html --format pretty
