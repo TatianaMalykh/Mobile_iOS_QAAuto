@@ -247,3 +247,27 @@ When(/^Ищем игру с видимым элементом "([^"]*)" с id "(
   game_search_tiny(condition)
   puts "Нашли элемент #{name}"
 end
+
+When(/^Список ПРОМО выбираем элемент с названием "([^"]*)"$/) do |name|
+# спецшаг получаем спиоск ПРОМО
+  try_url_3
+  memory_file = File.new("#{$project_path}/reports/body_PROMO.txt")
+  val_memory = memory_file.read.split("\n")
+  index = val_memory.index("#{name}")
+  puts index
+  if index == val_memory.size
+   until visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+      swipe_in_menu_on_high_of_element_of_class("XCUIElementTypeCollectionView","XCUIElementTypeCell")
+      sleep(2)
+      puts visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+   end
+   find_element(id:"promo-store_element-0-#{index}_cell").click
+  else
+    until visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+      swipe_in_menu_on_high_of_element_of_class("XCUIElementTypeCollectionView","XCUIElementTypeCell")
+      sleep(2)
+     puts  visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+    end
+    find_element(id:"promo-store_element-0-#{index}_cell").click
+  end
+end
