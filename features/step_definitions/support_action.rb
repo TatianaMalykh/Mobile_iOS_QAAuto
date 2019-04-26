@@ -124,7 +124,8 @@ When(/^Пользователь авторизуется с аккаунтом �
       "Meizu_m6note"=>"73022811_BFxEGv",
       "Techno_LA7"=>"73023053_EFsatQ",
       "HTC_Nexus_9"=>"73029561_yk4e3u",
-      "BQ_5012L"=>"73029769_4VvGYQ"
+      "BQ_5012L"=>"73029769_4VvGYQ",
+      "iPhone 6"=>"101173133_WttWn2"
   }
   udid = udid_phone
   #udid = ENV["device"]
