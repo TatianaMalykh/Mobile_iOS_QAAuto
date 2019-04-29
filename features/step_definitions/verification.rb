@@ -120,7 +120,7 @@ end
 When(/^Проверяем, что у элемента "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложнного в элемент с id "([^"]*)", есть лейбл$/) do |name, my_class,index, id|
   element = find_element(accessibility_id: id).find_elements(class:my_class)
   if element[index.to_i].label?
-    puts "В элементе есть текст #{element[index.to_i].value}"
+    puts "В элементе есть текст #{element[index.to_i].label}"
   else
     raise "В элементе нет текста"
   end
