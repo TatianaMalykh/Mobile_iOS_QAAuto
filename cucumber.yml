@@ -7,3 +7,4 @@ unsuccessful_registration: -t @unsuccessful_registration --format html --out rep
 history_bet: -t @history_bet --format html --out reports/history_bet/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_history_bet.html --format pretty
 profile: -t @profile --format html --out reports/profile/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_profile.html --format pretty
 anonim_negative: -t @anonim_negative --format html --out reports/anonim_negative/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_anonim_negative.html --format pretty
+coupon: -t @coupon --format html --out reports/coupon/coupon.html --format pretty
