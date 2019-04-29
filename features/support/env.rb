@@ -7,20 +7,17 @@ $project_path = ENV["IOS_PROJECT_PATH"]
 def caps1
     {
         caps: {
-            deviceName: "iPhone XR",
-            platformName: "iOS",
-            platformVersion: "12.1",
-            app: "/Users/sergeyignatov/QAIOSAuto/1xBet.app",
-            # automationName: "XCUITest",
-            noReset: true,
-            unicodeKeyboard: true,
-            useNewWDA: true,
-            # app: "#{$project_path}/1xBet.test.app",
-            #xcodeOrgId: "6UWA23N6D3",
-            #xcodeSigningId: "iPhone Developer",
-            bundleId: "1xBet.1xBet"
-            #newCommandTimeout: "1000",
-            #automationName: "UIAutomation",
+            #"deviceName": "iPhone XR",
+            "deviceName": "iPhone 5s",
+            "platformName": "iOS",
+            "platformVersion": "12.1",
+            "app": "/Users/sergeyignatov/QAIOSAuto/1xBet.test-9.app",
+            #"automationName": "XCUITest",
+            "noReset": "true",
+            "unicodeKeyboard": "true",
+            "useNewWDA": "true",
+            "allowTouchIdEnroll":"true"
+
         }
     }
 end
@@ -29,6 +26,24 @@ def exist_element?(element)
   $driver.set_implicit_wait(0.5)
   begin
     return true if find_element(element)
+  rescue
+    return false
+  end
+end
+
+def visible_element?(element)
+  $driver.set_implicit_wait(0.5)
+  begin
+    return true if find_element(element).attribute("visible")
+  rescue
+    return false
+  end
+end
+
+def visible_displayed?(element)
+  $driver.set_implicit_wait(0.5)
+  begin
+    return true if find_element(element).displayed?
   rescue
     return false
   end
@@ -52,7 +67,6 @@ def exist_element_class?(cls,ind,element)
     return false
   end
 end
-
 
 def screen_same?(actual, standard, x_st, y_st, x_len, y_len)
 #делаем скриншот экрана
@@ -87,7 +101,6 @@ def screen_same?(actual, standard, x_st, y_st, x_len, y_len)
   end
 end
 
-
 def screen_of_element(name, element)
 # скриним весь экран
   $driver.screenshot("#{$project_path}/reports/#{name}.png")
@@ -105,26 +118,12 @@ def screen_of_element(name, element)
   image.save("#{$project_path}/reports/#{name}.png")
 end
 
-
 def element_same?(actual_element, standard_element, element)
   puts point_x = element.rect.x*2
   puts point_y = element.rect.y*2
   puts width = element.rect.width*2
   puts height = element.rect.height*2
   screen_same?(actual_element, standard_element, point_x, point_y, width, height)
-end
-
-def touch_id_1
-  puts @driver.touch_id(false)
-end
-
-def exist_element_class?(element)
-  $driver.set_implicit_wait(0.5)
-  begin
-    return true if find_element(element)
-  rescue
-    return false
-  end
 end
 
 def tap_percentage(x_percentage, y_percentage) # тап по процентам
@@ -135,4 +134,173 @@ def tap_percentage(x_percentage, y_percentage) # тап по процентам
   y_point = size.height * y_percentage
   puts y_point
   Appium::TouchAction.new.press(x: x_point.to_i, y: y_point.to_i).release.perform
+end
+
+def game_search(condition)
+  i = 0
+  c4et = false
+  while !c4et
+  elements_sports = find_element(id: "sports-champs_element-0-#{i}_cell")
+  element_enabled = false
+  puts "Зашли в спорты"
+  if elements_sports.attribute("visible") == "true"
+  while !element_enabled
+    elements_sports.click
+    j = 0
+    while !element_enabled
+      elements_champs = find_element(id: "sports-champs_element-0-#{j}_cell")
+      elements_champs.click
+      spent_time = 0
+      puts "Зашли в игры"
+      while exist_element?(id: "games-collection_element-0-0_cell") == false
+        sleep (0.5)
+        spent_time +=0.5
+        break if spent_time > 10
+      end
+      find_element(id: "games-collection_element-0-0_cell").click
+      puts "Зашли внутрь игры"
+      sleep(2)
+      if condition.call
+        puts ("Подходящий элемент найден.")
+        c4et = true
+        element_enabled = true
+      end
+      if !element_enabled
+        puts ("Смотрим следующий Чемпионат.")
+        element = find_element(accessibility_id: "buttonLeft")
+        x = element.rect.x
+        y  = element.rect.y
+        Appium::TouchAction.new.press(x: x, y: y).release.perform
+        sleep(2)
+        element = find_element(accessibility_id: "buttonLeft")
+        x = element.rect.x
+        y  = element.rect.y
+        Appium::TouchAction.new.press(x: x, y: y).release.perform
+        sleep(2)
+      end
+      j+=1
+    end
+    if !element_enabled
+      puts ("Смотрим следующущее Событие.")
+      element = find_element(accessibility_id: "buttonLeft")
+      x = element.rect.x
+      y  = element.rect.y
+      Appium::TouchAction.new.press(x: x, y: y).release.perform
+    end
+  end
+  else
+    swipe(start_x: 50, start_y: 400, end_x: 50, end_y: 200)
+    puts "Свайпнули вниз, так как элементы кончились"
+    i = 0
+  end
+    i+=1
+  end
+end
+
+def game_search_tiny(condition)
+    element_enabled = false
+      while !element_enabled
+        j = 0
+        while !element_enabled
+          elements_champs = find_element(id: "sports-champs_element-0-#{j}_cell")
+          elements_champs.click
+          spent_time = 0
+          puts "Зашли в игры"
+          while exist_element?(id: "games-collection_element-0-0_cell") == false
+            sleep (0.5)
+            spent_time +=0.5
+            break if spent_time > 10
+          end
+          find_element(id: "games-collection_element-0-0_cell").click
+          puts "Зашли внутрь игры"
+
+          sleep(2)
+          if condition.call
+            puts ("Подходящий элемент найден.")
+            element_enabled = true
+          end
+          if !element_enabled
+            puts ("Смотрим следующий Чемпионат.")
+            element = find_element(accessibility_id: "buttonLeft")
+            x = element.rect.x
+            y  = element.rect.y
+            Appium::TouchAction.new.press(x: x, y: y).release.perform
+            sleep(2)
+            element = find_element(accessibility_id: "buttonLeft")
+            x = element.rect.x
+            y  = element.rect.y
+            Appium::TouchAction.new.press(x: x, y: y).release.perform
+            sleep(2)
+          end
+          j+=1
+        end
+      end
+end
+
+def try_url_3
+  $Dev_h = { "Samsung_Galaxy_Tab"=>"1229557",
+             "Samsung_Galaxy_S7"=>"67820953",
+             "Samsung_Galaxy_J1"=>"1197599",
+             "Huaiwei_P_smart"=>"73020445",
+             "Huaiwei_VNS_L21"=>"73020693",
+             "Huaiwei_Y541_U02"=>"73021487",
+             "Xiaomi_Mi_A1"=>"73021691",
+             "Xiaomi_Redmi_4A"=>"73021865",
+             "Meizu_M3_note"=>"73022083",
+             "Meizu_m6note"=>"73022811",
+             "Techno_LA7"=>"73023053",
+             "HTC_Nexus_9"=>"73029561",
+             "BQ_5012L"=>"73029769"
+  }
+
+  uri = URI.parse("https://mobegm.top/MobileOpen/Mobile_PromoShop_ListPromo2")
+
+  body = {
+      "partner": 1,
+      "Language": "ru",
+      "Params": [1],
+      "UserIdBonus": 99033707,
+      "UserId": 99033707
+  }
+  puts $Dev_h[ENV["device"]]
+
+# Create the HTTP objects
+  https = Net::HTTP.new(uri.host, uri.port)
+  https.use_ssl = true
+  request = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
+  request.body = body.to_json
+# Send the request
+  response = https.request(request)
+  puts response.code
+  content = response.body
+  body_resp = JSON.parse(content)
+  gt = (body_resp["Data"] || [])
+  gt_2 = gt.to_json
+  array = gt.map {|gt_2| gt_2[1]}
+  FileUtils.rm("#{$project_path}/reports/body_PROMO.txt") if File.exist? ("#{$project_path}/reports/body_PROMO.txt")
+  File.open("#{$project_path}/reports/body_PROMO.txt", "w") do |file|
+    file.puts array
+    file.close
+    puts ("Записали")
+  end
+
+end
+
+
+def swipe_in_menu_on_high_of_element(id)
+  element = find_element(id:id)
+  dimention= element.location.y
+  dimention_1 = element.size.height
+  start = (dimention_1.to_f/driver.window_size.height.to_f)*2
+  rez = dimention_1.to_f/driver.window_size.height.to_f
+  swipe(start_x: 50, start_y: dimention+dimention_1, end_x: 50, end_y: dimention, duration: 300)
+end
+
+def swipe_in_menu_on_high_of_element_of_class(myclass_1,myclass_2)
+  element = find_elements(class:myclass_1)[1].find_elements(class:myclass_2)
+  dimention= element[0].location.y
+  dimention_1 = element[0].size.height
+  puts  dimention+dimention_1
+  puts  dimention
+  swipe(start_x: 50, start_y: dimention+dimention_1, end_x: 50, end_y: dimention, duration: 300)
 end

@@ -79,19 +79,19 @@ end
 
 When(/^Пользователь авторизуется с аккаунтом без средств название телефона "([^"]*)"$/) do  |udid_phone|
   $accounts_hash = {
-      "Samsung_Galaxy_Tab"=>"59813843_J6g4vj",
-      "Samsung_Galaxy_S7"=>"57212813_123",
-      "Samsung_Galaxy_J1"=>"57721337_zhKTfx",
-      "Huaiwei_P_smart"=>"57942161_6myFJC",
-      "Huaiwei_VNS_L21"=>"57203695_qwe",
-      "Huaiwei_Y541_U02"=>"73017353_93KGd1",
-      "Xiaomi_Mi_A1"=>"73017813_9gTHUp",
-      "Xiaomi_Redmi_4A"=>"73018007_NRTTK8",
-      "Meizu_M3_note"=>"73018205_NxgL3U",
-      "Meizu_m6note"=>"73018565_knNVgv",
-      "Techno_LA7"=>"73018821_Q1xHVw",
-      "HTC_Nexus_9"=>"73019071_HWDmTn",
-      "BQ_5012L"=>"73019259_1Fq56h"
+      "Samsung_Galaxy_Tab"=>"101173133_WttWn2",
+      "Samsung_Galaxy_S7"=>"101173975_C5t9ja",
+      "Samsung_Galaxy_J1"=>"101174187_WCguDL",
+      "Huaiwei_P_smart"=>"101174351_GRfFC8",
+      "Huaiwei_VNS_L21"=>"101174525_7nxzfw",
+      "Huaiwei_Y541_U02"=>"101174681_V3GbRL",
+      "Xiaomi_Mi_A1"=>"101174873_RiXTzc",
+      "Xiaomi_Redmi_4A"=>"101175043_FkEhtv",
+      "Meizu_M3_note"=>"101735681_pFgjLT",
+      "Meizu_m6note"=>"101735827_ffwSMi",
+      "Techno_LA7"=>"101735941_UJTjUA",
+      "HTC_Nexus_9"=>"101736029_fvKhaW",
+      "BQ_5012L"=>"101736149_RbhWQn"
   }
   #udid = ENV["device"]
    udid = udid_phone
@@ -99,9 +99,7 @@ When(/^Пользователь авторизуется с аккаунтом �
   password = $accounts_hash[udid].split("_")[1]
   find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
-  if @driver.is_keyboard_shown()
-    @driver.hide_keyboard(nil, :tapOutside)
-  end
+
   find_element(accessibility_id: "authorization_auth_button").click
   puts ("Авторизовались с логином #{login} и паролем #{password}")
 end
@@ -138,7 +136,7 @@ end
 When(/^Ждем появления элемента "([^"]*)" с классом "([^"]*)", но не более "([^"]*)" секунд$/) do |name, myclass, second|
   $driver.set_implicit_wait(1)
   spent_time = 0
-  until exist_element_class?(class: myclass) do
+  until exist_element?(class: myclass) do
 # sleep (0.5)
     spent_time +=0.5
     if spent_time > second.to_i
@@ -250,4 +248,40 @@ When(/^Пользователь нажимает элемент "([^"]*)", ра�
 # sleep(5)
   tap_percentage(x.to_f, y.to_f)
   puts("Попытались нажать #{name}")
+end
+
+When(/^Ищем игру с видимым элементом "([^"]*)" с id "([^"]*)"$/) do |name, id|
+  condition = -> {find_element(id: id).visible?}
+  game_search(condition)
+  puts "Нашли элемент #{name}"
+end
+
+When(/^Ищем игру с видимым элементом "([^"]*)" с id "([^"]*)" сокрщенный$/) do |name, id|
+  condition = -> {find_element(id: id).visible?}
+  game_search_tiny(condition)
+  puts "Нашли элемент #{name}"
+end
+
+When(/^Список ПРОМО выбираем элемент с названием "([^"]*)"$/) do |name|
+# спецшаг получаем спиоск ПРОМО
+  try_url_3
+  memory_file = File.new("#{$project_path}/reports/body_PROMO.txt")
+  val_memory = memory_file.read.split("\n")
+  index = val_memory.index("#{name}")
+  puts index
+  if index == val_memory.size
+   until visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+      swipe_in_menu_on_high_of_element_of_class("XCUIElementTypeCollectionView","XCUIElementTypeCell")
+      sleep(2)
+      puts visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+   end
+   find_element(id:"promo-store_element-0-#{index}_cell").click
+  else
+    until visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+      swipe_in_menu_on_high_of_element_of_class("XCUIElementTypeCollectionView","XCUIElementTypeCell")
+      sleep(2)
+     puts  visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+    end
+    find_element(id:"promo-store_element-0-#{index}_cell").click
+  end
 end
