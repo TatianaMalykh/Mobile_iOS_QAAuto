@@ -7,7 +7,6 @@
     И ПРОВЕРКА НА ОБНОВЛНИЕ
     И ПРОВЕРКА НА ПРОПУСТИТЬ
     Также Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
-    #И Проверяем наличие элемента "Клавиша пропустить" с name "tutorial_skip_button"
     И ПРОВЕРКА НА ПРОПУСТИТЬ
     И Проверяем наличие элемента "Клавиша меню" с id "menuIcon"
     Когда Пользователь нажимает элемент "Клавиша меню" с id "menuIcon"
@@ -18,16 +17,16 @@
     # Заполняем соотвтствующи поля логин и пароль
     И Ждем появления элемента "Клавиша назад" с id "buttonLeft", но не более "10" секунд
     И Ждем появления элемента "Поле ввода логина" с id "authorization_login_text-field", но не более "10" секунд
-    Тогда Пользователь авторизуется с аккаунтом без средств название телефона "Samsung_Galaxy_Tab"
+    Тогда Пользователь авторизуется с аккаунтом со средствами название телефона "Samsung_Galaxy_S7"
     И Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
 
   Сценарий: События (виды спорта)
-#    Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
-#    И ПРОВЕРКА НА ОБНОВЛНИЕ
-#    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
+    И ПРОВЕРКА НА ОБНОВЛНИЕ
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
     Также Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
     И Ждем "2" секунд(ы)
-#    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
     И Делаем свайп вправо
     То Ждем появления элемента "Эмблема пользователь" с id "menuUser", но не более "10" секунд
     И Выбираем в меню элемент "menu_menuLine_cell"
@@ -310,7 +309,7 @@
     И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
     И Пользователь нажимает элемент "Продолжить" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
     И Ждем появления элемента "Пусто" с id "view-empty_message_label", но не более "10" секунд
-  @wip
+
   Сценарий: Игра
     Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
     И ПРОВЕРКА НА ОБНОВЛНИЕ
@@ -409,25 +408,287 @@
 #     КОГДА БУДУТ АЙДИШНИКИ
 
   Сценарий: Ставка в один клик
+    Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
+    И ПРОВЕРКА НА ОБНОВЛНИЕ
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    Также Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
+    И Ждем "2" секунд(ы)
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    И Делаем свайп вправо
+    То Ждем появления элемента "Эмблема пользователь" с id "menuUser", но не более "10" секунд
+    И Выбираем в меню элемент "menu_menuLine_cell"
+    И Ждем появления элемента "Событие" с id "sports-champs_element-0-0_cell", но не более "5" секунд
+    И Пользователь нажимает элемент "Футбол" с id "sports-champs_element-0-0_cell"
+    И Ждем "2" секунд(ы)
+    И Пользователь нажимает элемент "Чемп_1" с id "sports-champs_element-0-1_checkbox"
+    И Пользователь нажимает элемент "Перейти в фильтр" с id "buttonRight"
+    И Ждем появления элемента "Игра1" с id "games-collection_element-0-0_cell", но не более "5" секунд
+    И Проверяем наличие элемента "Список ставок" с id "gamesListBets"
+    И Пользователь нажимает элемент "Игра" с id "games-collection_element-0-0_cell"
+    И Ждем появления элемента "Уголочек" с id "gameHideShowMenu", но не более "10" секунд
+#    Если установить сумму быстрой ставки и сохранить её, то на аккаунте из линии больше не будет вызываться меню настройки ставки
+#    Поэтому в ходе теста ничего не сохраняем, проверяем интерфейс и переключение кнопок
+    И Пользователь нажимает элемент "Молния" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с классом "XCUIElementTypeNavigationBar"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Пользователь нажимает элемент "ок" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Ставка в один клик" с id "info-table_element-switch-0-0_cell", но не более "5" секунд
+    И Проверяем наличие элемента "Ставка в один клик" с id "info-table_element-switch-0-0_cell"
+    И Проверяем, что у элемента "Ставка в один клик" с id "table-cell_title_label" вложенного в элемент с id "info-table_element-switch-0-0_cell" есть лейбл
+    И Проверяем наличие элемента "Переключатель" с id "table-cell_switch_switch-control"
+    И Пользователь нажимает элемент "Переключатель" с id "table-cell_switch_switch-control"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Пользователь нажимает элемент "Отмена" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Проверяем наличие элемента "Сумма ставки" с id "info-table_element-info-0-1_cell"
+    И Проверяем, что у элемента "Сумма ставки" с id "table-cell_title_label" вложенного в элемент с id "info-table_element-info-0-1_cell" есть лейбл
+    И Проверяем наличие элемента "Сумма" с id "table-cell_info_label"
+    И Проверяем, что у элемента "Сумма" с id "table-cell_info_label" есть лейбл
+#    тотал и фора
+    И Проверяем наличие элемента "Заголовок про фору и тотал" с id "info-table-header_element-1_view"
+    И Проверяем наличие элемента "Лейбл заголовка" с id "info-tabel-header-footer-view_title_label"
+    И Проверяем, что у элемента "Заголовок" с id "info-tabel-header-footer-view_title_label" есть лейбл
+    И Проверяем наличие элемента "Не принимать" с id "info-table_element-info-1-0_cell"
+    И Проверяем, что у элемента "Не принимать" с id "table-cell_title_label" вложенного в элемент с id "info-table_element-info-1-0_cell" есть лейбл
+    И Проверяем наличие элемента "Место для галочки" с id "table-cell_icon_image-view"
+    И Проверяем наличие элемента "Принимать" с id "info-table_element-info-1-1_cell"
+    И Проверяем, что у элемента "Принимать" с id "table-cell_title_label" вложенного в элемент с id "info-table_element-info-1-1_cell" есть лейбл
+    И Проверяем наличие элемента "Место для галочки" с id "table-cell_icon_image-view" и индексом "1"
+#    проверяем переключение
+    И Делаем скриншот элемента "Галка_есть" с id "table-cell_icon_image-view" и индексом "0", вложенный в элемент с id "info-table_element-info-1-0_cell"
+    И Пользователь нажимает элемент "Место галочки" с id "info-table_element-info-1-1_cell"
+    И Проверяем, что скриншот "Галка_есть" не совпадает с новым скриншотом "Галки_нет" элемента с id "table-cell_icon_image-view" и индексом "0", вложенным в элемент с id "info-table_element-info-1-0_cell"
+#    переключаем обратно
+    И Делаем скриншот элемента "Галка_есть" с id "table-cell_icon_image-view" и индексом "0", вложенный в элемент с id "info-table_element-info-1-1_cell"
+    И Пользователь нажимает элемент "Место галочки" с id "info-table_element-info-1-0_cell"
+    И Проверяем, что скриншот "Галка_есть" не совпадает с новым скриншотом "Галки_нет" элемента с id "table-cell_icon_image-view" и индексом "0", вложенным в элемент с id "info-table_element-info-1-1_cell"
+#    Кэфы
+    И Проверяем наличие элемента "Заголовок Коэффициенты" с id "info-table-header_element-2_view"
+    И Проверяем, что у элемента "Заголовок Коэффициенты" с id "info-tabel-header-footer-view_title_label" вложенного в элемент с id "info-table-header_element-2_view" есть лейбл
+    И Проверяем наличие элемента "Нет" с id "info-table_element-info-2-0_cell"
+    И Проверяем, что у элемента "Нет" с id "table-cell_title_label" вложенного в элемент с id "info-table_element-info-2-0_cell" есть лейбл
+    И Проверяем наличие элемента "Место для галочки" с id "table-cell_icon_image-view" и индексом "2"
+    И Проверяем наличие элемента "Только вверх" с id "info-table_element-info-2-1_cell"
+    И Проверяем, что у элемента "Только вверх" с id "table-cell_title_label" вложенного в элемент с id "info-table_element-info-2-1_cell" есть лейбл
+    И Проверяем наличие элемента "Место для галочки" с id "table-cell_icon_image-view" и индексом "3"
+    И Проверяем наличие элемента "Все" с id "info-table_element-info-2-2_cell"
+    И Проверяем, что у элемента "Все" с id "table-cell_title_label" вложенного в элемент с id "info-table_element-info-2-2_cell" есть лейбл
+    И Проверяем наличие элемента "Место для галочки" с id "table-cell_icon_image-view" и индексом "4"
+#    проверяем переключение
+    И Делаем скриншот элемента "Галки_нет" с id "table-cell_icon_image-view" и индексом "0", вложенный в элемент с id "info-table_element-info-2-0_cell"
+    И Пользователь нажимает элемент "Место галочки" с id "info-table_element-info-2-0_cell"
+    И Проверяем, что скриншот "Галки_нет" не совпадает с новым скриншотом "Галка_есть" элемента с id "table-cell_icon_image-view" и индексом "0", вложенным в элемент с id "info-table_element-info-2-0_cell"
+    И Делаем скриншот элемента "Галка_есть" с id "table-cell_icon_image-view" и индексом "0", вложенный в элемент с id "info-table_element-info-2-0_cell"
+    И Пользователь нажимает элемент "Место галочки" с id "info-table_element-info-2-1_cell"
+    И Проверяем, что скриншот "Галка_есть" не совпадает с новым скриншотом "Галки_нет" элемента с id "table-cell_icon_image-view" и индексом "0", вложенным в элемент с id "info-table_element-info-2-0_cell"
+    И Делаем скриншот элемента "Галка_есть" с id "table-cell_icon_image-view" и индексом "0", вложенный в элемент с id "info-table_element-info-2-1_cell"
+    И Пользователь нажимает элемент "Место галочки" с id "info-table_element-info-2-2_cell"
+    И Проверяем, что скриншот "Галка_есть" не совпадает с новым скриншотом "Галки_нет" элемента с id "table-cell_icon_image-view" и индексом "0", вложенным в элемент с id "info-table_element-info-2-1_cell"
+#    переключаем обратно
+    И Делаем скриншот элемента "Галка_есть" с id "table-cell_icon_image-view" и индексом "0", вложенный в элемент с id "info-table_element-info-2-2_cell"
+    И Пользователь нажимает элемент "Место галочки" с id "info-table_element-info-2-0_cell"
+    И Проверяем, что скриншот "Галка_есть" не совпадает с новым скриншотом "Галки_нет" элемента с id "table-cell_icon_image-view" и индексом "0", вложенным в элемент с id "info-table_element-info-2-2_cell"
+    И Пользователь нажимает элемент "Место галочки" с id "info-table_element-info-2-1_cell"
 
   Сценарий: Проверка ставки
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Дано ПРОВЕРКА НА РАЗРЕШИТЬ УВЕДОМЛЕНИЯ НОВОМУ ПРИЛОЖЕНИЮ
+    И ПРОВЕРКА НА ОБНОВЛНИЕ
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    Также Ждем появления элемента "Клавиша меню" с id "menuUser", но не более "10" секунд
+    И Ждем "2" секунд(ы)
+    И ПРОВЕРКА НА ПРОПУСТИТЬ
+    И Делаем свайп вправо
+    То Ждем появления элемента "Эмблема пользователь" с id "menuUser", но не более "10" секунд
+    И Выбираем в меню элемент "menu_menuLine_cell"
+    И Ждем появления элемента "Событие" с id "sports-champs_element-0-0_cell", но не более "5" секунд
+    И Пользователь нажимает элемент "Футбол" с id "sports-champs_element-0-0_cell"
+    И Ждем "2" секунд(ы)
+    И Пользователь нажимает элемент "Чемп_1" с id "sports-champs_element-0-1_checkbox"
+    И Пользователь нажимает элемент "Перейти в фильтр" с id "buttonRight"
+    И Ждем появления элемента "Игра1" с id "games-collection_element-0-0_cell", но не более "5" секунд
+    И Проверяем наличие элемента "Список ставок" с id "gamesListBets"
+    И Пользователь нажимает элемент "Игра" с id "games-collection_element-0-0_cell"
+    И Ждем появления элемента "Уголочек" с id "gameHideShowMenu", но не более "10" секунд
+    И Пользователь нажимает элемент "П1" с id "game-bets-group_element-0-0_cell"
+    #    ставим по промокоду
+    И Пользователь нажимает элемент "Использовать промокод" класса "XCUIElementTypeButton" с индексом "4", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Чемпионат" с id "coupon-event-cell_champ-name_label", но не более "5" секунд
+    И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+    И Ждем появления элемента "Поставить" с id "coupon_bet_button", но не более "10" секунд
+    И Проверяем наличие элемента "Настройки" с id "settingsButton"
+    И Проверяем наличие элемента "Название чемпионата" с id "coupon-event-cell_champ-name_label"
+    И Проверяем, что у элемента "Название чемпионата" с id "coupon-event-cell_champ-name_label" есть лейбл
+    И Проверяем наличие элемента "Инфо об игре" с id "coupon-event-cell_info_label"
+    И Проверяем, что у элемента "Инфо об игре" с id "coupon-event-cell_info_label" есть лейбл
+    И Проверяем наличие элемента "Название первой команды" с id "coupon-event-cell_opponent1_label"
+    И Проверяем, что у элемента "Название первой команды" с id "coupon-event-cell_opponent1_label" есть лейбл
+    И Проверяем наличие элемента "Название второй команды" с id "coupon-event-cell_opponent2_label"
+    И Проверяем, что у элемента "Название второй команды" с id "coupon-event-cell_opponent2_label" есть лейбл
+    И Проверяем наличие элемента "Период" с id "coupon-event-cell_game-half-name_label"
+    И Проверяем, что у элемента "Период" с id "coupon-event-cell_game-half-name_label" есть лейбл
+    И Проверяем наличие элемента "Картинка спорта" с id "coupon-event-cell_sport_image"
+    И Проверяем наличие элемента "Событие" с id "coupon-event-cell_event_label"
+    И Проверяем, что у элемента "Событие" с id "coupon-event-cell_event_label" есть лейбл
+    И Проверяем наличие элемента "Коэф" с id "coupon-event-cell_coef-title_label"
+    И Проверяем, что у элемента "Коэф" с id "coupon-event-cell_coef-title_label" есть лейбл
+    И Проверяем наличие элемента "Величина коэфа" с id "coupon-event-cell_coef-title_label"
+    И Проверяем, что у элемента "Величина коэфа" с id "coupon-event-cell_coef-title_label" есть лейбл
+    И Проверяем наличие элемента "Итоговый коэф" с id "coupon_total-coef-name_label"
+    И Проверяем, что у элемента "Итоговый кэф" с id "coupon_total-coef-name_label" есть лейбл
+    И Проверяем наличие элемента "Величина итогового кэфа" с id "coupon_total-coef_label"
+    И Проверяем, что у элемента "Величина итогового кэфа" с id "coupon_total-coef_label" есть лейбл
+    И Проверяем наличие элемента "Баланс" с id "coupon_balance-name_label"
+    И Проверяем, что у элемента "Баланс" с id "coupon_balance-name_label" есть лейбл
+    И Проверяем наличие элемента "Величина баланса" с id "coupon_balance_label"
+    И Проверяем, что у элемента "Величина баланса" с id "coupon_balance_label" есть лейбл
+    И Проверяем наличие элемента "Поле ввода промокода" с id "coupon_summ_textfield"
+    И Проверяем наличие элемента "Чекбокс" с id "coupon_push-notification_checkbox"
+    И Проверяем наличие элемента "Пояснение" с id "coupon_push-notification_label"
+    И Проверяем, что у элемента "Пояснение" с id "coupon_push-notification_label" есть лейбл
+    И Проверяем, что у элемента "Поставить" с id "coupon_bet_button" есть лейбл
+    И Пользователь вводит в поле "Промокод" с ID "coupon_summ_textfield" "123456"
+    И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+    И Пользователь нажимает элемент "Поставить" с id "coupon_bet_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Проверяем, что у элемента "Предупреждение" класса "XCUIElementTypeStaticText" с индексом "0", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ок" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+#    Окно Сделать ставку
+    И Ждем появления элемента "Уголочек" с id "gameHideShowMenu", но не более "10" секунд
+    И Пользователь нажимает элемент "П1" с id "game-bets-group_element-0-0_cell"
+    И Пользователь нажимает элемент "Сделать ставку" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Поставить" с id "coupon_bet_button", но не более "10" секунд
+    И Проверяем наличие элемента "Настройки" с id "settingsButton"
+    И Проверяем наличие элемента "Название чемпионата" с id "coupon-event-cell_champ-name_label"
+    И Проверяем, что у элемента "Название чемпионата" с id "coupon-event-cell_champ-name_label" есть лейбл
+    И Проверяем наличие элемента "Инфо об игре" с id "coupon-event-cell_info_label"
+    И Проверяем, что у элемента "Инфо об игре" с id "coupon-event-cell_info_label" есть лейбл
+    И Проверяем наличие элемента "Название первой команды" с id "coupon-event-cell_opponent1_label"
+    И Проверяем, что у элемента "Название первой команды" с id "coupon-event-cell_opponent1_label" есть лейбл
+    И Проверяем наличие элемента "Название второй команды" с id "coupon-event-cell_opponent2_label"
+    И Проверяем, что у элемента "Название второй команды" с id "coupon-event-cell_opponent2_label" есть лейбл
+    И Проверяем наличие элемента "Период" с id "coupon-event-cell_game-half-name_label"
+    И Проверяем, что у элемента "Период" с id "coupon-event-cell_game-half-name_label" есть лейбл
+    И Проверяем наличие элемента "Картинка спорта" с id "coupon-event-cell_sport_image"
+    И Проверяем наличие элемента "Событие" с id "coupon-event-cell_event_label"
+    И Проверяем, что у элемента "Событие" с id "coupon-event-cell_event_label" есть лейбл
+    И Проверяем наличие элемента "Коэф" с id "coupon-event-cell_coef-title_label"
+    И Проверяем, что у элемента "Коэф" с id "coupon-event-cell_coef-title_label" есть лейбл
+    И Проверяем наличие элемента "Величина коэфа" с id "coupon-event-cell_coef-title_label"
+    И Проверяем, что у элемента "Величина коэфа" с id "coupon-event-cell_coef-title_label" есть лейбл
+    И Проверяем наличие элемента "Итоговый коэф" с id "coupon_total-coef-name_label"
+    И Проверяем, что у элемента "Итоговый кэф" с id "coupon_total-coef-name_label" есть лейбл
+    И Проверяем наличие элемента "Величина итогового кэфа" с id "coupon_total-coef_label"
+    И Проверяем, что у элемента "Величина итогового кэфа" с id "coupon_total-coef_label" есть лейбл
+    И Проверяем наличие элемента "Баланс" с id "coupon_balance-name_label"
+    И Проверяем, что у элемента "Баланс" с id "coupon_balance-name_label" есть лейбл
+    И Проверяем наличие элемента "Величина баланса" с id "coupon_balance_label"
+    И Проверяем, что у элемента "Величина баланса" с id "coupon_balance_label" есть лейбл
+    И Проверяем наличие элемента "Макс ставка" с id "coupon_max-bet-name_label"
+    И Проверяем, что у элемента "Макс ставка" с id "coupon_max-bet-name_label" есть лейбл
+    И Проверяем наличие элемента "Величина макс ставки" с id "coupon_max-bet_label"
+    И Проверяем, что у элемента "Величина макс ставки" с id "coupon_max-bet_label" есть лейбл
+    И Проверяем наличие элемента "Поле для ввода" с id "coupon_summ_textfield"
+    И Проверяем, что в элементе "Поле для ввода ставки" с id "coupon_summ_textfield" есть текст
+    И Проверяем наличие элемента "Чекбокс" с id "coupon_push-notification_checkbox"
+    И Проверяем наличие элемента "Пояснение" с id "coupon_push-notification_label"
+    И Проверяем, что у элемента "Пояснение" с id "coupon_push-notification_label" есть лейбл
+    И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+    И Проверяем, что элемент "Поставить" с id "coupon_bet_button" доступен и выводим значение атрибута "enabled"
+    И Проверяем наличие элемента "Поставить 1,5" с id "coupon_bet0x_button"
+    И Проверяем, что у элемента "Поставить 1,5" с id "coupon_bet0x_button" есть лейбл
+    И Проверяем наличие элемента "Поставить 7,5" с id "coupon_bet1x_button"
+    И Проверяем, что у элемента "Поставить 7,5" с id "coupon_bet1x_button" есть лейбл
+    И Проверяем наличие элемента "Поставить 15" с id "coupon_bet2x_button"
+    И Проверяем, что у элемента "Поставить 15" с id "coupon_bet2x_button" есть лейбл
+#    Окно Ставка при достижении коэффициента
+    И Пользователь нажимает элемент "Назад" с id "buttonLeft"
+    И Ждем появления элемента "Уголочек" с id "gameHideShowMenu", но не более "10" секунд
+    И Пользователь нажимает элемент "П1" с id "game-bets-group_element-0-0_cell"
+    И Пользователь нажимает элемент "Сделать ставку" класса "XCUIElementTypeButton" с индексом "3", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Поставить" с id "coupon_bet_button", но не более "10" секунд
+    И Проверяем наличие элемента "Настройки" с id "settingsButton"
+    И Проверяем наличие элемента "Название чемпионата" с id "coupon-event-cell_champ-name_label"
+    И Проверяем, что у элемента "Название чемпионата" с id "coupon-event-cell_champ-name_label" есть лейбл
+    И Проверяем наличие элемента "Инфо об игре" с id "coupon-event-cell_info_label"
+    И Проверяем, что у элемента "Инфо об игре" с id "coupon-event-cell_info_label" есть лейбл
+    И Проверяем наличие элемента "Название первой команды" с id "coupon-event-cell_opponent1_label"
+    И Проверяем, что у элемента "Название первой команды" с id "coupon-event-cell_opponent1_label" есть лейбл
+    И Проверяем наличие элемента "Название второй команды" с id "coupon-event-cell_opponent2_label"
+    И Проверяем, что у элемента "Название второй команды" с id "coupon-event-cell_opponent2_label" есть лейбл
+    И Проверяем наличие элемента "Период" с id "coupon-event-cell_game-half-name_label"
+    И Проверяем, что у элемента "Период" с id "coupon-event-cell_game-half-name_label" есть лейбл
+    И Проверяем наличие элемента "Картинка спорта" с id "coupon-event-cell_sport_image"
+    И Проверяем наличие элемента "Событие" с id "coupon-event-cell_event_label"
+    И Проверяем, что у элемента "Событие" с id "coupon-event-cell_event_label" есть лейбл
+    И Проверяем наличие элемента "Коэф" с id "coupon-event-cell_coef-title_label"
+    И Проверяем, что у элемента "Коэф" с id "coupon-event-cell_coef-title_label" есть лейбл
+    И Проверяем наличие элемента "Величина коэфа" с id "coupon-event-cell_coef-title_label"
+    И Проверяем, что у элемента "Величина коэфа" с id "coupon-event-cell_coef-title_label" есть лейбл
+    И Проверяем наличие элемента "Баланс" с id "coupon_balance-name_label"
+    И Проверяем, что у элемента "Баланс" с id "coupon_balance-name_label" есть лейбл
+    И Проверяем наличие элемента "Величина баланса" с id "coupon_balance_label"
+    И Проверяем, что у элемента "Величина баланса" с id "coupon_balance_label" есть лейбл
+    И Проверяем наличие элемента "Макс ставка" с id "coupon_max-bet-name_label"
+    И Проверяем, что у элемента "Макс ставка" с id "coupon_max-bet-name_label" есть лейбл
+    И Проверяем наличие элемента "Поле для ввода" с id "coupon_summ_textfield"
+    И Проверяем, что в элементе "Поле для ввода ставки" с id "coupon_summ_textfield" есть текст
+    И Проверяем наличие элемента "Ожидаемый коэффициент" с id "coupon_user-coef_textfield"
+    И Проверяем наличие элемента "+/-" с id "coupon_user-coef_stepper"
+    И Проверяем наличие элемента "Поле для ввода" с id "coupon_summ_textfield"
+    И Проверяем, что в элементе "Поле для ввода ставки" с id "coupon_summ_textfield" есть текст
+    И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+    И Проверяем наличие элемента "Чекбокс для сброса при изменении счета" с id "coupon_reset-on-score-change_checkbox"
+    И Проверяем наличие элемента "Чекбокс для разрешения перехода" с id "coupon_order-line-live-go_checkbox"
+    И Проверяем наличие элемента "Название чекбокса" с id "coupon_order-line-live-go_label"
+    И Проверяем наличие элемента "Чекбокс" с id "coupon_push-notification_checkbox"
+    И Проверяем наличие элемента "Пояснение" с id "coupon_push-notification_label"
+#    Проверяем чекбоксы
+    И Делаем скриншот элемента "Чекбокс" с id "coupon_reset-on-score-change_checkbox"
+    И Пользователь нажимает элемент "Чекбокс" с id "coupon_reset-on-score-change_checkbox" по координатам этого элемента
+    И Ждем "2" секунд(ы)
+    И Проверяем, что скриншот "Чекбокс" не совпадает с новым скриншотом "Чекбокс1" элемента с id "coupon_reset-on-score-change_checkbox"
+    И Пользователь нажимает элемент "Чекбокс" с id "coupon_reset-on-score-change_checkbox" по координатам этого элемента
+    И Делаем скриншот элемента "Чекбокс" с id "coupon_order-line-live-go_checkbox"
+    И Пользователь нажимает элемент "Чекбокс" с id "coupon_order-line-live-go_checkbox" по координатам этого элемента
+    И Проверяем, что скриншот "Чекбокс" не совпадает с новым скриншотом "Чекбокс1" элемента с id "coupon_order-line-live-go_checkbox"
+    И Пользователь нажимает элемент "Чекбокс" с id "coupon_order-line-live-go_checkbox" по координатам этого элемента
+    И Делаем скриншот элемента "Чекбокс" с id "coupon_push-notification_checkbox"
+    И Пользователь нажимает элемент "Чекбокс" с id "coupon_push-notification_checkbox" по координатам этого элемента
+    И Проверяем, что скриншот "Чекбокс" не совпадает с новым скриншотом "Чекбокс1" элемента с id "coupon_push-notification_checkbox"
+    И Пользователь нажимает элемент "Чекбокс" с id "coupon_push-notification_checkbox" по координатам этого элемента
+#    Проверка поля коэффициента
+    И Проверяем, что в элементе "Кэф" с id "coupon_user-coef_textfield" есть текст
+    И Записываем в файл всё значение текста элемента "Кэф" с id "coupon_user-coef_textfield"
+#    Уменьшаем коэффициент
+    И Пользователь нажимает элемент "-" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "coupon_user-coef_stepper"
+    И Проверяем, что значение всего текста элемента "Кэф" с id "coupon_user-coef_textfield" не соответствует ранее записанному
+#    Увеличиваем коэффициент
+    И Записываем в файл всё значение текста элемента "Кэф" с id "coupon_user-coef_textfield"
+    И Пользователь нажимает элемент "+" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "coupon_user-coef_stepper"
+    И Пользователь нажимает элемент "+" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "coupon_user-coef_stepper"
+    И Пользователь нажимает элемент "+" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "coupon_user-coef_stepper"
+    И Проверяем, что значение всего текста элемента "Кэф" с id "coupon_user-coef_textfield" не соответствует ранее записанному
+    И Пользователь вводит в поле "Кэф" с ID "coupon_user-coef_textfield" "7.21"
+#    Проверяем поле ввода суммы ставки
+    И Записываем в файл всё значение текста элемента "Ставка" с id "coupon_summ_textfield"
+    И Пользователь вводит в поле "Ставка" с ID "coupon_summ_textfield" "100"
+    И Проверяем, что значение всего текста элемента "Ставка" с id "coupon_summ_textfield" не соответствует ранее записанному
+    И Пользователь нажимает на экранной клавиатуре "Отмена" с id "text-field_cancel_button"
+#    Проверяем, что ставка прошла и есть купон
+    И Записываем в файл всё значение текста элемента "Кэф" с id "coupon_user-coef_textfield"
+    И Пользователь нажимает элемент "Поставить" с id "coupon_bet_button"
+    И Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "5" секунд
+    И Проверяем, что у элемента "Сообщение" класса "XCUIElementTypeStaticText" с индексом "0", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Пользователь нажимает элемент "Ок" класса "XCUIElementTypeButton" с индексом "0", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Линия-популярное" с id "menu_bar-item-1_button", но не более "5" секунд
+    Тогда Делаем свайп вправо
+    То Ждем появления элемента "Эмблема пользователь" с id "menuUser", но не более "10" секунд
+    И Выбираем в меню элемент "menu_menuUserBets_cell"
+    И Ждем появления элемента "Клавиша еще(три точки)" с id "moreButton", но не более "10" секунд
+    Когда Пользователь нажимает элемент "Клавиша еще" с id "moreButton"
+    Тогда Ждем появления элемента "Алерт" с id "alert-controller_alert_view", но не более "10" секунд
+    И Проверяем, что у элемента "История тото" класса "XCUIElementTypeButton" с индексом "0", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Проверяем, что у элемента "История заявок" класса "XCUIElementTypeButton" с индексом "1", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Проверяем, что у элемента "Очистить историю" класса "XCUIElementTypeButton" с индексом "2", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    И Проверяем, что у элемента "Кнопка отмена" класса "XCUIElementTypeButton" с индексом "0", вложнного в элемент с id "alert-controller_alert_view", есть лейбл
+    Тогда Пользователь нажимает элемент "История заявок" класса "XCUIElementTypeButton" с индексом "1", вложенный в элемент с id "alert-controller_alert_view"
+    И Ждем появления элемента "Клавиша еще(три точки)" с id "moreButton", но не более "10" секунд
+    И Проверяем, что значение всего текста элемента "Кэф" с id "bet-history_coef-value_label" соответствует ранее записанному
