@@ -8,3 +8,4 @@ coupon: -t @coupon --format html --out reports/coupon/<%= Time.now.strftime("%d.
 history_bet: -t @history_bet --format html --out reports/history_bet/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_history_bet.html --format pretty
 live: -t @live --format html --out reports/live/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_live.html --format pretty
 line: -t @line --format html --out reports/line/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_line.html --format pretty
+stream: -t @stream --format html --out reports/stream/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_stream.html --format pretty
