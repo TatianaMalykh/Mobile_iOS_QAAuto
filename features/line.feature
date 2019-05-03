@@ -390,7 +390,7 @@
     И Проверяем наличие элемента "Лейбл" с id "game-bets-group-header_header_label"
     И Проверяем, что у элемента "Лейбл" с id "<game-bets-group-header_header_label" есть лейбл
     И Проверяем наличие элемента "Картинка спрятать/показать" с id "game-bets-group-header_hide-show_image-view"
-    И Проверяем наличие элемента "Ячейка первого исхода" с id "<game-bets-group_element-0-0_cell"
+    И Проверяем наличие элемента "Ячейка первого исхода" с id "game-bets-group_element-0-0_cell"
     И Проверяем наличие элемента "Кнопка выбора исхода" с id "game-bets-group-cell_action_button"
     И Проверяем наличие элемента "Название ячейки" с id "game-bets-group-cell_name_label"
     И Проверяем, что у элемента "Название ячейки" с id "game-bets-group-cell_name_label" есть лейбл
