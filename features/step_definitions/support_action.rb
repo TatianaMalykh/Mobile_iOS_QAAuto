@@ -67,8 +67,8 @@ end
 
 When(/^Делаем скриншот экрана "([^"]*)" и обрезаем его начиная с x "([^"]*)" y "([^"]*)" на расстояние x "([^"]*)" и y "([^"]*)"$/) do |name, x_st, y_st, x_len, y_len|
 #делаем скриншот экрана
-  $driver.screenshot("#{$project_path}/#{name}.png")
-  image = ChunkyPNG::Image.from_file("#{$project_path}/#{name}.png")
+  $driver.screenshot("#{$project_path}/reports/#{name}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{name}.png")
   x_st = (($driver.window_size.width*x_st.to_f)*2).to_i
   y_st = (($driver.window_size.height*y_st.to_f)*2).to_i
   x_len = (($driver.window_size.width*x_len.to_f)*2).to_i
@@ -97,9 +97,14 @@ When(/^Пользователь авторизуется с аккаунтом �
    udid = udid_phone
   login = $accounts_hash[udid].split("_")[0]
   password = $accounts_hash[udid].split("_")[1]
+  find_element(accessibility_id: "authorization_login_text-field").clear
   find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
+  sleep(1)
+  find_element(accessibility_id: "authorization_password_text-field").clear
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
-
+  sleep(1)
+  find_element(id:"text-field_cancel_button").click
+  sleep(1)
   find_element(accessibility_id: "authorization_auth_button").click
   puts ("Авторизовались с логином #{login} и паролем #{password}")
 end
@@ -124,11 +129,14 @@ When(/^Пользователь авторизуется с аккаунтом �
   #udid = ENV["device"]
   login = $accounts_money_hash[udid].split("_")[0]
   password = $accounts_money_hash[udid].split("_")[1]
+  find_element(accessibility_id: "authorization_login_text-field").clear
   find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
+  sleep(1)
+  find_element(accessibility_id: "authorization_password_text-field").clear
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
-  if @driver.is_keyboard_shown()
-    @driver.hide_keyboard(nil, :tapOutside)
-  end
+  sleep(1)
+  find_element(id:"text-field_cancel_button").click
+  sleep(1)
   find_element(accessibility_id: "authorization_auth_button").click
   puts ("Авторизовались с логином #{login} и паролем #{password}")
 end
@@ -284,4 +292,24 @@ When(/^Список ПРОМО выбираем элемент с названи
     end
     find_element(id:"promo-store_element-0-#{index}_cell").click
   end
+end
+
+When(/^Находим все элементы класса "([^"]*)" узла класса "([^"]*)" и выводим их текст в лог$/) do |class2, class1|
+  child = find_element(class: class1).find_elements(class: class2)
+  koll = child.size.to_i
+  puts "Количество вложенных элементов = #{koll}"
+  if koll.nil?
+    raise "Элемент бездетен"
+  else
+    for i in 0..(koll-1)
+      sleep(1)
+      puts (child[i].value)
+    end
+  end
+end
+
+When(/^Ищем игру с существующим элементом "([^"]*)" c id "([^"]*)"$/) do |name, id|
+  condition = -> {exist_element?(id:id)}
+  game_search(condition)
+  puts "Нашли #{name}"
 end

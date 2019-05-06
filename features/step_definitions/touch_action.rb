@@ -67,7 +67,7 @@ When(/^Выбираем в меню элемент "([^"]*)"$/) do |id|
 end
 
 When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
-  # Для меню
+# Для меню
   hash_menu = {0 => "menu_menuLogIn_cell",
                1 =>"menu_menuRegistration_cell",
                2 =>"menu_menuMessagesFeed_cell",
@@ -92,10 +92,10 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
                21 =>"menu_menuInfo_cell"}
   puts id
   case id
-   # ПЕРВЫЕ 8 ЭЛЕМЕНТОВ
+    # ПЕРВЫЕ 8 ЭЛЕМЕНТОВ
   when  hash_menu[0], hash_menu[1] , hash_menu[2] , hash_menu[3] , hash_menu[4] , hash_menu[5] , hash_menu[6] , hash_menu[7] , hash_menu[8] , hash_menu[9]
     find_element(accessibility_id: id).click
-   # КАЗИНО
+    # КАЗИНО
   when hash_menu[10]
     swipe(start_x: 20, start_y: 250, end_x: 20, end_y: 200)
     find_element(accessibility_id: id).click
@@ -105,17 +105,17 @@ When(/^Выбираем в меню пункт "([^"]*)"$/) do |id|
     sleep (5)
     if exist_element?(accessibility_id: id)
       # закрываем другие пункты меню
-        if exist_element?(accessibility_id:"menu_menuInfo_cell")
+      if exist_element?(accessibility_id:"menu_menuInfo_cell")
         find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[7].click
-        else
+      else
         puts "Пункт Разное закрыт"
-        end
+      end
       #закрываем пункт меню лотереи и финставки
-        if exist_element?(accessibility_id:"menu_menuBettingExchange_cell")
-          find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[5].click
-        else
-          puts "Пункт Лотереи и финставки"
-        end
+      if exist_element?(accessibility_id:"menu_menuBettingExchange_cell")
+        find_element(class:"XCUIElementTypeTable").find_elements(class:"XCUIElementTypeOther")[5].click
+      else
+        puts "Пункт Лотереи и финставки"
+      end
       find_element(accessibility_id: id).click
     else
       # закрываем другие пункты меню
@@ -239,7 +239,7 @@ end
 When(/^Делаем свайп по параметрам x: "([^"]*)" y: "([^"]*)" x_end: "([^"]*)" y_end: "([^"]*)"$/) do |x, y, x_end,y_end|
   #работает только если выключить XCUIEST
   swipe(start_x: x.to_i, start_y: y.to_i, end_x: x_end.to_i, end_y: y_end.to_i)
-  puts ("Пользователь выбрал в  элемент ")
+  puts ("Пользователь сделал свайп по заданным в шаге параметрам")
 end
 
 When(/^Пользователь нажимает элемент "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенный в элемент с классом "([^"]*)"$/) do |name, class1, index, class2|
@@ -324,6 +324,62 @@ When(/^Пользователь делает свайп элемента "([^"]*
     raise "Неизвестный параметр"
   end
   puts ("Передвинули элемент #{name} на #{dist} по оси #{axis}")
+end
+
+When(/^Двигаемся по направлению "([^"]*)" "([^"]*)" раз в списке с классом "([^"]*)" и индексом "([^"]*)" который находится в элементе с классом "([^"]*)" и индексом "([^"]*)"$/) do |direction,numbers, class1, index1, class2, index2|
+  # direction принимает  ВВЕРХ ВНИЗ UP DOWN
+  element_sour = find_elements(class: class2)[index2.to_i]
+  elements = element_sour.find_elements(class:class1)[index1.to_i]
+  x = elements.rect.x
+  y = elements.rect.y
+  # находим  высоту элемента и делим ее на 2
+  height_elem  = elements.size.height
+  i = 0
+  while i < numbers.to_i
+    case direction
+    when "UP", "Вверх", "ВВЕРХ", "up", "вверх"
+      Appium::TouchAction.new.press(x: x+5, y: y+(height_elem/2)+(height_elem/4)).release.perform
+    when "DOWN", "Вниз", "ВНИЗ", "down", "вверх"
+      Appium::TouchAction.new.press(x: x+5, y: y+(height_elem/2)-5).release.perform
+    else
+      raise("Указано неверное направление")
+    end
+    i+=1
+  end
+end
+
+When(/^Пользователь делает свайп вниз до элемента с id "([^"]*)"$/) do |id|
+  count = 0
+  puts (find_element(id:id).attribute("visible"))
+  until find_element(id:id).attribute("visible") == "true"  do
+    puts "Ким точно клецка!"
+    puts ("сделали свайп")
+    swipe(start_x: 10, start_y: 250, end_x: 10, end_y: 200)
+    count +=1
+    break if count > 30
+  end
+end
+
+When(/^Двигаем год по направлению "([^"]*)" "([^"]*)" раз в списке с классом "([^"]*)" и индексом "([^"]*)" который находится в элементе с классом "([^"]*)" и индексом "([^"]*)"$/) do |direction,numbers, class1, index1, class2, index2|
+# direction принимает ВВЕРХ ВНИЗ UP DOWN
+  element_sour = find_elements(class: class2)[index2.to_i]
+  elements = element_sour.find_elements(class:class1)[index1.to_i]
+  x = elements.rect.x
+  y = elements.rect.y
+  width_elem = elements.size.width
+  height_elem = elements.size.height
+  i = 0
+  while i < numbers.to_i
+    case direction
+    when "UP", "Вверх", "ВВЕРХ", "up", "вверх"
+      Appium::TouchAction.new.press(x: x+width_elem-5, y: y+(height_elem/2)+(height_elem/4)).release.perform
+    when "DOWN", "Вниз", "ВНИЗ", "down", "вверх"
+      Appium::TouchAction.new.press(x: x+width_elem-5, y: y+(height_elem/2)-5).release.perform
+    else
+      raise("Указано неверное направление")
+    end
+    i+=1
+  end
 end
 
 When(/^Двигаемся по направлению "([^"]*)" "([^"]*)" раз в списке с классом "([^"]*)" и индексом "([^"]*)" который находится в элементе с классом "([^"]*)" и индексом "([^"]*)"$/) do |direction,numbers, class1, index1, class2, index2|
