@@ -67,8 +67,8 @@ end
 
 When(/^Делаем скриншот экрана "([^"]*)" и обрезаем его начиная с x "([^"]*)" y "([^"]*)" на расстояние x "([^"]*)" и y "([^"]*)"$/) do |name, x_st, y_st, x_len, y_len|
 #делаем скриншот экрана
-  $driver.screenshot("#{$project_path}/#{name}.png")
-  image = ChunkyPNG::Image.from_file("#{$project_path}/#{name}.png")
+  $driver.screenshot("#{$project_path}/reports/#{name}.png")
+  image = ChunkyPNG::Image.from_file("#{$project_path}/reports/#{name}.png")
   x_st = (($driver.window_size.width*x_st.to_f)*2).to_i
   y_st = (($driver.window_size.height*y_st.to_f)*2).to_i
   x_len = (($driver.window_size.width*x_len.to_f)*2).to_i
@@ -79,6 +79,7 @@ end
 
 When(/^Пользователь авторизуется с аккаунтом без средств название телефона "([^"]*)"$/) do  |udid_phone|
   $accounts_hash = {
+<<<<<<< HEAD
       "iPhone_5s"=>"101735941_UJTjUA",
       "iPhone_6"=>"101735941_UJTjUA",
       "Samsung_Galaxy_Tab"=>"59813843_J6g4vj",
@@ -94,17 +95,38 @@ When(/^Пользователь авторизуется с аккаунтом �
       "Techno_LA7"=>"73018821_Q1xHVw",
       "HTC_Nexus_9"=>"73019071_HWDmTn",
       "BQ_5012L"=>"73019259_1Fq56h"
+=======
+      "Samsung_Galaxy_Tab"=>"101173133_WttWn2",
+      "Samsung_Galaxy_S7"=>"101173975_C5t9ja",
+      "Samsung_Galaxy_J1"=>"101174187_WCguDL",
+      "Huaiwei_P_smart"=>"101174351_GRfFC8",
+      "Huaiwei_VNS_L21"=>"101174525_7nxzfw",
+      "Huaiwei_Y541_U02"=>"101174681_V3GbRL",
+      "Xiaomi_Mi_A1"=>"101174873_RiXTzc",
+      "Xiaomi_Redmi_4A"=>"101175043_FkEhtv",
+      "Meizu_M3_note"=>"101735681_pFgjLT",
+      "Meizu_m6note"=>"101735827_ffwSMi",
+      "Techno_LA7"=>"101735941_UJTjUA",
+      "HTC_Nexus_9"=>"101736029_fvKhaW",
+      "BQ_5012L"=>"101736149_RbhWQn"
+>>>>>>> develop
   }
   #udid = ENV["device"]
    udid = udid_phone
   login = $accounts_hash[udid].split("_")[0]
   password = $accounts_hash[udid].split("_")[1]
   find_element(accessibility_id: "authorization_login_text-field").clear
+<<<<<<< HEAD
   sleep(0.5)
   find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
   sleep(0.5)
   find_element(accessibility_id: "authorization_password_text-field").clear
   sleep(0.5)
+=======
+  find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
+  sleep(1)
+  find_element(accessibility_id: "authorization_password_text-field").clear
+>>>>>>> develop
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
   sleep(1)
   find_element(id:"text-field_cancel_button").click
@@ -137,11 +159,9 @@ When(/^Пользователь авторизуется с аккаунтом �
   login = $accounts_money_hash[udid].split("_")[0]
   password = $accounts_money_hash[udid].split("_")[1]
   find_element(accessibility_id: "authorization_login_text-field").clear
-  sleep(0.5)
   find_element(accessibility_id: "authorization_login_text-field").send_keys(login)
-  sleep(0.5)
+  sleep(1)
   find_element(accessibility_id: "authorization_password_text-field").clear
-  sleep(0.5)
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
   sleep(1)
   find_element(id:"text-field_cancel_button").click
@@ -154,7 +174,7 @@ end
 When(/^Ждем появления элемента "([^"]*)" с классом "([^"]*)", но не более "([^"]*)" секунд$/) do |name, myclass, second|
   $driver.set_implicit_wait(1)
   spent_time = 0
-  until exist_element_class?(class: myclass) do
+  until exist_element?(class: myclass) do
 # sleep (0.5)
     spent_time +=0.5
     if spent_time > second.to_i
@@ -282,4 +302,60 @@ When(/^Пользователь нажимает элемент "([^"]*)", ра�
 # sleep(5)
   tap_percentage(x.to_f, y.to_f)
   puts("Попытались нажать #{name}")
+end
+
+When(/^Ищем игру с видимым элементом "([^"]*)" с id "([^"]*)"$/) do |name, id|
+  condition = -> {find_element(id: id).visible?}
+  game_search(condition)
+  puts "Нашли элемент #{name}"
+end
+
+When(/^Ищем игру с видимым элементом "([^"]*)" с id "([^"]*)" сокрщенный$/) do |name, id|
+  condition = -> {find_element(id: id).visible?}
+  game_search_tiny(condition)
+  puts "Нашли элемент #{name}"
+end
+
+When(/^Список ПРОМО выбираем элемент с названием "([^"]*)"$/) do |name|
+# спецшаг получаем спиоск ПРОМО
+  try_url_3
+  memory_file = File.new("#{$project_path}/reports/body_PROMO.txt")
+  val_memory = memory_file.read.split("\n")
+  index = val_memory.index("#{name}")
+  puts index
+  if index == val_memory.size
+   until visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+      swipe_in_menu_on_high_of_element_of_class("XCUIElementTypeCollectionView","XCUIElementTypeCell")
+      sleep(2)
+      puts visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+   end
+   find_element(id:"promo-store_element-0-#{index}_cell").click
+  else
+    until visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+      swipe_in_menu_on_high_of_element_of_class("XCUIElementTypeCollectionView","XCUIElementTypeCell")
+      sleep(2)
+     puts  visible_displayed?(id: "promo-store_element-0-#{index}_cell")
+    end
+    find_element(id:"promo-store_element-0-#{index}_cell").click
+  end
+end
+
+When(/^Находим все элементы класса "([^"]*)" узла класса "([^"]*)" и выводим их текст в лог$/) do |class2, class1|
+  child = find_element(class: class1).find_elements(class: class2)
+  koll = child.size.to_i
+  puts "Количество вложенных элементов = #{koll}"
+  if koll.nil?
+    raise "Элемент бездетен"
+  else
+    for i in 0..(koll-1)
+      sleep(1)
+      puts (child[i].value)
+    end
+  end
+end
+
+When(/^Ищем игру с существующим элементом "([^"]*)" c id "([^"]*)"$/) do |name, id|
+  condition = -> {exist_element?(id:id)}
+  game_search(condition)
+  puts "Нашли #{name}"
 end

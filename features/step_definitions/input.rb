@@ -72,3 +72,11 @@ When(/^Пользователь вводит в поле "([^"]*)" с класс
   elements.send_keys(value)
   puts ("Вводим в поле #{field} #{value}")
 end
+
+When(/^Пользователь вводит в поле "([^"]*)" с ID "([^"]*)" значение из файла "([^"]*)"$/) do |field, id, namefile|
+  find_element(id: id).clear
+  memory_file = File.new("#{$project_path}/#{namefile}.txt")
+  val_memory = memory_file.read.chomp!
+  find_element(id: id).send_keys(val_memory)
+  puts ("Вводим в поле #{field} #{val_memory}")
+end
