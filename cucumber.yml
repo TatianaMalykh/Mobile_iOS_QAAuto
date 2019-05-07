@@ -5,4 +5,5 @@ Authorization_positive: -t @Authorization_positive --format html --out reports/A
 successful_registration: -t @successful_registration --format html --out reports/Successful_registration/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_Successful_registration.html --format pretty
 unsuccessful_registration: -t @unsuccessful_registration --format html --out reports/Unuccessful_registration/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_Unuccessful_registration.html --format pretty
 coupon: -t @coupon --format html --out reports/coupon/coupon.html --format pretty
+coupon_scanner: -t @coupon_scanner --format html --out reports/coupon_scanner/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_coupon_scanner.html --format pretty
 history_bet: -t @history_bet --format html --out reports/history_bet/<%= Time.now.strftime("%d.%m.%Y_%H:%M:%S") %>_history_bet.html --format pretty

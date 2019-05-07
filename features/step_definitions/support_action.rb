@@ -79,6 +79,8 @@ end
 
 When(/^Пользователь авторизуется с аккаунтом без средств название телефона "([^"]*)"$/) do  |udid_phone|
   $accounts_hash = {
+      "iPhone_5s"=>"101735941_UJTjUA",
+      "iPhone_6"=>"101735941_UJTjUA",
       "Samsung_Galaxy_Tab"=>"59813843_J6g4vj",
       "Samsung_Galaxy_S7"=>"57212813_123",
       "Samsung_Galaxy_J1"=>"57721337_zhKTfx",
@@ -104,7 +106,9 @@ When(/^Пользователь авторизуется с аккаунтом �
   find_element(accessibility_id: "authorization_password_text-field").clear
   sleep(0.5)
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
-  sleep(0.5)
+  sleep(1)
+  find_element(id:"text-field_cancel_button").click
+  sleep(1)
   find_element(accessibility_id: "authorization_auth_button").click
   sleep(2)
   puts ("Авторизовались с логином #{login} и паролем #{password}")
@@ -112,6 +116,8 @@ end
 
 When(/^Пользователь авторизуется с аккаунтом со средствами название телефона "([^"]*)"$/) do |udid_phone|
   $accounts_money_hash = {
+      "iPhone_5s"=>"101173133_WttWn2",
+      "iPhone_6"=>"101173133_WttWn2",
       "Samsung_Galaxy_Tab"=>"1229557_qwe890qwe",
       "Samsung_Galaxy_S7"=>"67820953_gkSk7v",
       "Samsung_Galaxy_J1"=>"1197599_qwe890qwe",
@@ -124,8 +130,7 @@ When(/^Пользователь авторизуется с аккаунтом �
       "Meizu_m6note"=>"73022811_BFxEGv",
       "Techno_LA7"=>"73023053_EFsatQ",
       "HTC_Nexus_9"=>"73029561_yk4e3u",
-      "BQ_5012L"=>"73029769_4VvGYQ",
-      "iPhone 6"=>"101173133_WttWn2"
+      "BQ_5012L"=>"73029769_4VvGYQ"
   }
   udid = udid_phone
   #udid = ENV["device"]
@@ -138,7 +143,9 @@ When(/^Пользователь авторизуется с аккаунтом �
   find_element(accessibility_id: "authorization_password_text-field").clear
   sleep(0.5)
   find_element(accessibility_id: "authorization_password_text-field").send_keys(password)
-  sleep(0.5)
+  sleep(1)
+  find_element(id:"text-field_cancel_button").click
+  sleep(1)
   find_element(accessibility_id: "authorization_auth_button").click
   sleep(2)
   puts ("Авторизовались с логином #{login} и паролем #{password}")
@@ -208,6 +215,22 @@ When(/^Записываем в файл с названием "([^"]*)" симв
       file.close
       puts "Запомнили значение #{text_num} элемента #{name}"
     end
+  end
+end
+
+When(/^Проверяем, совпадают ли символы в диапазоне от "([^"]*)" до "([^"]*)" текста из поля "([^"]*)" класса "([^"]*)" с индексом "([^"]*)", вложенного в элемент с id "([^"]*)" с записанными ранее в файл "([^"]*)"$/) do |start_num, end_num, name, class1, index, id, filename|
+  element = find_element(id: id).find_elements(class: class1)
+  if element[index.to_i].value.empty?
+    raise "В элементе #{name} текста нет"
+  else
+      data_file = File.new("#{$project_path}/#{filename}.txt")
+      value = data_file.read.chomp
+      text_num = element[index.to_i].value[start_num.to_i..end_num.to_i]
+      if value == text_num
+        puts ("Значение из файла #{filename}.txt #{value} равно значению поля #{name} #{text_num}.")
+      else
+        raise ("Значение из файла #{filename}.txt #{value} НЕ равно значению поля #{name} #{text_num}!")
+      end
   end
 end
 
